@@ -51,6 +51,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Frontline Defence.sln",
+    "dotnet.defaultSolution": "Frontline-defence.sln",
     "dotnet.preferCSharpExtension": true
 }

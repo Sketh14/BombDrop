@@ -4,7 +4,7 @@
 #
 /[Ll]ibrary/
 /[Tt]emp/
-/[Oo]bj/
+/[Oo]bj/ 
 /[Bb]uild/
 /[Bb]uilds/
 /[Ll]ogs/
@@ -12,6 +12,7 @@
 /[Oo]ut/
 /[Aa]ssets/Project/Editor/
 /[Aa]ssets/Project/Models/
+/[Aa]ssets/[Pp]lugins
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
