@@ -1,8 +1,6 @@
 // The Projectiles have custom physics
 // Wont be able to achieve through normal implementation
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace FrontLineDefense
@@ -12,14 +10,13 @@ namespace FrontLineDefense
     {
         // private Rigidbody _projectileRb;
 
-        // Only x matters overall, as y will be affected by gravity
-        // Reference : Projectile has its own speed irrespective of plane's speed
-        [SerializeField] private float _speedX;
+        // Reference : Projectile may have its own speed irrespective of plane's speed
+        [SerializeField] private float _speedMult;
         [SerializeField] private float _scalePhysics;
         private int _directionMult;
         private Vector3 _speedVec;
-        private float _inititalRot;
-        private const float _gravity = -9.8f;
+        [SerializeField] private PoolManager.PoolType _poolToUse;
+        // private float _inititalRot;
 
         // Start is called before the first frame update
         void Start()
@@ -49,7 +46,7 @@ namespace FrontLineDefense
         {
             //Apply Movement
             transform.position = transform.position + (_speedVec * _directionMult * Time.deltaTime);
-            _speedVec = _speedVec + (new Vector3(0f, _gravity, 0f) * Time.deltaTime * _scalePhysics);
+            _speedVec = _speedVec + (new Vector3(0f, UniversalConstants._gravity, 0f) * Time.deltaTime * _scalePhysics);
         }
 
         private void FixedUpdate()
@@ -66,14 +63,15 @@ namespace FrontLineDefense
 
         public void SetStats(in Vector2 initialSpeed)
         {
-            _inititalRot = transform.eulerAngles.z;
-            _speedVec = new Vector3(initialSpeed.x * _speedX, initialSpeed.y * _speedX, 0f);
+            // _inititalRot = transform.eulerAngles.z;
+            _speedVec = new Vector3(initialSpeed.x * _speedMult, initialSpeed.y * _speedMult, 0f);
         }
 
         private void OnTriggerEnter(Collider other)
         {
             // Debug.Log($"Hit | Collider : {other.name} | Tag : {other.tag}");
-            gameObject.SetActive(false);
+            // gameObject.SetActive(false);
+            PoolManager.Instance.ObjectPool[(int)_poolToUse].Release(gameObject);
             if (other.CompareTag(UniversalConstants.Player))
             {
                 other.GetComponent<PlayerController>().TakeDamage(10f);

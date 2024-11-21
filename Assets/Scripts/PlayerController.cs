@@ -100,7 +100,10 @@ public class PlayerController : MonoBehaviour
     private void ShootProjectile()
     {
         // Debug.Log($"Shoot Clicked | transform.right : {transform.right}");
-        GameObject shotProjectile = Instantiate(_projectilePrefab, _bombPoint.position, transform.rotation);
+        // GameObject shotProjectile = Instantiate(_projectilePrefab, _bombPoint.position, transform.rotation);
+        GameObject shotProjectile = PoolManager.Instance.ObjectPool[(int)PoolManager.PoolType.BOMB].Get();
+        shotProjectile.transform.position = _bombPoint.position;
+        shotProjectile.transform.rotation = transform.rotation;
         shotProjectile.GetComponent<ProjectileBase>().SetStats(transform.right * -1.0f);
     }
 
