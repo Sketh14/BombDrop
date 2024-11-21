@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-namespace FrontLineDefense
+namespace FrontLineDefense.Global
 {
     public class PoolManager : MonoBehaviour
     {

@@ -18,5 +18,7 @@
 - EnemyMissileCarrier
     (-) Turret Rotate Logic
 
+- Adding assemblies
+- Adding interface StatComponent for resolving circular dependency
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation

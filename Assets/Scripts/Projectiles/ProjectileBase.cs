@@ -3,7 +3,9 @@
 
 using UnityEngine;
 
-namespace FrontLineDefense
+using FrontLineDefense.Global;
+
+namespace FrontLineDefense.Projectiles
 {
     [RequireComponent(typeof(Rigidbody))]
     public class ProjectileBase : MonoBehaviour
@@ -74,7 +76,7 @@ namespace FrontLineDefense
             PoolManager.Instance.ObjectPool[(int)_poolToUse].Release(gameObject);
             if (other.CompareTag(UniversalConstants.Player))
             {
-                other.GetComponent<PlayerController>().TakeDamage(10f);
+                other.GetComponent<IStatComponent>().TakeDamage(10f);
             }
         }
     }

@@ -974,6 +974,8 @@ MonoBehaviour:
   _PlayerTransform: {fileID: 700313909}
   _Turret: {fileID: 1039037678}
   _PoolToUse: 0
+  _ShootCooldown: 2
+  _DetectionRange: 40
   _rotateSpeed: 5
 --- !u!1 &514785701
 GameObject:

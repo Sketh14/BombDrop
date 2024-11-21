@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-namespace FrontLineDefense
+namespace FrontLineDefense.Global
 {
     [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider))]
     public class ProceduralTerrain : MonoBehaviour

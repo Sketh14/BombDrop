@@ -1,12 +1,14 @@
 using System;
-using FrontLineDefense;
 using UnityEngine;
 using UnityEngine.UI;
 
+using FrontLineDefense.Global;
+using FrontLineDefense.Projectiles;
+
 // using UnityEngine.InputSystem.
-namespace FrontLineDefense
+namespace FrontLineDefense.Player
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, IStatComponent
     {
         [SerializeField] private JoyStickController joyStick;
         [SerializeField] private float speed = 5f;
