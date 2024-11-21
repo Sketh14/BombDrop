@@ -13,7 +13,10 @@
 - PoolManager
     (-) Basic PoolManager
 
-
+- EnemyVehilceController_Base
+    (-) Common script for all enemy vehicles
+- EnemyMissileCarrier
+    (-) Turret Rotate Logic
 
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation

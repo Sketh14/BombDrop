@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace FrontLineDefense
 {
-    // [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(Rigidbody))]
     public class ProjectileBase : MonoBehaviour
     {
         // private Rigidbody _projectileRb;
