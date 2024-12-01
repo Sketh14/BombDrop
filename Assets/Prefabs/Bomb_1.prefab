@@ -164,7 +164,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6497511135875993182}
   - component: {fileID: 4200852558607417007}
-  - component: {fileID: 8882552631082455595}
+  - component: {fileID: 4670829937622683503}
   - component: {fileID: 5818837057484270574}
   m_Layer: 6
   m_Name: Bomb_1
@@ -213,7 +213,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 0
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8882552631082455595
+--- !u!114 &4670829937622683503
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -222,11 +222,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 699251457047635070}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2150bb522f22d844cbd5f7a6d0b42726, type: 3}
+  m_Script: {fileID: 11500000, guid: 1819d68f47f5089438958e641303ab00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speedMult: 30
-  _scalePhysics: 0.8
+  _SpeedMult: 30
+  _poolToUse: 0
+  _scalePhysics: 0.6
 --- !u!54 &5818837057484270574
 Rigidbody:
   m_ObjectHideFlags: 0

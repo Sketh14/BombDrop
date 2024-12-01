@@ -11,7 +11,7 @@ namespace FrontLineDefense.Player
     public class PlayerController : MonoBehaviour, IStatComponent
     {
         [SerializeField] private JoyStickController joyStick;
-        [SerializeField] private float speed = 5f;
+        [SerializeField] private float _speedMult = 5f;
 
         //New
         private float _health = 100.0f;
@@ -22,6 +22,7 @@ namespace FrontLineDefense.Player
         private Transform _planeMesh;
         /// <summary> 0 : Left | 1 : Right | 2 : In Process of turning </summary>
         private byte _planeMeshRotateMult;
+        private const float _positionLerpVal = 0.35f;
 
         private void Start()
         {
@@ -92,8 +93,17 @@ namespace FrontLineDefense.Player
                 }
             }
 
-            transform.Translate(Vector2.left * speed * Time.deltaTime);
+            transform.Translate(Vector2.left * _speedMult * Time.deltaTime);
         }
+
+        /*private void FixedUpdate()
+        {
+            Vector3 speedVec = transform.right * -1f * _speedMult;
+            transform.position = Vector3.Lerp(transform.position, transform.position + speedVec, _positionLerpVal);
+
+            // transform.position = Vector3.Lerp(transform.position, (transform.position + Vector3.left) * _speedMult, _positionLerpVal);
+            // transform.Translate(Vector2.left * speed);
+        }*/
 
         private void OnCollisionEnter(Collision other)
         {

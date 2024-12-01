@@ -20,5 +20,29 @@
 
 - Adding assemblies
 - Adding interface StatComponent for resolving circular dependency
+
+- Making specific mechanics for different projectiles
+    (-) PlayerBomb
+        [=] Separate mechanic to control the bomb
+
+---------------------------------------------------------------------------------------------------------------------------------------
+                                                        01 Dec
+---------------------------------------------------------------------------------------------------------------------------------------
+
+- Enemy_Missile
+    (-) Making mechanic for Enemy missiles
+
+- Project
+    (-) Changing Bombs to have Player_bomb script instead of ProjectileBase
+
+- ProjectileBase
+    (-) [Not Viable] Moving position change to FixedUpdate and lerping between positions for smoothing
+        [=] Jitters while changing rotations
+
+- PlayerController
+    (-) [Not Viable] Moving position change to FixedUpdate and lerping for smoothness
+        [=] Jitters while changing rotations
+
+
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation
