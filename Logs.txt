@@ -43,6 +43,20 @@
     (-) [Not Viable] Moving position change to FixedUpdate and lerping for smoothness
         [=] Jitters while changing rotations
 
+- PoolManager
+    (-) Adding BULLET | STRAIGHT_RANGED_MISSILES | FOLLOWING_MISSILES | MISSILE_SHOOTER_1 
+        | MISSILE_SHOOTER_2 | BULLET_SHOOTER_1 to enums
+
+- Project
+    (-) Renaming projectile prefabs
+
+- Renaming EnemyMissile to FollowingMissile
+
+- StraightRangedMissiles
+    (-) Other separate script for ranged missiles
+    
+- Bullet
+    (-) Separate script for bullet mechanic
 
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation

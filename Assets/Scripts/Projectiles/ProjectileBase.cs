@@ -1,6 +1,9 @@
 // The Projectiles have custom physics
 // Wont be able to achieve through normal implementation
 
+// Multiple scripts wont matter as the number of scripts would remain the same, 
+// if there is a super-controller script, then it could matter
+
 using UnityEngine;
 
 using FrontLineDefense.Global;
@@ -15,7 +18,7 @@ namespace FrontLineDefense.Projectiles
         // Reference : Projectile may have its own speed irrespective of plane's speed
         [SerializeField] protected float _SpeedMult = 1f;
         protected Vector3 _SpeedVec;
-        [SerializeField] private PoolManager.PoolType _poolToUse;
+        [SerializeField] protected PoolManager.PoolType _PoolToUse;
         // private const float _positionLerpVal = 0.5f;
         // private float _inititalRot;
 
@@ -72,7 +75,7 @@ namespace FrontLineDefense.Projectiles
         {
             // Debug.Log($"Hit | Collider : {other.name} | Tag : {other.tag}");
             // gameObject.SetActive(false);
-            PoolManager.Instance.ObjectPool[(int)_poolToUse].Release(gameObject);
+            PoolManager.Instance.ObjectPool[(int)_PoolToUse].Release(gameObject);
             if (other.CompareTag(UniversalConstants.Player))
             {
                 other.GetComponent<IStatComponent>().TakeDamage(10f);

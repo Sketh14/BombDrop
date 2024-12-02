@@ -1,19 +1,16 @@
 /*
-* These will be similar to Player_Bomb in regards of Rigibody mechanics
-* These will be slower than the player and follow the player
+* These will be similar to PlayerBomb in regards of Rigibody mechanics
+* StraightRangedMissiles : These could be slower than the player and shoot upto a distance
 */
 
 using UnityEngine;
 
 namespace FrontLineDefense.Projectiles
 {
-    public class EnemyMissile : ProjectileBase
+    public class StraightRangedMissile : ProjectileBase
     {
         [SerializeField] private Transform _playerTransform;
 
-        /*
-        * There will be a delay in the change of direciton of the missile?
-        */
         protected override void Update()
         {
             base.Update();
