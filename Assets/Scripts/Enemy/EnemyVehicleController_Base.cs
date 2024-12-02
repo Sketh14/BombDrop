@@ -10,9 +10,11 @@ namespace FrontLineDefense.Enemy
     {
         // Some turrets might rotate a full 180 on z-axis | some will rotate to some 
         // constraints on z-axis and then rotate on y-axis to face the player 
-        [SerializeField] protected Transform _PlayerTransform, _Turret;
+        // [SerializeField] protected Transform _PlayerTransform, _Turret;
+        [SerializeField] protected Transform _Turret;
         [SerializeField] protected PoolManager.PoolType _PoolToUse;
         [SerializeField] protected float _ShootCooldown, _DetectionRange, _Health;
+        [SerializeField] protected Transform _ShootPoint;
         /// <summary> 0: Available to Shoot | 1 : Shot | 2 : Recharging | 3 : Recharging Complete </summary>
         protected byte _ShotProjectileStatus;
         protected bool _ReleasedToPool;
@@ -38,7 +40,7 @@ namespace FrontLineDefense.Enemy
 
         protected virtual void FixedUpdate()
         {
-            if (Mathf.Abs(_PlayerTransform.position.x - transform.position.x) <= _DetectionRange)
+            if (Mathf.Abs(GameManager.Instance.PlayerTransform.position.x - transform.position.x) <= _DetectionRange)
             {
                 TargetPlayer();
 

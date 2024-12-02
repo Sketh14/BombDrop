@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2181156592471404600}
   m_Layer: 0
   m_Name: EnemyMissileShooter
-  m_TagString: Untagged
+  m_TagString: StatComponent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52,6 +52,8 @@ MonoBehaviour:
   _PoolToUse: 4
   _ShootCooldown: 2
   _DetectionRange: 40
+  _Health: 80
+  _ShootPoint: {fileID: 2159678846851417174}
   _rotateSpeed: 5
 --- !u!65 &2181156592471404600
 BoxCollider:
@@ -104,8 +106,40 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 302865155402197832}
+  - {fileID: 2159678846851417174}
   m_Father: {fileID: 3515803048716798340}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -12}
+--- !u!1 &5295070271419259325
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2159678846851417174}
+  m_Layer: 0
+  m_Name: ShootPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2159678846851417174
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5295070271419259325}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.7, y: -0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3822196180181022520}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6185684376870582823
 GameObject:
   m_ObjectHideFlags: 0

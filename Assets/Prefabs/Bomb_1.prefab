@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 4670829937622683503}
   m_Layer: 6
   m_Name: Bomb_1
-  m_TagString: Untagged
+  m_TagString: Projectiles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -253,6 +253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _SpeedMult: 30
+  _Damage: 30
   _PoolToUse: 0
   _scalePhysics: 0.6
 --- !u!1 &2549030261882986114

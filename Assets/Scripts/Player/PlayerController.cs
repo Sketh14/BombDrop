@@ -15,7 +15,7 @@ namespace FrontLineDefense.Player
         [SerializeField] private float _speedMult = 5f;
 
         //New
-        private float _health = 100.0f;
+        [SerializeField] private float _health = 100.0f;
         [SerializeField] private float _rotateSpeed;
         [SerializeField] private Button _shootProjectile;
         // [SerializeField] private GameObject _projectilePrefab;           //test
@@ -113,12 +113,12 @@ namespace FrontLineDefense.Player
 
         private void ShootProjectile()
         {
-            // Debug.Log($"Shoot Clicked | transform.right : {transform.right}");
             // GameObject shotProjectile = Instantiate(_projectilePrefab, _bombPoint.position, transform.rotation);
             GameObject shotProjectile = PoolManager.Instance.ObjectPool[(int)PoolManager.PoolType.BOMB].Get();
             shotProjectile.transform.position = _bombPoint.position;
             shotProjectile.transform.rotation = transform.rotation;
             shotProjectile.GetComponent<ProjectileBase>().SetStats(transform.right * -1.0f);
+            // Debug.Log($"Shoot Clicked | transform.right : {transform.right} | Namer : {shotProjectile.name}");
         }
 
         public void TakeDamage(float damageTaken)

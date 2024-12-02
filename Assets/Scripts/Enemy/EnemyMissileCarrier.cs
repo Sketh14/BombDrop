@@ -1,6 +1,7 @@
 using UnityEngine;
 
 using FrontLineDefense.Global;
+using FrontLineDefense.Projectiles;
 
 namespace FrontLineDefense.Enemy
 {
@@ -8,6 +9,7 @@ namespace FrontLineDefense.Enemy
     {
         [SerializeField] private float _rotateSpeed;
         private const float _maxZRotateAngle = -12f, _minRotateAngle = -178f;
+        private const float _rechargeWaitTime = 2f;
 
         // float zRotateAngle;         //Debugging
         protected override void TargetPlayer()
@@ -15,7 +17,7 @@ namespace FrontLineDefense.Enemy
             if (_ShotProjectileStatus != (byte)ShootStatus.AVAILABLE_TO_SHOOT
                 && _ShotProjectileStatus != (byte)ShootStatus.RECHARGING) return;
 
-            Vector3 _playerDirection = _PlayerTransform.position - _Turret.position;
+            Vector3 _playerDirection = GameManager.Instance.PlayerTransform.position - _Turret.position;
             // _partToRotate.rotation = Quaternion.LookRotation(_playerDirection);
 
             //calculate the angle in radians and convert to  degrees
@@ -28,10 +30,15 @@ namespace FrontLineDefense.Enemy
 
         protected override async void Shoot()
         {
+            GameObject shotProjectile = PoolManager.Instance.ObjectPool[(int)PoolManager.PoolType.FOLLOWING_MISSILES].Get();
+            shotProjectile.transform.position = _ShootPoint.position;
+            shotProjectile.transform.rotation = transform.rotation;
+            shotProjectile.GetComponent<ProjectileBase>().SetStats(transform.right * -1.0f);
+
             _ShotProjectileStatus = (byte)ShootStatus.RECHARGING;
-            await _CtTimer.WaitForSeconds(1f);
+            await _CtTimer.WaitForSeconds(_rechargeWaitTime);
             _ShotProjectileStatus = (byte)ShootStatus.SEARCHING_PLAYER;
-            await _CtTimer.WaitForSeconds(1f);
+            await _CtTimer.WaitForSeconds(_rechargeWaitTime);
             _ShotProjectileStatus = (byte)ShootStatus.RECHARGE_DONE;
         }
     }

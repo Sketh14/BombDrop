@@ -87,5 +87,20 @@
 - EnemyVehilceController_Base
     (-) Adding pool release check
 
+- Scene
+    (-) Health/Damage for objects/player
+
+- PoolManager
+    (-) Activating object when demanded
+
+- EnemyMissileCarrier
+    (-) Shooting missiles logic
+
+- GameManager
+    (-) Singleton for referencing Player transform
+
+- FollowingMissile | StraightRangedMissiles
+    (-) Replacing _playerTransform with GameManager's reference
+
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation

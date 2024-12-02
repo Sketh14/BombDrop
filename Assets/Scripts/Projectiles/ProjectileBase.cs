@@ -69,7 +69,7 @@ namespace FrontLineDefense.Projectiles
             // transform.position = Vector3.Lerp(transform.position, transform.position + _SpeedVec, _positionLerpVal);
         }
 
-        public void SetStats(in Vector2 initialSpeed)
+        public virtual void SetStats(in Vector2 initialSpeed)
         {
             // _inititalRot = transform.eulerAngles.z;
             _SpeedVec = new Vector3(initialSpeed.x * _SpeedMult, initialSpeed.y * _SpeedMult, 0f);
@@ -95,5 +95,10 @@ namespace FrontLineDefense.Projectiles
             _ReleasedToPool = true;
             PoolManager.Instance.ObjectPool[(int)_PoolToUse].Release(gameObject);
         }*/
+    }
+
+    public interface TargetingProjectiles
+    {
+        void SetTargetingStats(in Transform _playerTransform);
     }
 }

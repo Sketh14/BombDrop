@@ -10,14 +10,13 @@ namespace FrontLineDefense.Projectiles
 {
     public class StraightRangedMissile : ProjectileBase
     {
-        [SerializeField] private Transform _playerTransform;
         private Vector2 _playerTargetedPos;
         private const float _maxTargetDiff = 1f;
 
         private void OnEnable()
         {
-            _playerTargetedPos = _playerTransform.position;
-            _SpeedVec = (_playerTransform.position - transform.position).normalized * _SpeedMult;
+            _playerTargetedPos = GameManager.Instance.PlayerTransform.position;
+            _SpeedVec = (GameManager.Instance.PlayerTransform.position - transform.position).normalized * _SpeedMult;
         }
 
         protected override void FixedUpdate()

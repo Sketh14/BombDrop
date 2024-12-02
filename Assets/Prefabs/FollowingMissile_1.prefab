@@ -251,11 +251,11 @@ GameObject:
   - component: {fileID: 1590030428564493238}
   m_Layer: 6
   m_Name: FollowingMissile_1
-  m_TagString: Untagged
+  m_TagString: Projectiles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2035244309611292907
 Transform:
   m_ObjectHideFlags: 0
@@ -336,5 +336,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _SpeedMult: 25
+  _Damage: 30
   _PoolToUse: 1
-  _playerTransform: {fileID: 0}

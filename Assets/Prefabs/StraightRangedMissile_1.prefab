@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 6814973961158744698}
   m_Layer: 6
   m_Name: StraightRangedMissile_1
-  m_TagString: Untagged
+  m_TagString: Projectiles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -336,5 +336,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _SpeedMult: 30
+  _Damage: 30
   _PoolToUse: 2
-  _playerTransform: {fileID: 0}
