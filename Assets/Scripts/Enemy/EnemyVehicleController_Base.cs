@@ -18,7 +18,7 @@ namespace FrontLineDefense.Enemy
         /// <summary> 0: Available to Shoot | 1 : Shot | 2 : Recharging | 3 : Recharging Complete </summary>
         protected byte _ShotProjectileStatus;
         protected bool _ReleasedToPool;
-        private float _shootTime;
+        // private float _shootTime;
 
         protected CustomTimer _CtTimer;
         protected CancellationTokenSource _Cts;

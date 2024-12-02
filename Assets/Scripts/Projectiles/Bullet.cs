@@ -13,13 +13,24 @@ namespace FrontLineDefense.Projectiles
         [SerializeField] private PoolManager.PoolType _poolToUse;
         [SerializeField] protected float _Damage = 1f;
         private bool _releasedToPool;
+        private Vector2 _startPosition;
+        private const float _maxRange = 100f;
 
         private void OnDisable() { _releasedToPool = false; }
+
+        private void OnEnable() { _startPosition = transform.position; }
 
         private void FixedUpdate()
         {
             //Apply Movement
             transform.position = transform.position + (transform.right * _SpeedMult);
+
+            if (Vector3.SqrMagnitude(transform.position - new Vector3(_startPosition.x, _startPosition.y, 0f)) >= (_maxRange * _maxRange))
+            {
+                gameObject.SetActive(false);
+                // Debug.Log($"Start Pos : {_startPosition} | Current pos : {transform.position} | "
+                // + $" Magnitude : {Vector3.SqrMagnitude(transform.position - new Vector3(_startPosition.x, _startPosition.y, 0f))}");
+            }
         }
 
         private void OnTriggerEnter(Collider other)
