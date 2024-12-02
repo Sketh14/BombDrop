@@ -11,7 +11,7 @@ using FrontLineDefense.Global;
 namespace FrontLineDefense.Projectiles
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class ProjectileBase : MonoBehaviour, IStatComponent
+    public abstract class ProjectileBase : MonoBehaviour
     {
         // private Rigidbody _projectileRb;
 
@@ -83,17 +83,17 @@ namespace FrontLineDefense.Projectiles
 
             _ReleasedToPool = true;
             PoolManager.Instance.ObjectPool[(int)_PoolToUse].Release(gameObject);
-            if (other.CompareTag(UniversalConstants.Player))
+            if (other.CompareTag(UniversalConstants.StatComponent))
                 other.GetComponent<IStatComponent>().TakeDamage(_Damage);
         }
 
         // Projectiles are one-shot, so they dont need extra checks for DamageTaken
-        public void TakeDamage(float damageTaken)
+        /*public void TakeDamage(float damageTaken)
         {
             if (_ReleasedToPool) return;
 
             _ReleasedToPool = true;
             PoolManager.Instance.ObjectPool[(int)_PoolToUse].Release(gameObject);
-        }
+        }*/
     }
 }

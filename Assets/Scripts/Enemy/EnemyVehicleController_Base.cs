@@ -12,10 +12,11 @@ namespace FrontLineDefense.Enemy
         // constraints on z-axis and then rotate on y-axis to face the player 
         [SerializeField] protected Transform _PlayerTransform, _Turret;
         [SerializeField] protected PoolManager.PoolType _PoolToUse;
-        [SerializeField] protected float _ShootCooldown, _DetectionRange;
+        [SerializeField] protected float _ShootCooldown, _DetectionRange, _Health;
         /// <summary> 0: Available to Shoot | 1 : Shot | 2 : Recharging | 3 : Recharging Complete </summary>
         protected byte _ShotProjectileStatus;
-        private float _health, _shootTime;
+        protected bool _ReleasedToPool;
+        private float _shootTime;
 
         protected CustomTimer _CtTimer;
         protected CancellationTokenSource _Cts;
@@ -61,9 +62,14 @@ namespace FrontLineDefense.Enemy
 
         public virtual void TakeDamage(float damageTaken)
         {
-            _health -= damageTaken;
-            if (_health <= 0f)
+            if (_ReleasedToPool) return;
+
+            _Health -= damageTaken;
+            if (_Health <= 0f)
+            {
+                _ReleasedToPool = true;
                 PoolManager.Instance.ObjectPool[(int)_PoolToUse].Release(gameObject);
+            }
         }
     }
 }

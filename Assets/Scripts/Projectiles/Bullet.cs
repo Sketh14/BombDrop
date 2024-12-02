@@ -32,7 +32,7 @@ namespace FrontLineDefense.Projectiles
 
             _releasedToPool = true;
             PoolManager.Instance.ObjectPool[(int)_poolToUse].Release(gameObject);
-            if (other.CompareTag(UniversalConstants.Player))
+            if (other.CompareTag(UniversalConstants.StatComponent))
                 other.GetComponent<IStatComponent>().TakeDamage(_Damage);
         }
     }

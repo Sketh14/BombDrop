@@ -77,5 +77,15 @@
     (-) Adding Damage | ReleasedToPool
     (-) Logic for damage taken
 
+- ProjectileBase
+    (-) Removing IStatComponent as we are already checking for collisions in both projectiles
+    (-) Checking for StatComponent for both Player/Enemy Vehicle
+
+- Bullet
+    (-) Checking for StatComponent for both Player/Enemy Vehicle
+
+- EnemyVehilceController_Base
+    (-) Adding pool release check
+
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation
