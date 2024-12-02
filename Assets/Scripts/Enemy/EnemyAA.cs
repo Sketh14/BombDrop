@@ -5,7 +5,7 @@ using FrontLineDefense.Projectiles;
 
 namespace FrontLineDefense.Enemy
 {
-    public class EnemyMissileCarrier : EnemyVehicleController_Base
+    public class EnemyAA : EnemyVehicleController_Base
     {
         [SerializeField] private float _rotateSpeed;
         [SerializeField] private PoolManager.PoolType _missilePool;

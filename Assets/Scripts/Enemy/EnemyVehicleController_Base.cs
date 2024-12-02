@@ -50,13 +50,14 @@ namespace FrontLineDefense.Enemy
 
             //Shoot in some intervals
             // We are not looking for perfect time-interval, so this will do to reduce performance cost
-            if (_shootTime > _ShootCooldown && _ShotProjectileStatus == (byte)ShootStatus.RECHARGE_DONE)
+            /*if (_shootTime > _ShootCooldown && _ShotProjectileStatus == (byte)ShootStatus.RECHARGE_DONE)
             {
                 _ShotProjectileStatus = (byte)ShootStatus.AVAILABLE_TO_SHOOT;
                 _shootTime = 0f;
             }
             else
                 _shootTime += Time.fixedDeltaTime;
+            */
         }
 
         protected abstract void TargetPlayer();

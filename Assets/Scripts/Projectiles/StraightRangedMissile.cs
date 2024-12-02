@@ -13,7 +13,7 @@ namespace FrontLineDefense.Projectiles
         private Vector2 _playerTargetedPos;
         private const float _maxTargetDiff = 1f;
 
-        private void OnEnable()
+        public override void SetStats(in Vector2 initialSpeed)
         {
             _playerTargetedPos = GameManager.Instance.PlayerTransform.position;
             _SpeedVec = (GameManager.Instance.PlayerTransform.position - transform.position).normalized * _SpeedMult;

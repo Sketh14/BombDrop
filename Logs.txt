@@ -102,5 +102,16 @@
 - FollowingMissile | StraightRangedMissiles
     (-) Replacing _playerTransform with GameManager's reference
 
+- EnemyMissileCarrier | EnemyVehilceController_Base
+    (-) Changing Shoot logic
+        [=] Shoot -> Wait for Recharge -> Target Player -> Repeat
+
+- Scene
+    (-) Changing prefab of MissileCarrier_1
+    (-) Prefab for MissileCarrier_2
+
+- EnemyAA
+    (-) Different script for shooting at player
+
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation
