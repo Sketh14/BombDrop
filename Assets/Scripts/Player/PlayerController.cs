@@ -1,4 +1,5 @@
 using System;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,7 +18,7 @@ namespace FrontLineDefense.Player
         private float _health = 100.0f;
         [SerializeField] private float _rotateSpeed;
         [SerializeField] private Button _shootProjectile;
-        [SerializeField] private GameObject _projectilePrefab;
+        // [SerializeField] private GameObject _projectilePrefab;           //test
         [SerializeField] private Transform _bombPoint;
         private Transform _planeMesh;
         /// <summary> 0 : Left | 1 : Right | 2 : In Process of turning </summary>
@@ -120,10 +121,10 @@ namespace FrontLineDefense.Player
             shotProjectile.GetComponent<ProjectileBase>().SetStats(transform.right * -1.0f);
         }
 
-        public void TakeDamage(float damage)
+        public void TakeDamage(float damageTaken)
         {
-            // Debug.Log($"Taking Damage : {damage}");
-            _health -= damage;
+            // Debug.Log($"Taking Damage : {damageTaken}");
+            _health -= damageTaken;
         }
     }
 }

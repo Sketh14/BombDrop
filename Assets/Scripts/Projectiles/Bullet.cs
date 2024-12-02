@@ -11,6 +11,10 @@ namespace FrontLineDefense.Projectiles
     {
         [SerializeField] protected float _SpeedMult = 1f;
         [SerializeField] private PoolManager.PoolType _poolToUse;
+        [SerializeField] protected float _Damage = 1f;
+        private bool _releasedToPool;
+
+        private void OnDisable() { _releasedToPool = false; }
 
         private void FixedUpdate()
         {
@@ -24,11 +28,12 @@ namespace FrontLineDefense.Projectiles
             // gameObject.SetActive(false);
             // return;
 
+            if (_releasedToPool) return;
+
+            _releasedToPool = true;
             PoolManager.Instance.ObjectPool[(int)_poolToUse].Release(gameObject);
             if (other.CompareTag(UniversalConstants.Player))
-            {
-                other.GetComponent<IStatComponent>().TakeDamage(10f);
-            }
+                other.GetComponent<IStatComponent>().TakeDamage(_Damage);
         }
     }
 }

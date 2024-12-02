@@ -54,9 +54,28 @@
 
 - StraightRangedMissiles
     (-) Other separate script for ranged missiles
-    
+
 - Bullet
     (-) Separate script for bullet mechanic
+
+---------------------------------------------------------------------------------------------------------------------------------------
+                                                        01 Dec
+---------------------------------------------------------------------------------------------------------------------------------------
+
+- StraightRangedMissiles
+    (-) Initializing _SpeedVec only once and storing player position OnEnable
+    (-) Checking if the targeted distance has been reached, if yes then releasing to pool
+
+- Scene
+    (-) Mat for Following/Ranged missiles
+    (-) Added Tag for "StatComponent"
+
+- UniversalConstant
+    (-) Adding const for StatComponent
+
+- ProjectileBase
+    (-) Adding Damage | ReleasedToPool
+    (-) Logic for damage taken
 
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation

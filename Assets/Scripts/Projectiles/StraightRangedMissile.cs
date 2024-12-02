@@ -3,6 +3,7 @@
 * StraightRangedMissiles : These could be slower than the player and shoot upto a distance
 */
 
+using FrontLineDefense.Global;
 using UnityEngine;
 
 namespace FrontLineDefense.Projectiles
@@ -10,12 +11,22 @@ namespace FrontLineDefense.Projectiles
     public class StraightRangedMissile : ProjectileBase
     {
         [SerializeField] private Transform _playerTransform;
+        private Vector2 _playerTargetedPos;
+        private const float _maxTargetDiff = 1f;
 
-        protected override void Update()
+        private void OnEnable()
         {
-            base.Update();
-
+            _playerTargetedPos = _playerTransform.position;
             _SpeedVec = (_playerTransform.position - transform.position).normalized * _SpeedMult;
+        }
+
+        protected override void FixedUpdate()
+        {
+            base.FixedUpdate();
+
+            if (Vector2.SqrMagnitude(transform.position - new Vector3(_playerTargetedPos.x, _playerTargetedPos.y, 0f))
+                <= _maxTargetDiff * _maxTargetDiff)
+                PoolManager.Instance.ObjectPool[(int)_PoolToUse].Release(gameObject);
         }
     }
 }
