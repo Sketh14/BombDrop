@@ -59,7 +59,7 @@
     (-) Separate script for bullet mechanic
 
 ---------------------------------------------------------------------------------------------------------------------------------------
-                                                        01 Dec
+                                                        02 Dec
 ---------------------------------------------------------------------------------------------------------------------------------------
 
 - StraightRangedMissiles
@@ -112,6 +112,22 @@
 
 - EnemyAA
     (-) Different script for shooting at player
+
+- EnemyAA
+    (-) Basic logic for shooting at player
+
+- Bullet
+    (-) Checking if outside max-range and deactivating
+
+- PoolManager
+    (-) Renaming BULLET to AA_BULLET
+
+---------------------------------------------------------------------------------------------------------------------------------------
+                                                        03 Dec
+---------------------------------------------------------------------------------------------------------------------------------------
+
+- Scene
+    (-) New Bullet Prefab
 
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation
