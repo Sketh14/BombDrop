@@ -126,8 +126,27 @@
                                                         03 Dec
 ---------------------------------------------------------------------------------------------------------------------------------------
 
+[Do] Turning speed of missiles is also low
+
 - Scene
     (-) New Bullet Prefab
+
+- EnemySpawner
+    (-) For spawning enemies on the map
+    (-) Array of poolTypes for requesting enemies
+    (-) Enemy spawning logic basic
+
+- ProceduralTerrain
+    (-) Storing positions to spawn enemies
+        [=] Random chance to store position | Checking Z(2) to be in-line with player
+    (-) Invoking action to send enemy positions to EnemySpawner
+
+- GameManager
+    (-) Adding action for enemy genration
+
+- Scene
+    (-) Increasing width
+    (-) Changing Player tag to "StatComponent" for projectile detection
 
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation

@@ -123,7 +123,7 @@ namespace FrontLineDefense.Player
 
         public void TakeDamage(float damageTaken)
         {
-            // Debug.Log($"Taking Damage : {damageTaken}");
+            Debug.Log($"Taking Damage : {damageTaken}");
             _health -= damageTaken;
         }
     }
