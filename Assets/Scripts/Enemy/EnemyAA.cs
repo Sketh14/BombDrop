@@ -28,12 +28,14 @@ namespace FrontLineDefense.Enemy
 
         protected override void Shoot()
         {
-            // Debug.Log($"SHooting");
             _ShotProjectileStatus = (byte)ShootStatus.SHOT_PROJECTILE;
             _shootTime = 0f;
             GameObject shotProjectile = PoolManager.Instance.ObjectPool[(int)PoolManager.PoolType.AA_BULLET].Get();
             shotProjectile.transform.position = _ShootPoint.position;
             shotProjectile.transform.rotation = _ShootPoint.rotation;
+            // Debug.Log($"SHooting Before ACtive| Instantiated Pos : {shotProjectile.transform.position}");
+            shotProjectile.SetActive(true);
+            // Debug.Log($"SHooting After Active| Instantiated Pos : {shotProjectile.transform.position}");
             // shotProjectile.GetComponent<ProjectileBase>().SetStats(_Turret.right * -1.0f);
         }
 

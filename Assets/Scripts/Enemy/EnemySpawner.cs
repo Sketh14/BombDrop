@@ -32,7 +32,7 @@ namespace FrontLineDefense.Enemy
                                   _terrainTranform.position.x + (enemyPositions[i].x * _terrainTranform.localScale.x)
                                 , _terrainTranform.position.y + (enemyPositions[i].y * _terrainTranform.localScale.y) + 0.05f
                                 , _terrainTranform.position.z + (enemyPositions[i].z * _terrainTranform.localScale.z));
-
+                enemyToSpawn.SetActive(true);
                 // Debug.Log($"Spawning Enemie | i : {i} | pos : {enemyToSpawn.transform.position} | scale : {_terrainTranform.localScale}");
             }
         }

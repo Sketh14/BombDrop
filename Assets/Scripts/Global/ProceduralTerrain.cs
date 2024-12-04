@@ -45,6 +45,7 @@ namespace FrontLineDefense.Global
             GetComponent<MeshFilter>().mesh = mesh;
             meshCollider = GetComponent<MeshCollider>();
 
+            // CreateTerrain();
             CreateTerrain2();
         }
 
@@ -53,7 +54,8 @@ namespace FrontLineDefense.Global
         {
             if (_meshGenerateRequested)
             {
-                CreateTerrain();
+                // CreateTerrain();
+                CreateTerrain2();
                 _meshGenerateRequested = false;
             }
         }
@@ -154,28 +156,18 @@ namespace FrontLineDefense.Global
             // Vector2[] 
             randomEnemyPositions = new Vector3[5];
 
-            int zPoint = 20;
+            int zPerlinPoint = 15;
             float zRange = 10f;
-
-            float[] perlinYPoints = new float[xWidth];
-            //Generate an array of Perlin Y Points
-            for (int x = 0; x <= xWidth; x++)
-                perlinYPoints[x] = Mathf.PerlinNoise((x + offset.x) * scale * 0.1f, (zPoint + offset.y) * scale * 0.1f) * heightMultiplier;
-
 
 #if TERRAIN_DEBUG_PERLIN
             int printTimeLerpZ = 0, printTimeZ = 0;
 #endif
-            for (int z = 0, i = 0; z <= zDepth; z++)
+
+            float[] perlinYPoints = new float[xWidth + 1];
+            //Generate an array of Perlin Y Points
+            for (int x = 0; x <= xWidth; x++)
             {
-                for (int x = 0; x <= xWidth; x++, i++)
-                {
-                    // Calculate height using Perlin noise and the offset for a different map
-                    float y;
-                    // if (Mathf.Abs(z - zPoint) <= 10)
-                    if (z == zPoint)             //Bumps to be in a single line
-                    {
-                        y = Mathf.PerlinNoise((x + offset.x) * scale * 0.1f, (z + offset.y) * scale * 0.1f) * heightMultiplier;
+                perlinYPoints[x] = Mathf.PerlinNoise((x + offset.x) * scale * 0.1f, (zPerlinPoint + offset.y) * scale * 0.1f) * heightMultiplier;
 
 #if TERRAIN_DEBUG_PERLIN
                         if (printTimeZ <= xWidth)
@@ -184,13 +176,23 @@ namespace FrontLineDefense.Global
                             printTimeZ++;
                         }
 #endif
-                    }
-                    else if ((z - zPoint) > 0 && (z - zPoint) <= zRange)
+            }
+
+            for (int z = 0, i = 0; z <= zDepth; z++)
+            {
+                for (int x = 0; x <= xWidth; x++, i++)
+                {
+                    // Calculate height using Perlin noise and the offset for a different map
+                    float y;
+
+                    if ((z - zPerlinPoint) > 0 && (z - zPerlinPoint) <= zRange)
                     {
+                        // Debug.Log($"Greater than Z | z : {z}");
                         // float lerpNormalized = 1 - ((z - zPoint) / zRange);       //We would need inverse as we are progressing forward
                         // float lerpNormalized = (z - zPoint) / zRange;
-                        float val = _lerpCurve.Evaluate((z - zPoint) / zRange);
-                        y = Mathf.Lerp(0, vertices[(zPoint * (xWidth + 1)) + x].y, val);              //Total xWidth+1
+                        float val = _lerpCurve.Evaluate((z - zPerlinPoint) / zRange);
+                        // y = Mathf.Lerp(0, vertices[(zPoint * (xWidth + 1)) + x].y, val);              //Total xWidth+1
+                        y = Mathf.Lerp(0, perlinYPoints[x], val);              //Total xWidth+1
 
 #if TERRAIN_DEBUG_PERLIN
                         if (printTimeLerpZ < 20)
@@ -201,17 +203,37 @@ namespace FrontLineDefense.Global
                         }
 #endif
                     }
+                    else if ((zPerlinPoint - z) > 0 && (zPerlinPoint - z) <= zRange)
+                    {
+                        // Debug.Log($"Less than Z | z : {z}");
+                        float val = _lerpCurve.Evaluate(((zPerlinPoint - z) / zRange));
+                        // y = Mathf.Lerp(0, vertices[(zPoint * (xWidth + 1)) + x].y, val);              //Total xWidth+1
+                        y = Mathf.Lerp(0, perlinYPoints[x], val);              //Total xWidth+1
+
+#if TERRAIN_DEBUG_PERLIN
+                        if (printTimeLerpZ < 20)
+                        {
+                            Debug.Log($"Lerping | lerpNormalized : {1 - ((zPoint - z) / zRange)} | val : {val} | z : {z} | zpoint : {zPoint} "
+                            + $"| Index : {(zPoint * (xWidth + 1)) + x} | x : {x} | verticeY : {vertices[(zPoint * (xWidth + 1)) + x].y}");
+                            printTimeLerpZ++;
+                        }
+#endif
+                    }
+                    else if (z == zPerlinPoint)
+                    {
+                        y = perlinYPoints[x];
+                    }
                     else y = 0f;
 
                     vertices[i] = new Vector3(x, y, z);
                     uvs[i] = new Vector2((float)x / xWidth, (float)z / zDepth);
 
-                    if (z == 2                                          // In line with the player
+                    if (z == zPerlinPoint                                          // In line with the player
                      && enemyPosFilled < 5 && fillInterval >= 1
                      && Random.Range(0f, 1f) <= 0.3f)                   //Can get rid of this part
                     {
                         fillInterval = 0;
-                        randomEnemyPositions[enemyPosFilled] = vertices[i];             //We dont need z
+                        randomEnemyPositions[enemyPosFilled] = vertices[i];
                         enemyPosFilled++;
                     }
 

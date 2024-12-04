@@ -52,7 +52,7 @@ namespace FrontLineDefense.Global
                 int tempPoolIndex = i;              //Avoid wrong indexing
                 poolToMake = new ObjectPool<GameObject>(
                     createFunc: () => CreatePoolObject(_poolsToMake[tempPoolIndex]._poolType, poolParent.transform),
-                    actionOnGet: ReturnPooledObject,
+                    // actionOnGet: ReturnPooledObject,
                     actionOnRelease: ReleasePoolObject,
                     defaultCapacity: 10,
                     maxSize: 15
@@ -66,6 +66,7 @@ namespace FrontLineDefense.Global
         {
             GameObject poolObject = Instantiate(_poolsToMake[(int)poolType]._prefab, poolParent);
             poolObject.name = $"{poolType}_{ObjectPool[(int)poolType].CountAll}";
+            poolObject.SetActive(false);
             return poolObject;
         }
 
