@@ -154,10 +154,20 @@
     (-) Adding simple ground texture to Terrain
         [=] Does not looks good
 
+---------------------------------------------------------------------------------------------------------------------------------------
+                                                        03 Dec
+---------------------------------------------------------------------------------------------------------------------------------------
+
 - ProjectileBase
     (-) Adding turn speed
         [=] Lerping for rotation
     (-) Multiplying to Translate here instead of with SpeedVec
+
+- Scene
+    (-) StraightRangedMissiles
+        [=] Increasing speed
+    (-) MissileCarrier_2
+        [=] Increasing turret rotation speed
 
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation

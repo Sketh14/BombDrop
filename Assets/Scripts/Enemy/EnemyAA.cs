@@ -46,7 +46,7 @@ namespace FrontLineDefense.Enemy
             if (_shootTime > _ShootCooldown)
             {
                 // Debug.Log($"Shoot Available");
-                _ShotProjectileStatus = (byte)ShootStatus.RECHARGE_DONE;
+                _ShotProjectileStatus = (byte)ShootStatus.AVAILABLE_TO_SHOOT;
             }
             else
                 _shootTime += Time.fixedDeltaTime;

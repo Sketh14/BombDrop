@@ -219,7 +219,7 @@ MonoBehaviour:
   _DetectionRange: 40
   _Health: 80
   _ShootPoint: {fileID: 2159678846851417174}
-  _rotateSpeed: 5
+  _rotateSpeed: 10
   _missilePool: 2
 --- !u!65 &2181156592471404600
 BoxCollider:

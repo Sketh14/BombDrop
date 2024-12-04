@@ -100,7 +100,7 @@ namespace FrontLineDefense.Global
                     uvs[i] = new Vector2((float)x / xWidth, (float)z / zDepth);
 
                     if (z == 2                                          // In line with the player
-                     && enemyPosFilled < 5 && fillInterval >= 5
+                     && enemyPosFilled < 5 && fillInterval >= 1
                      && Random.Range(0f, 1f) <= 0.3f)                   //Can get rid of this part
                     {
                         fillInterval = 0;
