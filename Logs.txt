@@ -155,7 +155,7 @@
         [=] Does not looks good
 
 ---------------------------------------------------------------------------------------------------------------------------------------
-                                                        03 Dec
+                                                        04 Dec
 ---------------------------------------------------------------------------------------------------------------------------------------
 
 - ProjectileBase
@@ -169,5 +169,7 @@
     (-) MissileCarrier_2
         [=] Increasing turret rotation speed
 
+- ProceduralTerrain
+    (-) Changing terrain to have hills on a straight line
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation
