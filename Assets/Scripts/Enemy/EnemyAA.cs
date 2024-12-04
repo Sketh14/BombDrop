@@ -19,7 +19,11 @@ namespace FrontLineDefense.Enemy
             //calculate the angle in radians and convert to  degrees
             float zRotateAngle = (Mathf.Atan2(_playerDirection.y, _playerDirection.x) * Mathf.Rad2Deg) - 180f;
             if (zRotateAngle >= _minRotateAngle && zRotateAngle <= _maxZRotateAngle)
+            {
                 _Turret.localRotation = Quaternion.Lerp(_Turret.localRotation, Quaternion.Euler(0f, 0f, zRotateAngle), _rotateSpeed * Time.deltaTime);
+                //Can make a condition to check if the turret is facing the player and shoot then only
+                // But the player wont just appear on top of the vehicle, so no need for now
+            }
         }
 
         protected override void Shoot()
@@ -42,7 +46,7 @@ namespace FrontLineDefense.Enemy
             if (_shootTime > _ShootCooldown)
             {
                 // Debug.Log($"Shoot Available");
-                _ShotProjectileStatus = (byte)ShootStatus.AVAILABLE_TO_SHOOT;
+                _ShotProjectileStatus = (byte)ShootStatus.RECHARGE_DONE;
             }
             else
                 _shootTime += Time.fixedDeltaTime;

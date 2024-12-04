@@ -15,8 +15,9 @@ namespace FrontLineDefense.Projectiles
 
         public override void SetStats(in Vector2 initialSpeed)
         {
+            _turnSpeed = 1f;
             _playerTargetedPos = GameManager.Instance.PlayerTransform.position;
-            _SpeedVec = (GameManager.Instance.PlayerTransform.position - transform.position).normalized * _SpeedMult;
+            _SpeedVec = (GameManager.Instance.PlayerTransform.position - transform.position).normalized;
         }
 
         protected override void FixedUpdate()

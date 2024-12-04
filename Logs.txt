@@ -148,5 +148,16 @@
     (-) Increasing width
     (-) Changing Player tag to "StatComponent" for projectile detection
 
+- Scene
+    (-) Changing Plane Wing mat ot Simple Lit
+    (-) Changing Player Colliders
+    (-) Adding simple ground texture to Terrain
+        [=] Does not looks good
+
+- ProjectileBase
+    (-) Adding turn speed
+        [=] Lerping for rotation
+    (-) Multiplying to Translate here instead of with SpeedVec
+
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation

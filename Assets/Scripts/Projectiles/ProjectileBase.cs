@@ -21,10 +21,13 @@ namespace FrontLineDefense.Projectiles
         protected bool _ReleasedToPool;
         [SerializeField] protected float _Damage = 1f;
         [SerializeField] protected PoolManager.PoolType _PoolToUse;
+        protected float _turnSpeed = 0.015f;
         // private const float _positionLerpVal = 0.5f;
         // private float _inititalRot;
 
-        private void OnDisable() { _ReleasedToPool = false; }
+        protected virtual void OnDisable() { _ReleasedToPool = false; }
+
+        protected virtual void OnEnable() { }
 
         // Start is called before the first frame update
         void Start()
@@ -51,18 +54,22 @@ namespace FrontLineDefense.Projectiles
         protected virtual void Update()
         {
             //Apply Movement
-            transform.position = transform.position + (_SpeedVec * Time.deltaTime);
+            // transform.position = transform.position + (_SpeedVec * Time.deltaTime * _SpeedMult);
+            transform.Translate(Vector3.left * _SpeedMult * Time.deltaTime);
             // _SpeedVec = _SpeedVec + (new Vector3(0f, UniversalConstants._gravity, 0f) * Time.deltaTime * _ScalePhysics);
         }
 
+        // private float _rotationAngle;            //For Debugging
         protected virtual void FixedUpdate()
         {
             //Apply Rotation
             //calculate the angle in radians and convert to  degrees 
-            float angle = Mathf.Atan2(_SpeedVec.normalized.y, _SpeedVec.normalized.x) * Mathf.Rad2Deg;
+            float _rotationAngle = Mathf.Atan2(_SpeedVec.normalized.y, _SpeedVec.normalized.x) * Mathf.Rad2Deg;
+            // _rotationAngle = Mathf.Lerp(_rotationAngle, Mathf.Atan2(_SpeedVec.normalized.y, _SpeedVec.normalized.x) * Mathf.Rad2Deg, _turnSpeed);        //Weird Turning
 
             // Apply rotation to the airplace to point in the direction of movement
-            transform.rotation = Quaternion.Euler(0, 0, angle - 180);
+            // transform.rotation = Quaternion.Euler(0, 0, _rotationAngle - 180);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, _rotationAngle - 180), _turnSpeed);      //Not Effective
 
             // _projectileRb.AddForce(Vector3.right * 15f, ForceMode.Acceleration);
 
