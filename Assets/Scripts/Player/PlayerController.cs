@@ -118,6 +118,7 @@ namespace FrontLineDefense.Player
             shotProjectile.transform.position = _bombPoint.position;
             shotProjectile.transform.rotation = transform.rotation;
             shotProjectile.GetComponent<ProjectileBase>().SetStats(transform.right * -1.0f);
+            shotProjectile.SetActive(true);
             // Debug.Log($"Shoot Clicked | transform.right : {transform.right} | Namer : {shotProjectile.name}");
         }
 

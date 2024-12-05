@@ -155,7 +155,7 @@
         [=] Does not looks good
 
 ---------------------------------------------------------------------------------------------------------------------------------------
-                                                        03 Dec
+                                                        04 Dec
 ---------------------------------------------------------------------------------------------------------------------------------------
 
 - ProjectileBase
@@ -168,6 +168,21 @@
         [=] Increasing speed
     (-) MissileCarrier_2
         [=] Increasing turret rotation speed
+
+- ProceduralTerrain
+    (-) Changing terrain to have hills on a straight line
+
+- Scene
+    (-) Changing position of the Procedural Terrain
+    (-) Changing zPoint to 15 for both enemy spawn and Perlin points
+    (-) Changing Virtual Camera settings
+
+- PoolManager
+    (-) Removing actionOnGet from Pool | Disabling objects after creation
+        [=] Calling scripts will manually turn gameObjects on
+
+- ProceduralTerrain
+    (-) Doing both Sides to the Perlin points
 
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation
