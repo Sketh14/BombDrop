@@ -3,7 +3,8 @@
     "rootNamespace": "FrontLineDefense",
     "references": [
         "GUID:a6401abded3a85943aab5787d58d0ea9",
-        "GUID:202947b03f7cfd14784df485b1ed94f1"
+        "GUID:202947b03f7cfd14784df485b1ed94f1",
+        "GUID:1f20a6518ba7bd942b74e419ef3ef05a"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 using FrontLineDefense.Global;
 using FrontLineDefense.Projectiles;
+using FrontLineDefense.Utils;
 
 // using UnityEngine.InputSystem.
 namespace FrontLineDefense.Player
@@ -21,15 +22,25 @@ namespace FrontLineDefense.Player
         // [SerializeField] private GameObject _projectilePrefab;           //test
         [SerializeField] private Transform _bombPoint;
         private Transform _planeMesh;
+
         /// <summary> 0 : Left | 1 : Right | 2 : In Process of turning </summary>
         private byte _planeMeshRotateMult;
-        private const float _positionLerpVal = 0.35f;
+        /// <summary> 0 : Available | 1 : Shot </summary>
+        private byte _projectileStatus;
+        private float _ogHealth;
+        // private const float _positionLerpVal = 0.35f;
+        private const float _bombCooldownTime = 2f;
+
+
+        private CustomTimer _customTimer;
 
         private void Start()
         {
+            _ogHealth = _health;
             _shootProjectile.onClick.AddListener(ShootProjectile);
             _planeMesh = transform.GetChild(0);
-            _planeMeshRotateMult = 1;
+            _planeMeshRotateMult = (int)PlaneRotateStatus.RIGHT;
+            _customTimer = new CustomTimer();
         }
 
         /*
@@ -63,9 +74,10 @@ namespace FrontLineDefense.Player
 
             //Apply rotation to the child mesh body when direction is changed
             // Switch between 180 | 0 
-            if (transform.right.x < -0.3f && (_planeMeshRotateMult == 1 || _planeMeshRotateMult == 2))
+            if (transform.right.x < -0.3f && (_planeMeshRotateMult == (int)PlaneRotateStatus.RIGHT
+                    || _planeMeshRotateMult == (int)PlaneRotateStatus.IN_PROCESS_OF_TURNING))
             {
-                _planeMeshRotateMult = 2;
+                _planeMeshRotateMult = (int)PlaneRotateStatus.IN_PROCESS_OF_TURNING;
                 _planeMesh.localRotation = Quaternion.Lerp(_planeMesh.localRotation, Quaternion.Euler(180f, 0f, 0f), _rotateSpeed * Time.deltaTime);
                 // Debug.Log($"Negative | transform right : {transform.right} | _planeMeshRotateMult : {_planeMeshRotateMult}"
                 // + $" | Euler : {_planeMesh.localEulerAngles} | rotation : {_planeMesh.localRotation}");
@@ -75,12 +87,13 @@ namespace FrontLineDefense.Player
                 {
                     // Debug.Log($"Reached");
                     _planeMesh.localRotation = Quaternion.Euler(180f, 0f, 0f);
-                    _planeMeshRotateMult = 0;
+                    _planeMeshRotateMult = (int)PlaneRotateStatus.LEFT;
                 }
             }
-            else if (transform.right.x > 0.3f && (_planeMeshRotateMult == 0 || _planeMeshRotateMult == 2))
+            else if (transform.right.x > 0.3f && (_planeMeshRotateMult == (int)PlaneRotateStatus.LEFT
+                    || _planeMeshRotateMult == (int)PlaneRotateStatus.IN_PROCESS_OF_TURNING))
             {
-                _planeMeshRotateMult = 2;
+                _planeMeshRotateMult = (int)PlaneRotateStatus.IN_PROCESS_OF_TURNING;
                 _planeMesh.localRotation = Quaternion.Lerp(_planeMesh.localRotation, Quaternion.Euler(0, 0f, 0f), _rotateSpeed * Time.deltaTime);
                 // Debug.Log($"Positive | transform right : {transform.right} | _planeMeshRotateMult : {_planeMeshRotateMult}"
                 // + $" | Euler : {_planeMesh.localEulerAngles} | rotation : {_planeMesh.localRotation}");
@@ -90,7 +103,7 @@ namespace FrontLineDefense.Player
                 {
                     // Debug.Log($"Reached");
                     _planeMesh.localRotation = Quaternion.Euler(0f, 0f, 0f);
-                    _planeMeshRotateMult = 1;
+                    _planeMeshRotateMult = (int)PlaneRotateStatus.RIGHT;
                 }
             }
 
@@ -113,6 +126,9 @@ namespace FrontLineDefense.Player
 
         private void ShootProjectile()
         {
+            if (_projectileStatus == (int)BombStatus.SHOT) return;
+            _projectileStatus = (int)BombStatus.SHOT;
+            CoolDownBomb();
             // GameObject shotProjectile = Instantiate(_projectilePrefab, _bombPoint.position, transform.rotation);
             GameObject shotProjectile = PoolManager.Instance.ObjectPool[(int)PoolManager.PoolType.BOMB].Get();
             shotProjectile.transform.position = _bombPoint.position;
@@ -122,10 +138,18 @@ namespace FrontLineDefense.Player
             // Debug.Log($"Shoot Clicked | transform.right : {transform.right} | Namer : {shotProjectile.name}");
         }
 
+        private async void CoolDownBomb()
+        {
+            GameManager.Instance.OnPlayerAction?.Invoke(_bombCooldownTime, (int)PlayerAction.BOMB_DROP);
+            await _customTimer.WaitForSeconds(_bombCooldownTime);
+            _projectileStatus = (int)BombStatus.AVAILABLE;
+        }
+
         public void TakeDamage(float damageTaken)
         {
             // Debug.Log($"Taking Damage : {damageTaken}");
             _health -= damageTaken;
+            GameManager.Instance.OnPlayerAction?.Invoke(_health / _ogHealth, (int)PlayerAction.PLAYER_HIT);
         }
     }
 }

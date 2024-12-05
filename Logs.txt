@@ -197,6 +197,24 @@
     (-) Camera Changes
         [=] Zooming out and keeping th player on the upper half of the screen
 
+- GameUIManager
+    (-) Creating Manager to handle all the UI calls
+    (-) HealthBar update logic
+    (-) BombCooldownBar update logic
+
+- GameManager
+    (-) Action Callback for any of Player's Action
+
+- Scene
+    (-) Added health-bar | bomb-cooldown-bar
+
+- PlayerController
+    (-) Logic for bomb cooldown
+
+- UniversalConstant
+    (-) Adding enum for checking PlaneRotateStatus | BombStatus | PlayerAction
+
+
 
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation
