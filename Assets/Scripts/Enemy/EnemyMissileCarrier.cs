@@ -37,6 +37,7 @@ namespace FrontLineDefense.Enemy
             shotProjectile.transform.position = _ShootPoint.position;
             shotProjectile.transform.rotation = transform.rotation;
             shotProjectile.GetComponent<ProjectileBase>().SetStats(transform.right * -1.0f);
+            shotProjectile.SetActive(true);
 
             _ShotProjectileStatus = (byte)ShootStatus.RECHARGING;
             await _CtTimer.WaitForSeconds(_ShootCooldown);

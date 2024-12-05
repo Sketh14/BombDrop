@@ -126,8 +126,63 @@
                                                         03 Dec
 ---------------------------------------------------------------------------------------------------------------------------------------
 
+[Do] Turning speed of missiles is also low
+
 - Scene
     (-) New Bullet Prefab
+
+- EnemySpawner
+    (-) For spawning enemies on the map
+    (-) Array of poolTypes for requesting enemies
+    (-) Enemy spawning logic basic
+
+- ProceduralTerrain
+    (-) Storing positions to spawn enemies
+        [=] Random chance to store position | Checking Z(2) to be in-line with player
+    (-) Invoking action to send enemy positions to EnemySpawner
+
+- GameManager
+    (-) Adding action for enemy genration
+
+- Scene
+    (-) Increasing width
+    (-) Changing Player tag to "StatComponent" for projectile detection
+
+- Scene
+    (-) Changing Plane Wing mat ot Simple Lit
+    (-) Changing Player Colliders
+    (-) Adding simple ground texture to Terrain
+        [=] Does not looks good
+
+---------------------------------------------------------------------------------------------------------------------------------------
+                                                        04 Dec
+---------------------------------------------------------------------------------------------------------------------------------------
+
+- ProjectileBase
+    (-) Adding turn speed
+        [=] Lerping for rotation
+    (-) Multiplying to Translate here instead of with SpeedVec
+
+- Scene
+    (-) StraightRangedMissiles
+        [=] Increasing speed
+    (-) MissileCarrier_2
+        [=] Increasing turret rotation speed
+
+- ProceduralTerrain
+    (-) Changing terrain to have hills on a straight line
+
+- Scene
+    (-) Changing position of the Procedural Terrain
+    (-) Changing zPoint to 15 for both enemy spawn and Perlin points
+    (-) Changing Virtual Camera settings
+
+- PoolManager
+    (-) Removing actionOnGet from Pool | Disabling objects after creation
+        [=] Calling scripts will manually turn gameObjects on
+
+- ProceduralTerrain
+    (-) Doing both Sides to the Perlin points
 
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation

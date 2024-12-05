@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace FrontLineDefense.Global
@@ -16,5 +17,9 @@ namespace FrontLineDefense.Global
         #endregion Singleton
 
         public Transform PlayerTransform;
+
+        #region Actions
+        public Action<Vector3[]> OnMapGenerated;
+        #endregion Actions
     }
 }

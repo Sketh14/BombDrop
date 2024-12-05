@@ -18,18 +18,22 @@ namespace FrontLineDefense.Projectiles
 
         private void OnDisable() { _releasedToPool = false; }
 
-        private void OnEnable() { _startPosition = transform.position; }
+        private void OnEnable()
+        {
+            _startPosition = transform.position;
+            // Debug.Log($"_startPosition : {_startPosition}");
+        }
 
         private void FixedUpdate()
         {
             //Apply Movement
             transform.position = transform.position + (transform.right * _SpeedMult);
 
-            if (Vector3.SqrMagnitude(transform.position - new Vector3(_startPosition.x, _startPosition.y, 0f)) >= (_maxRange * _maxRange))
+            if (Vector3.SqrMagnitude(transform.position - new Vector3(_startPosition.x, _startPosition.y, transform.position.z)) >= (_maxRange * _maxRange))
             {
                 gameObject.SetActive(false);
                 // Debug.Log($"Start Pos : {_startPosition} | Current pos : {transform.position} | "
-                // + $" Magnitude : {Vector3.SqrMagnitude(transform.position - new Vector3(_startPosition.x, _startPosition.y, 0f))}");
+                // + $" Magnitude : {Vector3.SqrMagnitude(transform.position - new Vector3(_startPosition.x, _startPosition.y, transform.position.z))}");
             }
         }
 

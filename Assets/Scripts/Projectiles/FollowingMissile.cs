@@ -10,11 +10,15 @@ namespace FrontLineDefense.Projectiles
 {
     public class FollowingMissile : ProjectileBase
     {
+        // private Vector3 _prevSpeedVec;
+
         protected override void Update()
         {
             base.Update();
 
-            _SpeedVec = (GameManager.Instance.PlayerTransform.position - transform.position).normalized * _SpeedMult;
+            // Vector3 projectedVec = (GameManager.Instance.PlayerTransform.position - transform.position).normalized;
+            // _SpeedVec = Vector3.Lerp(_SpeedVec, projectedVec, 0.5f);
+            _SpeedVec = (GameManager.Instance.PlayerTransform.position - transform.position).normalized;
         }
     }
 }

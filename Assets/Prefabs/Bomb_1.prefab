@@ -252,10 +252,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1819d68f47f5089438958e641303ab00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _SpeedMult: 30
+  _SpeedMult: 35
   _Damage: 30
   _PoolToUse: 0
-  _scalePhysics: 0.6
+  _scalePhysics: 0.8
 --- !u!1 &2549030261882986114
 GameObject:
   m_ObjectHideFlags: 0
