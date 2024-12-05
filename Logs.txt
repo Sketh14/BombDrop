@@ -184,5 +184,19 @@
 - ProceduralTerrain
     (-) Doing both Sides to the Perlin points
 
+---------------------------------------------------------------------------------------------------------------------------------------
+                                                        05 Dec
+---------------------------------------------------------------------------------------------------------------------------------------
+
+- Scene
+    (-) Changing the scale of Terrain to match with player and enemies
+        [=] Changing position also
+        [=] Changing to 9 | 4.5 | 4.5
+    (-) PlayerBomb
+        [=] Changing ScalePhysics to 9 and changing to affect gravity directly
+    (-) Camera Changes
+        [=] Zooming out and keeping th player on the upper half of the screen
+
+
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation

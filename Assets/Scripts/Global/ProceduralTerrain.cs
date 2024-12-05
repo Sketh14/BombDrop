@@ -54,6 +54,9 @@ namespace FrontLineDefense.Global
         {
             if (_meshGenerateRequested)
             {
+                Random.InitState(_generatedHash.GetHashCode());
+                offset = new Vector2(Random.Range(0f, 1000f), Random.Range(0f, 1000f));
+
                 // CreateTerrain();
                 CreateTerrain2();
                 _meshGenerateRequested = false;

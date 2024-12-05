@@ -255,7 +255,7 @@ MonoBehaviour:
   _SpeedMult: 35
   _Damage: 30
   _PoolToUse: 0
-  _scalePhysics: 0.8
+  _scalePhysics: 9
 --- !u!1 &2549030261882986114
 GameObject:
   m_ObjectHideFlags: 0

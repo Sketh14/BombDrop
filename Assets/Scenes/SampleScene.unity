@@ -822,8 +822,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.15958974, y: -0.000000008923024, z: 0.000000001442511, w: 0.98718345}
-  m_LocalPosition: {x: 55.23, y: 70.48, z: -40}
+  m_LocalRotation: {x: 0.2594946, y: -0.0073156017, z: 0.0019657554, w: 0.9657149}
+  m_LocalPosition: {x: 55.73, y: 63.600002, z: -33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1118,8 +1118,8 @@ GameObject:
   m_Component:
   - component: {fileID: 557309660}
   - component: {fileID: 557309663}
-  - component: {fileID: 557309662}
   - component: {fileID: 557309661}
+  - component: {fileID: 557309664}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -1161,7 +1161,7 @@ MonoBehaviour:
   m_HorizontalDamping: 0.5
   m_VerticalDamping: 0.5
   m_ScreenX: 0.5
-  m_ScreenY: 0.5
+  m_ScreenY: 0.2
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
   m_SoftZoneWidth: 0.8
@@ -1169,28 +1169,6 @@ MonoBehaviour:
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
---- !u!114 &557309662
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 557309659}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa7155796051b734daa718462081dc5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 13.28, z: -40}
-  m_XDamping: 1
-  m_YDamping: 1
-  m_ZDamping: 1
-  m_AngularDampingMode: 0
-  m_PitchDamping: 0
-  m_YawDamping: 0
-  m_RollDamping: 0
-  m_AngularDamping: 0
 --- !u!114 &557309663
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1203,6 +1181,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &557309664
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557309659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd6043bde05a7fc4cba197d06915c1e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damping: {x: 0.1, y: 0.5, z: 0.3}
+  ShoulderOffset: {x: 0.5, y: 6, z: -31}
+  VerticalArmLength: 0.4
+  CameraSide: 1
+  CameraDistance: 2
+  CameraCollisionFilter:
+    serializedVersion: 2
+    m_Bits: 0
+  IgnoreTag: 
+  CameraRadius: 0.2
+  DampingIntoCollision: 0
+  DampingFromCollision: 2
 --- !u!4 &677542196 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5718106102575556941, guid: 5fd308ab16e3b9146851c066d4c3eb45,
@@ -1729,7 +1731,7 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 0}
+  m_LookAt: {fileID: 700313909}
   m_Follow: {fileID: 700313909}
   m_Lens:
     FieldOfView: 60
@@ -1758,8 +1760,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1196661321}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.15958974, y: -0.000000008923024, z: 0.000000001442511, w: 0.98718345}
-  m_LocalPosition: {x: 55.23, y: 70.48, z: -40}
+  m_LocalRotation: {x: 0.2594946, y: -0.0073156017, z: 0.0019657554, w: 0.9657149}
+  m_LocalPosition: {x: 55.73, y: 63.600002, z: -33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1835,9 +1837,9 @@ Transform:
   m_GameObject: {fileID: 1240347854}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2000, y: -300, z: -750}
-  m_LocalScale: {x: 100, y: 50, z: 50}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -450, y: 0, z: -67.5}
+  m_LocalScale: {x: 9, y: 4.5, z: 4.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 788396185}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1855,8 +1857,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xWidth: 50
   zDepth: 30
-  scale: 2
-  heightMultiplier: 8
+  scale: 1.5
+  heightMultiplier: 16
   _generatedHash: KUNDAN
   _lerpCurve:
     serializedVersion: 2
@@ -1864,42 +1866,42 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 1
-      inSlope: 0.005827311
-      outSlope: 0.005827311
-      tangentMode: 0
-      weightedMode: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 1
+      weightedMode: 2
       inWeight: 0
-      outWeight: 0.45553643
+      outWeight: 0.57193583
     - serializedVersion: 3
-      time: 0.28107786
-      value: 0.87389654
-      inSlope: -1.162173
-      outSlope: -1.162173
+      time: 0.21646552
+      value: 0.8526897
+      inSlope: -0.98783815
+      outSlope: -0.98783815
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.172765
-      outWeight: 0.39982447
+      inWeight: 0.3327415
+      outWeight: 0.32076296
     - serializedVersion: 3
-      time: 0.4300564
-      value: 0.5366884
-      inSlope: -0.8602957
-      outSlope: -0.8602957
+      time: 0.41339073
+      value: 0.7112057
+      inSlope: -0.416448
+      outSlope: -0.416448
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33278933
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.7017336
+      value: 0.3391919
+      inSlope: -1.6808118
+      outSlope: -1.6808118
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0.40619332
     - serializedVersion: 3
-      time: 0.7454978
-      value: 0.2991298
-      inSlope: -1.0705884
-      outSlope: -1.0705884
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.8857906
-      value: 0.062420227
+      time: 0.9066341
+      value: 0.102520324
       inSlope: -1.3145621
       outSlope: -1.3145621
       tangentMode: 0
