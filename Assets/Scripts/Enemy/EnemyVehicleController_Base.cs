@@ -15,9 +15,11 @@ namespace FrontLineDefense.Enemy
         [SerializeField] protected PoolManager.PoolType _PoolToUse;
         [SerializeField] protected float _ShootCooldown, _DetectionRange, _Health;
         [SerializeField] protected Transform _ShootPoint;
+        [SerializeField] protected RectTransform _healthBarRect;
         /// <summary> 0: Available to Shoot | 1 : Shot | 2 : Recharging | 3 : Recharging Complete </summary>
         protected byte _ShotProjectileStatus;
         protected bool _ReleasedToPool;
+        protected float _OgHealth;
         // private float _shootTime;
 
         protected CustomTimer _CtTimer;
@@ -25,6 +27,7 @@ namespace FrontLineDefense.Enemy
 
         protected virtual void OnDisable()
         {
+            // _Health = _OgHealth;                //To reset stats if needed
             _Cts.Cancel();
         }
 
@@ -35,6 +38,7 @@ namespace FrontLineDefense.Enemy
 
         protected virtual void Start()
         {
+            _OgHealth = _Health;
             _CtTimer = new CustomTimer();
         }
 
@@ -68,6 +72,7 @@ namespace FrontLineDefense.Enemy
             if (_ReleasedToPool) return;
 
             _Health -= damageTaken;
+            _healthBarRect.anchorMax = new Vector2(_Health / _OgHealth, 1f);
             if (_Health <= 0f)
             {
                 _ReleasedToPool = true;

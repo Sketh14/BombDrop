@@ -221,5 +221,15 @@
 - Scene
     (-) Making Player Bullet variant prefab from bullet prefab
 
+---------------------------------------------------------------------------------------------------------------------------------------
+                                                        06 Dec
+---------------------------------------------------------------------------------------------------------------------------------------
+
+- Scene
+    (-) Making health bars for Enemy for UI
+-EnemyVehilceController_Base
+    (-) Adding another variable to store the original health
+    (-) Health bar logic
+
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation
