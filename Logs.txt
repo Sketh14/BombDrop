@@ -214,7 +214,12 @@
 - UniversalConstant
     (-) Adding enum for checking PlaneRotateStatus | BombStatus | PlayerAction
 
-
+- PlayerController
+    (-) Shoot Bullets Logic
+- PoolManager
+    (-) Adding PLAYER_BULLET enum
+- Scene
+    (-) Making Player Bullet variant prefab from bullet prefab
 
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation

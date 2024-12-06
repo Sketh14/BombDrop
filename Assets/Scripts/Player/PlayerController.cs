@@ -20,14 +20,17 @@ namespace FrontLineDefense.Player
         [SerializeField] private float _rotateSpeed;
         [SerializeField] private Button _shootProjectile;
         // [SerializeField] private GameObject _projectilePrefab;           //test
-        [SerializeField] private Transform _bombPoint;
+        [SerializeField] private Transform _bombPoint, _shootPoint;
         private Transform _planeMesh;
+        private GameObject _instancedBullet;
 
         /// <summary> 0 : Left | 1 : Right | 2 : In Process of turning </summary>
         private byte _planeMeshRotateMult;
         /// <summary> 0 : Available | 1 : Shot </summary>
         private byte _projectileStatus;
         private float _ogHealth;
+        private float _shootTime;
+        private const float _shootInterval = 0.25f;
         // private const float _positionLerpVal = 0.35f;
         private const float _bombCooldownTime = 2f;
 
@@ -37,7 +40,7 @@ namespace FrontLineDefense.Player
         private void Start()
         {
             _ogHealth = _health;
-            _shootProjectile.onClick.AddListener(ShootProjectile);
+            _shootProjectile.onClick.AddListener(DropBomb);
             _planeMesh = transform.GetChild(0);
             _planeMeshRotateMult = (int)PlaneRotateStatus.RIGHT;
             _customTimer = new CustomTimer();
@@ -50,7 +53,10 @@ namespace FrontLineDefense.Player
         {
 #if UNITY_EDITOR
             if (Input.GetKeyDown(KeyCode.Space))
-                ShootProjectile();
+                DropBomb();
+            if (Input.GetKey(KeyCode.LeftControl))
+                ShootBullets();
+            else _shootTime = 0f;
 #endif
 
             Vector2 input = joyStick.GetInputDirection();
@@ -58,9 +64,6 @@ namespace FrontLineDefense.Player
             Vector2 direction = new Vector2(input.x, input.y).normalized;
 
             // Move the airplance based on joystick input
-
-            //
-
             if (direction.magnitude > 0.1f)
             {
                 //calculate the angle in radians and convert to  degrees 
@@ -119,12 +122,14 @@ namespace FrontLineDefense.Player
             // transform.Translate(Vector2.left * speed);
         }*/
 
+        //TODO: Make a destruction logic/effect
         private void OnCollisionEnter(Collision other)
         {
             Debug.Log("Hit");
+            gameObject.SetActive(false);
         }
 
-        private void ShootProjectile()
+        private void DropBomb()
         {
             if (_projectileStatus == (int)BombStatus.SHOT) return;
             _projectileStatus = (int)BombStatus.SHOT;
@@ -138,6 +143,20 @@ namespace FrontLineDefense.Player
             // Debug.Log($"Shoot Clicked | transform.right : {transform.right} | Namer : {shotProjectile.name}");
         }
 
+        private void ShootBullets()
+        {
+            if (_shootTime >= _shootInterval)
+            {
+                _shootTime = 0f;
+                //Shoot Bullet
+                _instancedBullet = PoolManager.Instance.ObjectPool[(int)PoolManager.PoolType.PLAYER_BULLET].Get();
+                _instancedBullet.transform.position = _shootPoint.position;
+                _instancedBullet.transform.rotation = _shootPoint.rotation;
+                _instancedBullet.SetActive(true);
+            }
+            _shootTime += Time.deltaTime;
+        }
+
         private async void CoolDownBomb()
         {
             GameManager.Instance.OnPlayerAction?.Invoke(_bombCooldownTime, (int)PlayerAction.BOMB_DROP);
@@ -145,11 +164,15 @@ namespace FrontLineDefense.Player
             _projectileStatus = (int)BombStatus.AVAILABLE;
         }
 
+        //TODO: Plane destruction effect
         public void TakeDamage(float damageTaken)
         {
             // Debug.Log($"Taking Damage : {damageTaken}");
             _health -= damageTaken;
             GameManager.Instance.OnPlayerAction?.Invoke(_health / _ogHealth, (int)PlayerAction.PLAYER_HIT);
+
+            if (_health <= 0)
+                gameObject.SetActive(false);
         }
     }
 }

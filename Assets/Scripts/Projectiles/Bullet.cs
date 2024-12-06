@@ -31,7 +31,9 @@ namespace FrontLineDefense.Projectiles
 
             if (Vector3.SqrMagnitude(transform.position - new Vector3(_startPosition.x, _startPosition.y, transform.position.z)) >= (_maxRange * _maxRange))
             {
-                gameObject.SetActive(false);
+                // gameObject.SetActive(false);
+                _releasedToPool = true;
+                PoolManager.Instance.ObjectPool[(int)_poolToUse].Release(gameObject);
                 // Debug.Log($"Start Pos : {_startPosition} | Current pos : {transform.position} | "
                 // + $" Magnitude : {Vector3.SqrMagnitude(transform.position - new Vector3(_startPosition.x, _startPosition.y, transform.position.z))}");
             }
