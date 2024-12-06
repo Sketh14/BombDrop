@@ -254,5 +254,9 @@
 - MainMenuManager
     (-) Basic logic for loading scene and quitting
 
+- Fill Terrain on the edges
+    (-) Adding Padding to Perlin Points so that the edges smoothly go down to the bottom
+        [=] Smoothing with Lerp Curve with an offset to look good
+
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation

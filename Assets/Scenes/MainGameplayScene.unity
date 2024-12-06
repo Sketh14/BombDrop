@@ -332,12 +332,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _meshGenerateRequested: 0
-  randomEnemyPositions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
 --- !u!1 &126002790
 GameObject:
   m_ObjectHideFlags: 0
@@ -1427,7 +1421,7 @@ GameObject:
   - component: {fileID: 566175999}
   - component: {fileID: 566175998}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2298,7 +2292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cdf66fae8d9cf1419a82ae3de4aa480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xWidth: 50
+  xWidth: 80
   zDepth: 30
   scale: 1.5
   heightMultiplier: 16
@@ -2364,12 +2358,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _meshGenerateRequested: 0
-  randomEnemyPositions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
 --- !u!64 &1240347857
 MeshCollider:
   m_ObjectHideFlags: 0

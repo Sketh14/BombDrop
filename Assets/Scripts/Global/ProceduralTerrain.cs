@@ -1,5 +1,6 @@
 #define MESH_GENERATION_TESTING
 // #define TERRAIN_DEBUG_PERLIN
+// #define TERRAIN_DEBUG_EDGES
 
 using UnityEngine;
 
@@ -8,7 +9,7 @@ namespace FrontLineDefense.Global
     [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider))]
     public class ProceduralTerrain : MonoBehaviour
     {
-        [SerializeField] private int xWidth = 100; // Terrain Width 
+        [SerializeField] private int xWidth = 100; // Terrain Width // Provide extra padding for before and after points
         [SerializeField] private int zDepth = 100; // Terrain depth
 
         [SerializeField] private float scale = 20f; // Sacle of the noise
@@ -25,8 +26,9 @@ namespace FrontLineDefense.Global
         private Mesh mesh;
         private Vector2 offset;
         private MeshCollider meshCollider;
+        private const int zPerlinPoint = 15, zRange = 10;
 
-        public Vector3[] randomEnemyPositions;             //Debugging
+        // public Vector3[] randomEnemyPositions;             //Debugging
         // public Vector3[] vertices;             //Debugging
         // [SerializeField] private int seed = 0;
 
@@ -94,8 +96,7 @@ namespace FrontLineDefense.Global
             Vector2[] uvs = new Vector2[vertices.Length];
 
             int enemyPosFilled = 0, fillInterval = 10;
-            // Vector2[] 
-            randomEnemyPositions = new Vector3[5];
+            Vector3[] randomEnemyPositions = new Vector3[5];
 
             for (int z = 0, i = 0; z <= zDepth; z++)
             {
@@ -155,12 +156,11 @@ namespace FrontLineDefense.Global
             int[] triangles = new int[xWidth * zDepth * 6];
             Vector2[] uvs = new Vector2[vertices.Length];
 
-            int enemyPosFilled = 0, fillInterval = 10;
-            // Vector2[] 
-            randomEnemyPositions = new Vector3[5];
+            int enemyPosFilled = 0, fillInterval = 0;
+            Vector3[] randomEnemyPositions = new Vector3[5];
 
-            int zPerlinPoint = 15;
-            float zRange = 10f;
+            // int zPerlinPoint = 15;
+            // int zRange = 10;
 
 #if TERRAIN_DEBUG_PERLIN
             int printTimeLerpZ = 0, printTimeZ = 0;
@@ -168,7 +168,8 @@ namespace FrontLineDefense.Global
 
             float[] perlinYPoints = new float[xWidth + 1];
             //Generate an array of Perlin Y Points
-            for (int x = 0; x <= xWidth; x++)
+            // for (int x = 0; x <= xWidth; x++)
+            for (int x = zRange; x <= xWidth - zRange; x++)
             {
                 perlinYPoints[x] = Mathf.PerlinNoise((x + offset.x) * scale * 0.1f, (zPerlinPoint + offset.y) * scale * 0.1f) * heightMultiplier;
 
@@ -181,21 +182,38 @@ namespace FrontLineDefense.Global
 #endif
             }
 
-            for (int z = 0, i = 0; z <= zDepth; z++)
+            for (int x = 0; x < zRange; x++)
             {
-                for (int x = 0; x <= xWidth; x++, i++)
+                // Taking 10 points plus/minus and using curve to fill the points value
+                float pointVal = _lerpCurve.Evaluate(x / (float)zRange + 0.15f);
+
+                // perlinYPoints[zRange - x - 1] = pointVal * heightMultiplier;
+                // perlinYPoints[xWidth - zRange + x + 1] = pointVal * heightMultiplier;
+
+                perlinYPoints[zRange - x - 1] = Mathf.Lerp(0, perlinYPoints[zRange], pointVal);
+                perlinYPoints[xWidth - zRange + x + 1] = Mathf.Lerp(0, perlinYPoints[xWidth - zRange], pointVal);
+
+#if TERRAIN_DEBUG_EDGES
+                Debug.Log($"Perlin Before Points | x : {x} | val : {pointVal} | Before : {zRange - x - 1} "
+                        + $"| After {xWidth - zRange + x + 1}");
+#endif
+            }
+
+            for (int zCoord = 0, i = 0; zCoord <= zDepth; zCoord++)
+            {
+                for (int xCoord = 0; xCoord <= xWidth; xCoord++, i++)
                 {
                     // Calculate height using Perlin noise and the offset for a different map
-                    float y;
+                    float yCoord;
 
-                    if ((z - zPerlinPoint) > 0 && (z - zPerlinPoint) <= zRange)
+                    if ((zCoord - zPerlinPoint) > 0 && (zCoord - zPerlinPoint) <= zRange)
                     {
                         // Debug.Log($"Greater than Z | z : {z}");
                         // float lerpNormalized = 1 - ((z - zPoint) / zRange);       //We would need inverse as we are progressing forward
                         // float lerpNormalized = (z - zPoint) / zRange;
-                        float val = _lerpCurve.Evaluate((z - zPerlinPoint) / zRange);
+                        float val = _lerpCurve.Evaluate((zCoord - zPerlinPoint) / (float)zRange);
                         // y = Mathf.Lerp(0, vertices[(zPoint * (xWidth + 1)) + x].y, val);              //Total xWidth+1
-                        y = Mathf.Lerp(0, perlinYPoints[x], val);              //Total xWidth+1
+                        yCoord = Mathf.Lerp(0, perlinYPoints[xCoord], val);              //Total xWidth+1
 
 #if TERRAIN_DEBUG_PERLIN
                         if (printTimeLerpZ < 20)
@@ -206,12 +224,12 @@ namespace FrontLineDefense.Global
                         }
 #endif
                     }
-                    else if ((zPerlinPoint - z) > 0 && (zPerlinPoint - z) <= zRange)
+                    else if ((zPerlinPoint - zCoord) > 0 && (zPerlinPoint - zCoord) <= zRange)
                     {
                         // Debug.Log($"Less than Z | z : {z}");
-                        float val = _lerpCurve.Evaluate(((zPerlinPoint - z) / zRange));
+                        float val = _lerpCurve.Evaluate(((zPerlinPoint - zCoord) / (float)zRange));
                         // y = Mathf.Lerp(0, vertices[(zPoint * (xWidth + 1)) + x].y, val);              //Total xWidth+1
-                        y = Mathf.Lerp(0, perlinYPoints[x], val);              //Total xWidth+1
+                        yCoord = Mathf.Lerp(0, perlinYPoints[xCoord], val);              //Total xWidth+1
 
 #if TERRAIN_DEBUG_PERLIN
                         if (printTimeLerpZ < 20)
@@ -222,23 +240,31 @@ namespace FrontLineDefense.Global
                         }
 #endif
                     }
-                    else if (z == zPerlinPoint)
+                    else if (zCoord == zPerlinPoint)                 // In line with the player
                     {
-                        y = perlinYPoints[x];
+                        yCoord = perlinYPoints[xCoord];
+
+                        if (enemyPosFilled < 5 && fillInterval >= 1
+                         && Random.Range(0f, 1f) <= 0.3f)                   //Can get rid of this part
+                        {
+                            fillInterval = 0;
+                            randomEnemyPositions[enemyPosFilled] = new Vector3(xCoord, yCoord, zCoord);
+                            enemyPosFilled++;
+                        }
                     }
-                    else y = 0f;
+                    else yCoord = 0f;
 
-                    vertices[i] = new Vector3(x, y, z);
-                    uvs[i] = new Vector2((float)x / xWidth, (float)z / zDepth);
+                    vertices[i] = new Vector3(xCoord, yCoord, zCoord);
+                    uvs[i] = new Vector2((float)xCoord / xWidth, (float)zCoord / zDepth);
 
-                    if (z == zPerlinPoint                                          // In line with the player
+                    /*if (zCoord == zPerlinPoint                                          // In line with the player
                      && enemyPosFilled < 5 && fillInterval >= 1
                      && Random.Range(0f, 1f) <= 0.3f)                   //Can get rid of this part
                     {
                         fillInterval = 0;
                         randomEnemyPositions[enemyPosFilled] = vertices[i];
                         enemyPosFilled++;
-                    }
+                    }*/
 
                     fillInterval++;
                 }
