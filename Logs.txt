@@ -231,5 +231,19 @@
     (-) Adding another variable to store the original health
     (-) Health bar logic
 
+- Scene
+    (-) Basic Game Over screen
+        [=] Added Restart Button
+- GameManager
+    (-) Action for button click
+- GameUIManager
+    (-) Restart button logic
+        [=] Reloading scene for now
+- UniversalConstant
+    (-) Enum for button clicked
+    (-) "PLAYER_DEAD" enum for PlayerAction
+- PlayerController
+    (-) Invoking Callback for player death
+
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation

@@ -21,8 +21,9 @@ namespace FrontLineDefense.Global
         #region Actions
         public Action<Vector3[]> OnMapGenerated;
 
-        /// <summary> 0 : Bomb Drop | 1 : Player Hit </summary>
+        /// <summary> 0 : Bomb Drop | 1 : Player Hit | 2 : Player Dead </summary>
         public Action<float, int> OnPlayerAction;
+        public Action<int> OnButtonClicked;
         #endregion Actions
     }
 }

@@ -3,7 +3,9 @@ namespace FrontLineDefense.Global
     public enum ShootStatus { AVAILABLE_TO_SHOOT, SHOT_PROJECTILE, RECHARGING, RECHARGE_DONE, SEARCHING_PLAYER }
     public enum PlaneRotateStatus { LEFT, RIGHT, IN_PROCESS_OF_TURNING }
     public enum BombStatus { AVAILABLE, SHOT }
-    public enum PlayerAction { BOMB_DROP, PLAYER_HIT }
+    public enum PlayerAction { BOMB_DROP, PLAYER_HIT, PLAYER_DEAD }
+    public enum ButtonClicked { RESTART }
+    public enum SceneToLoad { MAIN_MENU, MAIN_GAMEPLAY }
 
     public class UniversalConstants
     {

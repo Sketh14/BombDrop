@@ -127,6 +127,7 @@ namespace FrontLineDefense.Player
         {
             Debug.Log("Hit");
             gameObject.SetActive(false);
+            GameManager.Instance.OnPlayerAction?.Invoke(0f, (int)PlayerAction.PLAYER_DEAD);
         }
 
         private void DropBomb()
@@ -172,7 +173,10 @@ namespace FrontLineDefense.Player
             GameManager.Instance.OnPlayerAction?.Invoke(_health / _ogHealth, (int)PlayerAction.PLAYER_HIT);
 
             if (_health <= 0)
+            {
                 gameObject.SetActive(false);
+                GameManager.Instance.OnPlayerAction?.Invoke(0f, (int)PlayerAction.PLAYER_DEAD);
+            }
         }
     }
 }
