@@ -3951,6 +3951,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerTransform: {fileID: 700313909}
+  PlayerDead: 0
 --- !u!1 &1985841162
 GameObject:
   m_ObjectHideFlags: 0
@@ -4558,6 +4559,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1196841631}
     m_Modifications:
+    - target: {fileID: 577190802587031321, guid: a93210887a717c746b14b9c5d7003774,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2128198616298571715, guid: a93210887a717c746b14b9c5d7003774,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4566,7 +4572,7 @@ PrefabInstance:
     - target: {fileID: 2128198616298571715, guid: a93210887a717c746b14b9c5d7003774,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -23.1
+      value: 29.9
       objectReference: {fileID: 0}
     - target: {fileID: 2128198616298571715, guid: a93210887a717c746b14b9c5d7003774,
         type: 3}
@@ -4616,7 +4622,7 @@ PrefabInstance:
     - target: {fileID: 6669039041535605348, guid: a93210887a717c746b14b9c5d7003774,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

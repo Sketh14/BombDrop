@@ -271,5 +271,13 @@
 - GameManager
     (-) Adding a flag for setting if the player is dead
 
+- Scene
+    (-) Adding additional BoxColliders for turrets for enemies
+        [=] Workaround needed as projectile Starting point is within the collider
+
+- EnemyMissileCarrier
+    (-) Logic to rotate turret in Y-Axis for MissileCarrier_2 which has FollowingMissiles
+
+
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation

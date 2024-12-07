@@ -1,3 +1,5 @@
+// #define TEST_SHOOT_OFF
+
 using System.Threading;
 using UnityEngine;
 
@@ -48,8 +50,10 @@ namespace FrontLineDefense.Enemy
             {
                 TargetPlayer();
 
+#if !TEST_SHOOT_OFF
                 if (!GameManager.Instance.PlayerDead && _ShotProjectileStatus == (byte)ShootStatus.AVAILABLE_TO_SHOOT)
                     Shoot();
+#endif
             }
 
             //Shoot in some intervals

@@ -276,6 +276,7 @@ GameObject:
   - component: {fileID: 5352448943608751014}
   - component: {fileID: 6240280449093479570}
   - component: {fileID: 8973371752506799605}
+  - component: {fileID: 9033252645506919521}
   m_Layer: 0
   m_Name: EnemyAA
   m_TagString: StatComponent
@@ -342,6 +343,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 6, y: 3.23, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &9033252645506919521
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2885289116653499476}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 2.5, y: 3.8, z: 3}
+  m_Center: {x: 0.97, y: 3.5, z: 0}
 --- !u!1 &4767140310200517975
 GameObject:
   m_ObjectHideFlags: 0
