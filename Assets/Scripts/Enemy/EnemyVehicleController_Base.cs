@@ -12,7 +12,7 @@ namespace FrontLineDefense.Enemy
         // constraints on z-axis and then rotate on y-axis to face the player 
         // [SerializeField] protected Transform _PlayerTransform, _Turret;
         [SerializeField] protected Transform _Turret;
-        [SerializeField] protected PoolManager.PoolType _PoolToUse;
+        [SerializeField] protected PoolManager.PoolType _VehiclePoolType;
         [SerializeField] protected float _ShootCooldown, _DetectionRange, _Health;
         [SerializeField] protected Transform _ShootPoint;
         [SerializeField] protected RectTransform _healthBarRect;
@@ -48,7 +48,7 @@ namespace FrontLineDefense.Enemy
             {
                 TargetPlayer();
 
-                if (_ShotProjectileStatus == (byte)ShootStatus.AVAILABLE_TO_SHOOT)
+                if (!GameManager.Instance.PlayerDead && _ShotProjectileStatus == (byte)ShootStatus.AVAILABLE_TO_SHOOT)
                     Shoot();
             }
 
@@ -76,7 +76,7 @@ namespace FrontLineDefense.Enemy
             if (_Health <= 0f)
             {
                 _ReleasedToPool = true;
-                PoolManager.Instance.ObjectPool[(int)_PoolToUse].Release(gameObject);
+                PoolManager.Instance.ObjectPool[(int)_VehiclePoolType].Release(gameObject);
             }
         }
     }

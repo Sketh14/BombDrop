@@ -17,6 +17,7 @@ namespace FrontLineDefense.Global
         #endregion Singleton
 
         public Transform PlayerTransform;
+        public bool PlayerDead;
 
         #region Actions
         public Action<Vector3[]> OnMapGenerated;

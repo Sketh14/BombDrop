@@ -258,5 +258,18 @@
     (-) Adding Padding to Perlin Points so that the edges smoothly go down to the bottom
         [=] Smoothing with Lerp Curve with an offset to look good
 
+---------------------------------------------------------------------------------------------------------------------------------------
+                                                        07 Dec
+---------------------------------------------------------------------------------------------------------------------------------------
+
+- ProceduralTerrain
+    (-) Adding yCoord condition to select enemy positions above water level
+    (-) Increasing interval of enemy spawn position from 1 to 2
+- EnemyVehilceController_Base
+    (-) Fixing Pool bug | Assinging correct PoolType
+    (-) Checking condition for if the player is dead and only shooting then
+- GameManager
+    (-) Adding a flag for setting if the player is dead
+
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation
