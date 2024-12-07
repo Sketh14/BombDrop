@@ -22,16 +22,25 @@ namespace FrontLineDefense.Projectiles
         [SerializeField] protected float _Damage = 1f;
         [SerializeField] protected PoolManager.PoolType _PoolToUse;
         protected float _turnSpeed = 0.015f;
+        [SerializeField] protected bool _gradualSpeedIncrease;
+        private float _currentSpeedMult = 1f;
         // private const float _positionLerpVal = 0.5f;
         // private float _inititalRot;
 
-        protected virtual void OnDisable() { _ReleasedToPool = false; }
+        protected virtual void OnDisable()
+        {
+            _currentSpeedMult = 1f;
+            _ReleasedToPool = false;
+        }
 
         protected virtual void OnEnable() { }
 
         // Start is called before the first frame update
         void Start()
         {
+            if (!_gradualSpeedIncrease)
+                _currentSpeedMult = _SpeedMult;
+
             // _projectileRb = GetComponent<Rigidbody>();
             // _projectileRb.AddForce(Vector3.right * 10f, ForceMode.Impulse);      //Test
         }
@@ -55,7 +64,13 @@ namespace FrontLineDefense.Projectiles
         {
             //Apply Movement
             // transform.position = transform.position + (_SpeedVec * Time.deltaTime * _SpeedMult);
-            transform.Translate(Vector3.left * _SpeedMult * Time.deltaTime);
+            transform.Translate(Vector3.left * _currentSpeedMult * Time.deltaTime);
+
+            if (_gradualSpeedIncrease && _currentSpeedMult < _SpeedMult)
+                _currentSpeedMult += Time.deltaTime * 7f;
+            // _currentSpeedMult += Time.deltaTime * 4f;
+            // _currentSpeedMult = Mathf.Clamp(_currentSpeedMult, 1, _SpeedMult);
+
             // _SpeedVec = _SpeedVec + (new Vector3(0f, UniversalConstants._gravity, 0f) * Time.deltaTime * _ScalePhysics);
         }
 

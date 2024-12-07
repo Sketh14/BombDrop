@@ -278,6 +278,8 @@
 - EnemyMissileCarrier
     (-) Logic to rotate turret in Y-Axis for MissileCarrier_2 which has FollowingMissiles
 
+- ProjectileBase
+    (-) Gradually accelerate logic
 
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation
