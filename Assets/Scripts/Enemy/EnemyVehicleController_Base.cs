@@ -15,14 +15,14 @@ namespace FrontLineDefense.Enemy
         // [SerializeField] protected Transform _PlayerTransform, _Turret;
         [SerializeField] protected Transform _Turret;
         [SerializeField] protected PoolManager.PoolType _VehiclePoolType;
-        [SerializeField] protected float _ShootCooldown, _DetectionRange, _Health;
+        [SerializeField] protected float _ShootCooldown, _DetectionRange, _Health, _SearchWaitTime;
         [SerializeField] protected Transform _ShootPoint;
         [SerializeField] protected RectTransform _healthBarRect;
         /// <summary> 0: Available to Shoot | 1 : Shot | 2 : Recharging | 3 : Recharging Complete </summary>
-        protected byte _ShotProjectileStatus;
+        protected int _ShotProjectileStatus;
         protected bool _ReleasedToPool;
         protected float _OgHealth;
-        // private float _shootTime;
+        // private float _searchTime;
 
         protected CustomTimer _CtTimer;
         protected CancellationTokenSource _Cts;
@@ -35,6 +35,9 @@ namespace FrontLineDefense.Enemy
 
         protected virtual void OnEnable()
         {
+            _ShotProjectileStatus |= 1 << (int)ShootStatus.SEARCHING_PLAYER;
+            _ShotProjectileStatus |= 1 << (int)ShootStatus.AVAILABLE_TO_SHOOT;
+            // Debug.Log($"Enabling ShootStatus : {_ShotProjectileStatus}");
             _Cts = new CancellationTokenSource();
         }
 
@@ -51,20 +54,22 @@ namespace FrontLineDefense.Enemy
                 TargetPlayer();
 
 #if !TEST_SHOOT_OFF
-                if (!GameManager.Instance.PlayerDead && _ShotProjectileStatus == (byte)ShootStatus.AVAILABLE_TO_SHOOT)
+                // if (!GameManager.Instance.PlayerDead && (_ShotProjectileStatus == (byte)ShootStatus.AVAILABLE_TO_SHOOT)
+                if (!GameManager.Instance.PlayerDead
+                    && (_ShotProjectileStatus & (1 << ((int)ShootStatus.AVAILABLE_TO_SHOOT | (int)ShootStatus.FOUND_PLAYER))) != 0)
                     Shoot();
 #endif
             }
 
             //Shoot in some intervals
             // We are not looking for perfect time-interval, so this will do to reduce performance cost
-            /*if (_shootTime > _ShootCooldown && _ShotProjectileStatus == (byte)ShootStatus.RECHARGE_DONE)
+            /*if (_searchTime > _ShootCooldown && _ShotProjectileStatus == (byte)ShootStatus.FOUND_PLAYER)
             {
                 _ShotProjectileStatus = (byte)ShootStatus.AVAILABLE_TO_SHOOT;
-                _shootTime = 0f;
+                _searchTime = 0f;
             }
             else
-                _shootTime += Time.fixedDeltaTime;
+                _searchTime += Time.fixedDeltaTime;
             */
         }
 
@@ -82,6 +87,22 @@ namespace FrontLineDefense.Enemy
                 _ReleasedToPool = true;
                 PoolManager.Instance.ObjectPool[(int)_VehiclePoolType].Release(gameObject);
             }
+        }
+    }
+
+    public abstract class EnemyMissileCarrier : EnemyVehicleController_Base
+    {
+        [SerializeField] private float _rotateSpeed;
+        [SerializeField] private PoolManager.PoolType _missilePool;
+        // protected const float _searchWaitTime = 2f;
+
+        protected virtual async void RechargeShoot()
+        {
+            _ShotProjectileStatus = (byte)ShootStatus.RECHARGING;
+            await _CtTimer.WaitForSeconds(_ShootCooldown);
+            _ShotProjectileStatus = (byte)ShootStatus.SEARCHING_PLAYER;
+            await _CtTimer.WaitForSeconds(_SearchWaitTime);
+            _ShotProjectileStatus = (byte)ShootStatus.AVAILABLE_TO_SHOOT;
         }
     }
 }

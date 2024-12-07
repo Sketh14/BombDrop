@@ -281,5 +281,15 @@
 - ProjectileBase
     (-) Gradually accelerate logic
 
+- FollowingMissile | StraightRangedMissiles
+    (-) Setting _CurrentSpeedMult accordingly
+- Separate MissileCarrier Scripts
+- EnemyVehilceController_Base
+    (-) Changing shoot logic
+        [=] Checking to see if the turret is aligned according to the player
+        [=] Using flags to check if the Player has been found and then shooting
+- UniversalConstant
+    (-) Adding FOUND_PLAYER enum to SHOOT_STATUS
+
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation

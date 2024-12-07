@@ -174,6 +174,7 @@ namespace FrontLineDefense.Player
 
             if (_health <= 0)
             {
+                GameManager.Instance.PlayerDead = true;
                 gameObject.SetActive(false);
                 GameManager.Instance.OnPlayerAction?.Invoke(0f, (int)PlayerAction.PLAYER_DEAD);
             }

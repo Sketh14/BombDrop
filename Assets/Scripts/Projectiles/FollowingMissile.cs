@@ -12,6 +12,12 @@ namespace FrontLineDefense.Projectiles
     {
         // private Vector3 _prevSpeedVec;
 
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            _CurrentSpeedMult = 0f;
+        }
+
         protected override void Update()
         {
             base.Update();
@@ -19,6 +25,11 @@ namespace FrontLineDefense.Projectiles
             // Vector3 projectedVec = (GameManager.Instance.PlayerTransform.position - transform.position).normalized;
             // _SpeedVec = Vector3.Lerp(_SpeedVec, projectedVec, 0.5f);
             _SpeedVec = (GameManager.Instance.PlayerTransform.position - transform.position).normalized;
+
+            if (_CurrentSpeedMult < _SpeedMult)
+                _CurrentSpeedMult += Time.deltaTime * 7f;
+            // _currentSpeedMult += Time.deltaTime * 7f;
+            // _currentSpeedMult = Mathf.Clamp(_currentSpeedMult, 1, _SpeedMult);
         }
     }
 }

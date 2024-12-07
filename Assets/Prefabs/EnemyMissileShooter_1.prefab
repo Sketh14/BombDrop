@@ -296,11 +296,11 @@ MonoBehaviour:
   _ShootCooldown: 2
   _DetectionRange: 40
   _Health: 80
+  _SearchWaitTime: 2
   _ShootPoint: {fileID: 2159678846851417174}
   _healthBarRect: {fileID: 6909845996528269033}
   _rotateSpeed: 10
   _missilePool: 2
-  rotateY: 0
 --- !u!65 &2181156592471404600
 BoxCollider:
   m_ObjectHideFlags: 0

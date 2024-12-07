@@ -13,11 +13,20 @@ namespace FrontLineDefense.Projectiles
         private Vector2 _playerTargetedPos;
         private const float _maxTargetDiff = 1f;
 
-        public override void SetStats(in Vector2 initialSpeed)
+        protected override void OnDisable()
         {
+            base.OnDisable();
+            // if (!_GradualSpeedIncrease)
+            _CurrentSpeedMult = _SpeedMult;
+        }
+
+        public override void SetStats(in Vector3 initialSpeedVec)
+        {
+            _CurrentSpeedMult = _SpeedMult;
             _turnSpeed = 1f;
             _playerTargetedPos = GameManager.Instance.PlayerTransform.position;
-            _SpeedVec = (GameManager.Instance.PlayerTransform.position - transform.position).normalized;
+            // _SpeedVec = (GameManager.Instance.PlayerTransform.position - transform.position).normalized;
+            _SpeedVec = initialSpeedVec;
         }
 
         protected override void FixedUpdate()
