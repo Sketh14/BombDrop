@@ -56,7 +56,9 @@ namespace FrontLineDefense.Enemy
 #if !TEST_SHOOT_OFF
                 // if (!GameManager.Instance.PlayerDead && (_ShotProjectileStatus == (byte)ShootStatus.AVAILABLE_TO_SHOOT)
                 if (!GameManager.Instance.PlayerDead
-                    && (_ShotProjectileStatus & (1 << ((int)ShootStatus.AVAILABLE_TO_SHOOT | (int)ShootStatus.FOUND_PLAYER))) != 0)
+                    // && (_ShotProjectileStatus & (1 << ((int)ShootStatus.AVAILABLE_TO_SHOOT | (int)ShootStatus.FOUND_PLAYER))) != 0)
+                    && (_ShotProjectileStatus & (1 << (int)ShootStatus.AVAILABLE_TO_SHOOT)) != 0
+                    && (_ShotProjectileStatus & (1 << (int)ShootStatus.FOUND_PLAYER)) != 0)
                     Shoot();
 #endif
             }

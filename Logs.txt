@@ -291,5 +291,14 @@
 - UniversalConstant
     (-) Adding FOUND_PLAYER enum to SHOOT_STATUS
 
+---------------------------------------------------------------------------------------------------------------------------------------
+                                                        07 Dec
+---------------------------------------------------------------------------------------------------------------------------------------
+
+- EnemyAA
+    (-) Fixing According to new shoot logic
+- PlayerBomb
+    (-) Fixing according to new movement logic
+
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation

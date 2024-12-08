@@ -37,7 +37,7 @@ namespace FrontLineDefense.Enemy
             // if (_ShotProjectileStatus != (byte)ShootStatus.AVAILABLE_TO_SHOOT
             //     && _ShotProjectileStatus != (byte)ShootStatus.RECHARGING) return;
 #if !TARGETING_TEST
-            if (_ShotProjectileStatus != (byte)ShootStatus.SEARCHING_PLAYER) return;
+            // if (_ShotProjectileStatus != (byte)ShootStatus.SEARCHING_PLAYER) return;
             if ((_ShotProjectileStatus & (1 << (int)ShootStatus.SEARCHING_PLAYER)) == 0) return;
 #endif
 

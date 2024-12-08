@@ -10,6 +10,18 @@ namespace FrontLineDefense.Projectiles
     {
         [SerializeField] private float _scalePhysics;
 
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            // if (!_GradualSpeedIncrease)
+            _CurrentSpeedMult = _SpeedMult;
+        }
+
+        protected override void OnEnable()
+        {
+            _CurrentSpeedMult = _SpeedMult;
+        }
+
         protected override void Update()
         {
             base.Update();
