@@ -300,5 +300,26 @@
 - PlayerBomb
     (-) Fixing according to new movement logic
 
+---------------------------------------------------------------------------------------------------------------------------------------
+                                                        09 Dec
+---------------------------------------------------------------------------------------------------------------------------------------
+
+- Fixing FollowingMissile rotation when travelling towards player
+    (-) [BUG] To turn towards player using lerp, the rotation does not occur in the desired manner and starts to 
+        go in a z-offset to achieve the desired rotation and then fixes to rotate around the player
+    (-) EnemyMissileCarrier_2
+        [=] Checking battery rotation and applying rotation accordingly
+        [=] If the battery is in the Vector3.right direction, then applying pre-defined rotation to battery
+        [=] Reducing turret _alignThreshold to 2f;
+        [=] Using eulerAngles to compare the y-rotation if the battery is facing the player or not
+    (-) EnemyMissileCarrier_1
+        [=] Reducing turret _alignThreshold to 2f;
+    (-) ProjectileBase
+        [=] [FAILED] Trying to rotate using forward logic
+            {+} Same problem occurs even if the model is oriented to the forward direction
+        [=] [FAILED] Using Slerp also does nto solve the problem
+        [=] Shifting rotate logic to Update instead of FixedUpdate
+
+
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation

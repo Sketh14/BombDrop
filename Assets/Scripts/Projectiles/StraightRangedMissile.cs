@@ -11,7 +11,7 @@ namespace FrontLineDefense.Projectiles
     public class StraightRangedMissile : ProjectileBase
     {
         private Vector2 _playerTargetedPos;
-        private const float _maxTargetDiff = 1f;
+        private const float _maxTargetDiff = 2f;
 
         protected override void OnDisable()
         {
@@ -33,7 +33,7 @@ namespace FrontLineDefense.Projectiles
         {
             base.FixedUpdate();
 
-            if (Vector2.SqrMagnitude(transform.position - new Vector3(_playerTargetedPos.x, _playerTargetedPos.y, 0f))
+            if (Vector2.SqrMagnitude(new Vector2(transform.position.x, transform.position.y) - new Vector2(_playerTargetedPos.x, _playerTargetedPos.y))
                 <= _maxTargetDiff * _maxTargetDiff)
                 PoolManager.Instance.ObjectPool[(int)_PoolToUse].Release(gameObject);
         }

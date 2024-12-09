@@ -12,7 +12,7 @@ namespace FrontLineDefense.Enemy
         [SerializeField] private float _rotateSpeed;
         [SerializeField] private PoolManager.PoolType _missilePool;
         private const float _maxZRotateAngle = -12f, _minRotateAngle = -178f;
-        private const float _alignThreshold = 10f;
+        private const float _alignThreshold = 2f;
 
         // private const float _searchWaitTime = 2f;
 
