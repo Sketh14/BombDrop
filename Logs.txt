@@ -320,6 +320,19 @@
         [=] [FAILED] Using Slerp also does nto solve the problem
         [=] Shifting rotate logic to Update instead of FixedUpdate
 
+---------------------------------------------------------------------------------------------------------------------------------------
+                                                        10 Dec
+---------------------------------------------------------------------------------------------------------------------------------------
+
+- Scene
+    (-) Making Coin Prefab
+        [=] Disabling by default as it has logic in OnEnable, so that it doesnt get executed twice by accident
+    (-) Adding Coin to PoolManager
+- Coin
+    [=] Shooting above with offset and collection logic
+- PoolManager
+    [=] Adding COIN to PoolType
+
 
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation

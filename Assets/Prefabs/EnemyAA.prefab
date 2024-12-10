@@ -319,8 +319,10 @@ MonoBehaviour:
   _ShootCooldown: 2
   _DetectionRange: 40
   _Health: 80
+  _SearchWaitTime: 0
   _ShootPoint: {fileID: 4694353563588661888}
   _healthBarRect: {fileID: 8851789025969842811}
+  _coinAmount: 1
   _rotateSpeed: 8
 --- !u!65 &8973371752506799605
 BoxCollider:
