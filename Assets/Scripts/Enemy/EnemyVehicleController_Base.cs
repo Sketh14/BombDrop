@@ -98,6 +98,7 @@ namespace FrontLineDefense.Enemy
 
                 _ReleasedToPool = true;
                 PoolManager.Instance.ObjectPool[(int)_VehiclePoolType].Release(gameObject);
+                GameManager.Instance.OnPlayerAction?.Invoke(_coinAmount, (int)PlayerAction.COIN_COLLECTED);
             }
         }
     }

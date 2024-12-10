@@ -1,5 +1,5 @@
 using System.Threading;
-using System.Threading.Tasks;
+using Task = System.Threading.Tasks.Task;
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +11,7 @@ namespace FrontLineDefense.Global
         [SerializeField] private Image _playerHealthBar, _bombCooldownBar;
         [SerializeField] private Image _gameOverPanel;
         [SerializeField] private Button _restartBt;
+        [SerializeField] private TMPro.TMP_Text _coinCounterTxt;
 
         private CancellationTokenSource _cts;
 
@@ -30,6 +31,7 @@ namespace FrontLineDefense.Global
             _restartBt.onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene((int)SceneToLoad.MAIN_GAMEPLAY));
         }
 
+        #region UpdateUI
         private void UpdateUIHelper(float updateVal, int actionFlag)
         {
             switch (actionFlag)
@@ -41,8 +43,13 @@ namespace FrontLineDefense.Global
                 case (int)PlayerAction.PLAYER_HIT:
                     UpdateHealthBar(updateVal);
                     break;
+
                 case (int)PlayerAction.PLAYER_DEAD:
                     _gameOverPanel.gameObject.SetActive(true);
+                    break;
+
+                case (int)PlayerAction.COIN_COLLECTED:
+                    UpdateCoinCounter((int)updateVal);
                     break;
             }
         }
@@ -64,5 +71,14 @@ namespace FrontLineDefense.Global
                 await Task.Yield();
             }
         }
+
+        private async void UpdateCoinCounter(int coinAmount)
+        {
+            await Task.Delay(UniversalConstants.WaitTimeBeforeCoinCollection);
+            if (_cts.Token.IsCancellationRequested) return;
+
+            _coinCounterTxt.text = coinAmount.ToString();
+        }
+        #endregion UpdateUI
     }
 }

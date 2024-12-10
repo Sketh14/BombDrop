@@ -14,7 +14,6 @@ namespace FrontLineDefense.Projectiles
     {
         [SerializeField] private float _forceMultiplier;
         private Rigidbody _coinRb;
-        private const int _waitTimeBeforeCollection = 3000;
         private CancellationTokenSource _cts;
         // [SerializeField] private PoolManager.PoolType _coinPool;
 #if THROW_TEST
@@ -49,7 +48,7 @@ namespace FrontLineDefense.Projectiles
         private async void GetCollected()
         {
             //Fly toward the top left or top right
-            await Task.Delay(_waitTimeBeforeCollection);
+            await Task.Delay(UniversalConstants.WaitTimeBeforeCoinCollection);
             _coinRb.isKinematic = true;
 
             bool reached = false;

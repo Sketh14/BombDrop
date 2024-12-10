@@ -333,6 +333,19 @@
 - PoolManager
     [=] Adding COIN to PoolType
 
+- Scene
+    (-) Vehicle coinAmount by default setting to 5
+- GameManager
+    (-) PlayerCoins to store coins collected by the player
+- UniversalConstant
+    (-) Adding COIN_COLLECTED to PlayerAction
+    (-) Adding wait time for coin collection as constant
+        [=] GameUIManager can also use the value in this way
+- GameUIManager
+    (-) Adding a counter for coins collected/logic
+- EnemyVehilceController_Base
+    (-) Using PlayerAction callback for coin collection calls also
+
 
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation

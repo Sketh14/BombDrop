@@ -24,7 +24,7 @@ namespace FrontLineDefense.Projectiles
 
         protected override void Update()
         {
-            _SpeedVec = _SpeedVec + new Vector3(0f, Global.UniversalConstants._gravity * _scalePhysics, 0f) * Time.deltaTime;
+            _SpeedVec = _SpeedVec + new Vector3(0f, Global.UniversalConstants.Gravity * _scalePhysics, 0f) * Time.deltaTime;
             // _SpeedVec = (_SpeedVec + new Vector3(0f, Global.UniversalConstants._gravity * _scalePhysics, 0f) * Time.deltaTime).normalized;
             base.Update();
         }
