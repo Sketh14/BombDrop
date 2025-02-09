@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -331,7 +331,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _meshGenerateRequested: 0
   randomEnemyPositions: []
 --- !u!1 &126002790
 GameObject:
@@ -2578,7 +2577,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _meshGenerateRequested: 0
   randomEnemyPositions: []
 --- !u!64 &1240347857
 MeshCollider:
@@ -4845,7 +4843,7 @@ PrefabInstance:
     - target: {fileID: 6669039041535605348, guid: a93210887a717c746b14b9c5d7003774,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
