@@ -138,8 +138,13 @@ namespace FrontLineDefense.Player
             // GameObject shotProjectile = Instantiate(_projectilePrefab, _bombPoint.position, transform.rotation);
             GameObject shotProjectile = PoolManager.Instance.ObjectPool[(int)PoolManager.PoolType.BOMB].Get();
             shotProjectile.transform.position = _bombPoint.position;
-            shotProjectile.transform.rotation = transform.rotation;
-            shotProjectile.GetComponent<ProjectileBase>().SetStats(transform.right * -1.0f, false);
+            shotProjectile.transform.rotation = _bombPoint.rotation;
+
+            bool leftAligned = false;
+            if (_bombPoint.eulerAngles.y > 150)
+                leftAligned = true;
+            shotProjectile.GetComponent<ProjectileBase>().SetStats(Vector3.forward, leftAligned);
+
             shotProjectile.SetActive(true);
             // Debug.Log($"Shoot Clicked | transform.right : {transform.right} | Namer : {shotProjectile.name}");
         }

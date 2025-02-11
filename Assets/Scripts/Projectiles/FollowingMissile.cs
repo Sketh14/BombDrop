@@ -30,8 +30,11 @@ namespace FrontLineDefense.Projectiles
 
         protected override void Update()
         {
-            // Vector3 projectedVec = (GameManager.Instance.PlayerTransform.position - transform.position).normalized;
-            // _SpeedVec = Vector3.Lerp(_SpeedVec, projectedVec, _turnSpeed);
+            //This causes abrupt turns
+            {
+                // Vector3 projectedVec = (GameManager.Instance.PlayerTransform.position - transform.position).normalized;
+                // _SpeedVec = Vector3.Lerp(_SpeedVec, projectedVec, _turnSpeed * Time.deltaTime);
+            }
             _SpeedVec = (GameManager.Instance.PlayerTransform.position - transform.position).normalized;
 
             // Doesnt work as intended | Missile sometimes slows down and takes a sharp turn
@@ -54,29 +57,6 @@ namespace FrontLineDefense.Projectiles
             // _currentSpeedMult += Time.deltaTime * _speedDeltaTimeMult;
             // _currentSpeedMult = Mathf.Clamp(_currentSpeedMult, 1, _SpeedMult);
 
-            // This was for only rotating in the x-y axis as the missile reaches the player
-            /*if (Mathf.Abs(transform.position.z - GameManager.Instance.PlayerTransform.position.z) <= 1f)
-            {
-                float xRotationAngle = Mathf.Atan2(_SpeedVec.y, _SpeedVec.x) * Mathf.Rad2Deg;
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(xRotationAngle * -1f, 90f, 0f), _turnSpeed * Time.deltaTime);      //Almost Perfect
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(xRotationAngle * -1f, 90f, 0f), _turnSpeed * Time.deltaTime);      //Almost Perfect
-            }
-            else
-            {
-                Quaternion lookRotation = Quaternion.LookRotation(_SpeedVec, Vector3.up);
-                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, _turnSpeed * Time.deltaTime);
-            }*/
-
-            if (_LeftAligned)
-            {
-                float xRotationAngle = (Mathf.Atan2(_SpeedVec.y, _SpeedVec.x) * Mathf.Rad2Deg) - 180f;
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(xRotationAngle, -90f, 0f), _turnSpeed * Time.deltaTime);      //Almost Perfect
-            }
-            else
-            {
-                float xRotationAngle = Mathf.Atan2(_SpeedVec.y, _SpeedVec.x) * Mathf.Rad2Deg;
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(xRotationAngle * -1f, 90f, 0f), _turnSpeed * Time.deltaTime);      //Almost Perfect
-            }
             base.Update();
         }
     }

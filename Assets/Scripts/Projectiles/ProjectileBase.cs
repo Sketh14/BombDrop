@@ -21,7 +21,7 @@ namespace FrontLineDefense.Projectiles
         protected bool _ReleasedToPool;
         [SerializeField] protected float _Damage = 1f;
         [SerializeField] protected PoolManager.PoolType _PoolToUse;
-        protected float _turnSpeed = 0.75f;
+        protected float _TurnSpeed = 0.75f;
         // [SerializeField] protected bool _GradualSpeedIncrease;
         protected float _CurrentSpeedMult = 1f;
         // private const float _positionLerpVal = 0.5f;
@@ -59,14 +59,11 @@ namespace FrontLineDefense.Projectiles
         */
         protected virtual void Update()
         {
-            // Apply Movement
-            // transform.position = transform.position + (_SpeedVec * Time.deltaTime * _CurrentSpeedMult);
-
             // Missile with forward rotation
             /*
-            // transform.Translate(Vector3.forward * _CurrentSpeedMult * Time.deltaTime);
-            // float zRotationAngle = Mathf.Atan2(_SpeedVec.y, _SpeedVec.x) * Mathf.Rad2Deg;
-            // transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(zRotationAngle - 180f, -90f, 0f), _turnSpeed * Time.deltaTime);      //Not Effective even when the missile is rotated to move with forward
+            transform.Translate(Vector3.forward * _CurrentSpeedMult * Time.deltaTime);
+            float zRotationAngle = Mathf.Atan2(_SpeedVec.y, _SpeedVec.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(zRotationAngle - 180f, -90f, 0f), _turnSpeed * Time.deltaTime);      //Not Effective even when the missile is rotated to move with forward
             */
 
             // _SpeedVec = _SpeedVec + (new Vector3(0f, UniversalConstants._gravity, 0f) * Time.deltaTime * _ScalePhysics);
@@ -83,8 +80,36 @@ namespace FrontLineDefense.Projectiles
             // transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0f, yRotationAngle + 90, zRotationAngle - 180), _turnSpeed * Time.deltaTime);      //Not Effective
             */
 
+            // This was for only rotating in the x-y axis as the missile reaches the player
+            /*if (Mathf.Abs(transform.position.z - GameManager.Instance.PlayerTransform.position.z) <= 1f)
+            {
+                float xRotationAngle = Mathf.Atan2(_SpeedVec.y, _SpeedVec.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(xRotationAngle * -1f, 90f, 0f), _turnSpeed * Time.deltaTime);      //Almost Perfect
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(xRotationAngle * -1f, 90f, 0f), _turnSpeed * Time.deltaTime);      //Almost Perfect
+            }
+            else
+            {
+                Quaternion lookRotation = Quaternion.LookRotation(_SpeedVec, Vector3.up);
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, _turnSpeed * Time.deltaTime);
+            }*/
+
+            if (_LeftAligned)
+            {
+                float xRotationAngle = (Mathf.Atan2(_SpeedVec.y, _SpeedVec.x) * Mathf.Rad2Deg) - 180f;
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(xRotationAngle, -90f, 0f), _TurnSpeed * Time.deltaTime);      //Almost Perfect
+                // transform.rotation = Quaternion.Euler(xRotationAngle, -90f, 0f);      //This will cause abrupt turns if the player changes direction quickly
+            }
+            else
+            {
+                float xRotationAngle = Mathf.Atan2(_SpeedVec.y, _SpeedVec.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(xRotationAngle * -1f, 90f, 0f), _TurnSpeed * Time.deltaTime);      //Almost Perfect
+                // transform.rotation = Quaternion.Euler(xRotationAngle * -1f, 90f, 0f);      //This will cause abrupt turns if the player changes direction quickly
+            }
+
             // Apply Movement
-            transform.Translate(Vector3.forward * _CurrentSpeedMult * Time.deltaTime);
+            // transform.position = transform.position + (_SpeedVec * Time.deltaTime * _CurrentSpeedMult);      //This is independent of rotation
+            // transform.position = transform.position + (Vector3.right * Time.deltaTime * _CurrentSpeedMult);      //This depends on the direction
+            transform.Translate(Vector3.forward * _CurrentSpeedMult * Time.deltaTime, Space.Self);              //This depends on the rotation
 
             // transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(_SpeedVec), _turnSpeed * Time.deltaTime);      //Not Effective
             // transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, new Vector3(0f, 0f, zRotationAngle), _turnSpeed * Time.deltaTime);      //Does not work
@@ -111,7 +136,8 @@ namespace FrontLineDefense.Projectiles
         {
             // _inititalRot = transform.eulerAngles.z;
             _LeftAligned = leftAligned;
-            _SpeedVec = new Vector3(initialSpeed.x * _SpeedMult, initialSpeed.y * _SpeedMult, 0f);
+            _SpeedVec = new Vector3(0f, 0f, initialSpeed.z);
+            // Debug.Log($"initialSpeed : {initialSpeed} | _SpeedVec : {_SpeedVec}");
         }
 
         private void OnTriggerEnter(Collider other)
