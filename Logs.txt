@@ -406,6 +406,12 @@
         [=] Using base script movement logic | Only changing turnspeed/speedmult on initialisation
         [=] Fixing accordingly
 
+- Scenes
+    (-) Adding Shoot bt to PlayerCanvas
+- Scripts
+    (-) Adding Shoot logic using button input
+- Project
+    (-) Adding assembly to the folder so editor scripts are excluded
 
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation

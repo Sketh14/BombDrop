@@ -1,7 +1,10 @@
+// #define TESTING
+
 using System;
 
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 using FrontLineDefense.Global;
 using FrontLineDefense.Projectiles;
@@ -18,7 +21,8 @@ namespace FrontLineDefense.Player
         //New
         [SerializeField] private float _health = 100.0f;
         [SerializeField] private float _rotateSpeed;
-        [SerializeField] private Button _shootProjectile;
+        [SerializeField] private Button _dropBomb;
+        [SerializeField] private EventTrigger _shootBullet;
         // [SerializeField] private GameObject _projectilePrefab;           //test
         [SerializeField] private Transform _bombPoint, _shootPoint;
         private Transform _planeMesh;
@@ -27,7 +31,9 @@ namespace FrontLineDefense.Player
         /// <summary> 0 : Left | 1 : Right | 2 : In Process of turning </summary>
         private byte _planeMeshRotateMult;
         /// <summary> 0 : Available | 1 : Shot </summary>
-        private byte _projectileStatus;
+        private byte _bombStatus;
+        /// <summary> 0 : Available | 1 : Shooting </summary>
+        private byte _shootStatus;
         private float _ogHealth;
         private float _shootTime;
         private const float _shootInterval = 0.25f;
@@ -39,8 +45,24 @@ namespace FrontLineDefense.Player
 
         private void Start()
         {
+            _dropBomb.onClick.AddListener(DropBomb);
+            // _shootBullet.OnSelect((data) => (ShootBullets));
+            EventTrigger.Entry downEvent = new EventTrigger.Entry() { eventID = EventTriggerType.PointerDown };
+            EventTrigger.Entry upEvent = new EventTrigger.Entry() { eventID = EventTriggerType.PointerUp };
+            upEvent.callback.AddListener((eventData) =>
+            {
+                _shootStatus = 0;
+                _shootTime = 0f;
+            });
+            downEvent.callback.AddListener((eventData) =>
+            {
+                _shootStatus = 1;
+            });
+            _shootBullet.triggers.Add(downEvent);
+            _shootBullet.triggers.Add(upEvent);
+
             _ogHealth = _health;
-            _shootProjectile.onClick.AddListener(DropBomb);
+
             _planeMesh = transform.GetChild(0);
             _planeMeshRotateMult = (int)PlaneRotateStatus.RIGHT;
             _customTimer = new CustomTimer();
@@ -51,13 +73,18 @@ namespace FrontLineDefense.Player
         */
         private void Update()
         {
-#if UNITY_EDITOR
+#if UNITY_EDITOR && TESTING
             if (Input.GetKeyDown(KeyCode.Space))
                 DropBomb();
             if (Input.GetKey(KeyCode.LeftControl))
+                _shootStatus = 1;
+            else
+                _shootStatus = 0;
+#endif
+            if ((_shootStatus & (1 << 0)) != 0)
                 ShootBullets();
             else _shootTime = 0f;
-#endif
+
 
             Vector2 input = joyStick.GetInputDirection();
 
@@ -132,8 +159,8 @@ namespace FrontLineDefense.Player
 
         private void DropBomb()
         {
-            if (_projectileStatus == (int)BombStatus.SHOT) return;
-            _projectileStatus = (int)BombStatus.SHOT;
+            if (_bombStatus == (int)BombStatus.SHOT) return;
+            _bombStatus = (int)BombStatus.SHOT;
             CoolDownBomb();
             // GameObject shotProjectile = Instantiate(_projectilePrefab, _bombPoint.position, transform.rotation);
             GameObject shotProjectile = PoolManager.Instance.ObjectPool[(int)PoolManager.PoolType.BOMB].Get();
@@ -167,7 +194,7 @@ namespace FrontLineDefense.Player
         {
             GameManager.Instance.OnPlayerAction?.Invoke(_bombCooldownTime, (int)PlayerAction.BOMB_DROP);
             await _customTimer.WaitForSeconds(_bombCooldownTime);
-            _projectileStatus = (int)BombStatus.AVAILABLE;
+            _bombStatus = (int)BombStatus.AVAILABLE;
         }
 
         //TODO: Plane destruction effect
