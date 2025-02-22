@@ -413,5 +413,16 @@
 - Project
     (-) Adding assembly to the folder so editor scripts are excluded
 
+---------------------------------------------------------------------------------------------------------------------------------------
+                                                        11 Feb
+---------------------------------------------------------------------------------------------------------------------------------------
+- Project
+    (-) Modelling Plane
+        [=] Instead of making a dedicated model, uusing basic meshes for building
+
+- Script
+    (-) PlayerController
+        [=] Adding logic for rotating propeller
+        [=] Removing magnitude check for joystick
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation

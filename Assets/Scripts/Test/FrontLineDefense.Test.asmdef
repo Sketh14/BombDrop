@@ -2,7 +2,8 @@
     "name": "FrontLineDefense.Test",
     "rootNamespace": "FrontLineDefense.Test",
     "references": [
-        "GUID:a6401abded3a85943aab5787d58d0ea9"
+        "GUID:a6401abded3a85943aab5787d58d0ea9",
+        "GUID:bf6d1d89497e0d5438b8ad512c456841"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

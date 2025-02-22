@@ -24,7 +24,7 @@ namespace FrontLineDefense.Player
         [SerializeField] private Button _dropBomb;
         [SerializeField] private EventTrigger _shootBullet;
         // [SerializeField] private GameObject _projectilePrefab;           //test
-        [SerializeField] private Transform _bombPoint, _shootPoint;
+        [SerializeField] private Transform _bombPoint, _shootPoint, _propeller;
         private Transform _planeMesh;
         private GameObject _instancedBullet;
 
@@ -86,12 +86,12 @@ namespace FrontLineDefense.Player
             else _shootTime = 0f;
 
 
-            Vector2 input = joyStick.GetInputDirection();
+            // Vector2 input = joyStick.GetInputDirection();
 
-            Vector2 direction = new Vector2(input.x, input.y).normalized;
+            Vector2 direction = joyStick.GetInputDirection().normalized;
 
             // Move the airplance based on joystick input
-            if (direction.magnitude > 0.1f)
+            // if (direction.magnitude > 0.1f)
             {
                 //calculate the angle in radians and convert to  degrees 
                 float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -138,6 +138,8 @@ namespace FrontLineDefense.Player
             }
 
             transform.Translate(Vector2.left * _speedMult * Time.deltaTime);
+
+            _propeller.transform.Rotate(new Vector3(10f, 0f, 0f));
         }
 
         /*private void FixedUpdate()

@@ -253,7 +253,6 @@ GameObject:
   - component: {fileID: 3515803048716798340}
   - component: {fileID: 748851591213983310}
   - component: {fileID: 2181156592471404600}
-  - component: {fileID: 5423002771590955391}
   m_Layer: 0
   m_Name: EnemyMissileShooter_1
   m_TagString: StatComponent
@@ -323,27 +322,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 6, y: 3.23, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &5423002771590955391
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2390286777390894482}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 2.5, y: 3.23, z: 3}
-  m_Center: {x: 0.97, y: 3.2, z: 0}
 --- !u!1 &5020297519081576663
 GameObject:
   m_ObjectHideFlags: 0
