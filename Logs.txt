@@ -439,6 +439,29 @@
     (-) Finishing EnemyMissileCarrier_2
     (-) Adding mats for Enemy vehicles
 
+- Project
+    (-) Modelling EnemyMissileCarrier_1
+    (-) Making some changes to EnemyMissileCarrier_2 MissileStand
+    (-) Changing Missile Dimensions
+
+---------------------------------------------------------------------------------------------------------------------------------------
+                                                        22 Feb
+---------------------------------------------------------------------------------------------------------------------------------------
+- Project
+    (-) Changing StraightRangedMissiles prefab dimensions
+        [=] Making smaller compared to FollowingMissile
+    (-) EnemyMissileCarrier_2 Prefab change
+        [=] Missile Point Change
+    (-) Modelling EnemyAA
+        [=] Changing AA Orientation
+- Scripts
+    (-) EnemyMissileCarrier_1
+        [=] Instantiating missiles according to shoot point and offset
+    (-) EnemyAA
+        [=] Changing AA rotation logic
+
 
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation
+- [DO] [IMPORTANT] Change Rotation logic
+    (-) Remove atan2

@@ -11,8 +11,10 @@ namespace FrontLineDefense.Enemy
     {
         [SerializeField] private float _rotateSpeed;
         [SerializeField] private PoolManager.PoolType _missilePool;
-        private const float _maxZRotateAngle = -12f, _minRotateAngle = -178f;
-        private const float _alignThreshold = 2f;
+        private MissilePointIndex _currMissilePointIndex = 0;
+        private const float _cMaxZRotateAngle = -12f, cMinRotateAngle = -178f;
+        private const float _cAlignThreshold = 2f;
+        private const float _cMissileInstantiateOffseYZ = 0.4f;
 
         // private const float _searchWaitTime = 2f;
 
@@ -33,13 +35,13 @@ namespace FrontLineDefense.Enemy
             //calculate the angle in radians and convert to  degrees
             float zRotateAngle = (Mathf.Atan2(playerDirection.y, playerDirection.x) * Mathf.Rad2Deg) - 180f;
             // zRotateAngle = Mathf.Clamp(zRotateAngle, 100f, 150f);
-            if (zRotateAngle >= _minRotateAngle && zRotateAngle <= _maxZRotateAngle)
+            if (zRotateAngle >= cMinRotateAngle && zRotateAngle <= _cMaxZRotateAngle)
             {
                 _Turret.localRotation = Quaternion.Lerp(_Turret.localRotation, Quaternion.Euler(0f, 0f, zRotateAngle), _rotateSpeed * Time.deltaTime);
                 // Debug.Log($"Turret Local Euler : {_Turret.eulerAngles.z}");
                 // if (Mathf.Abs(_Turret.localEulerAngles.z - zRotateAngle) <= 4f)          //Does not work
                 if ((_ShotProjectileStatus & (1 << (int)ShootStatus.FOUND_PLAYER)) == 0
-                    && Vector3.Angle(_Turret.right * -1f, playerDirection) <= _alignThreshold)
+                    && Vector3.Angle(_Turret.right * -1f, playerDirection) <= _cAlignThreshold)
                 {
                     // Debug.Log($"Turret Aligned : {_ShotProjectileStatus}");
                     _ShotProjectileStatus |= 1 << (int)ShootStatus.FOUND_PLAYER;
@@ -51,8 +53,38 @@ namespace FrontLineDefense.Enemy
         {
             // Debug.Log($"Shooting : {_ShotProjectileStatus}");
             GameObject shotProjectile = PoolManager.Instance.ObjectPool[(int)_missilePool].Get();
-            shotProjectile.transform.position = _ShootPoint.position;
-            shotProjectile.transform.rotation = _ShootPoint.rotation;
+            {
+                Vector3 projectileInstantiatePos = _ShootPoint.position;
+
+                switch (_currMissilePointIndex)
+                {
+                    case MissilePointIndex.TOP_LEFT:
+                        projectileInstantiatePos.y += _cMissileInstantiateOffseYZ;
+                        projectileInstantiatePos.z += _cMissileInstantiateOffseYZ;
+                        _currMissilePointIndex += 1;
+                        break;
+
+                    case MissilePointIndex.TOP_RIGHT:
+                        projectileInstantiatePos.y += _cMissileInstantiateOffseYZ;
+                        projectileInstantiatePos.z -= _cMissileInstantiateOffseYZ;
+                        _currMissilePointIndex += 1;
+                        break;
+
+                    case MissilePointIndex.BOTTOM_LEFT:
+                        projectileInstantiatePos.y -= _cMissileInstantiateOffseYZ;
+                        projectileInstantiatePos.z += _cMissileInstantiateOffseYZ;
+                        _currMissilePointIndex += 1;
+                        break;
+
+                    case MissilePointIndex.BOTTOM_RIGHT:
+                        projectileInstantiatePos.y -= _cMissileInstantiateOffseYZ;
+                        projectileInstantiatePos.z -= _cMissileInstantiateOffseYZ;
+                        _currMissilePointIndex = MissilePointIndex.TOP_LEFT;
+                        break;
+                }
+                shotProjectile.transform.position = projectileInstantiatePos;
+            }
+            // shotProjectile.transform.rotation = _ShootPoint.rotation;
             shotProjectile.GetComponent<ProjectileBase>().SetStats(_ShootPoint.right * -1.0f, false);
             shotProjectile.SetActive(true);
 

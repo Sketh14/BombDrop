@@ -8,7 +8,7 @@ namespace FrontLineDefense.Enemy
     public class EnemyAA : EnemyVehicleController_Base
     {
         [SerializeField] private float _rotateSpeed;
-        private const float _maxZRotateAngle = -12f, _minRotateAngle = -178f;
+        private const float _maxZRotateAngle = 168f, _minRotateAngle = 12f;
         private float _shootTime;
         private const float _alignThreshold = 15f;
 
@@ -18,7 +18,8 @@ namespace FrontLineDefense.Enemy
             Vector3 playerDirection = GameManager.Instance.PlayerTransform.position - _Turret.position;
 
             //calculate the angle in radians and convert to  degrees
-            float zRotateAngle = (Mathf.Atan2(playerDirection.y, playerDirection.x) * Mathf.Rad2Deg) - 180f;
+            // float zRotateAngle = (Mathf.Atan2(playerDirection.y, playerDirection.x) * Mathf.Rad2Deg) - 180f;
+            float zRotateAngle = Mathf.Atan2(playerDirection.y, playerDirection.x) * Mathf.Rad2Deg;
             if (zRotateAngle >= _minRotateAngle && zRotateAngle <= _maxZRotateAngle)
             {
                 _Turret.localRotation = Quaternion.Lerp(_Turret.localRotation, Quaternion.Euler(0f, 0f, zRotateAngle), _rotateSpeed * Time.deltaTime);
@@ -26,7 +27,7 @@ namespace FrontLineDefense.Enemy
                 // But the player wont just appear on top of the vehicle, so no need for now
 
                 if ((_ShotProjectileStatus & (1 << (int)ShootStatus.FOUND_PLAYER)) == 0
-                    && Vector3.Angle(_Turret.right * -1f, playerDirection) <= _alignThreshold)
+                    && Vector3.Angle(_Turret.right, playerDirection) <= _alignThreshold)
                 {
                     // Debug.Log($"Turret Aligned : {_ShotProjectileStatus}");
                     _ShotProjectileStatus |= 1 << (int)ShootStatus.FOUND_PLAYER;

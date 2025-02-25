@@ -6,6 +6,7 @@ namespace FrontLineDefense.Global
     public enum PlayerAction { BOMB_DROP, PLAYER_HIT, PLAYER_DEAD, COIN_COLLECTED }
     public enum ButtonClicked { RESTART }
     public enum SceneToLoad { MAIN_MENU, MAIN_GAMEPLAY }
+    public enum MissilePointIndex { TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT }
 
     public class UniversalConstants
     {

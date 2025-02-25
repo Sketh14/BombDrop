@@ -91,7 +91,7 @@ namespace FrontLineDefense.Player
             Vector2 direction = joyStick.GetInputDirection().normalized;
 
             // Move the airplance based on joystick input
-            // if (direction.magnitude > 0.1f)
+            if (direction.magnitude > 0.1f)
             {
                 //calculate the angle in radians and convert to  degrees 
                 float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
