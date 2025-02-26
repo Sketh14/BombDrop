@@ -445,7 +445,7 @@
     (-) Changing Missile Dimensions
 
 ---------------------------------------------------------------------------------------------------------------------------------------
-                                                        22 Feb
+                                                        25 Feb
 ---------------------------------------------------------------------------------------------------------------------------------------
 - Project
     (-) Changing StraightRangedMissiles prefab dimensions
@@ -460,6 +460,15 @@
     (-) EnemyAA
         [=] Changing AA rotation logic
 
+---------------------------------------------------------------------------------------------------------------------------------------
+                                                        26 Feb
+---------------------------------------------------------------------------------------------------------------------------------------
+- Project
+    (-) EnemyMissileCarrier
+        [=] Changing Collider dimensions
+- Script
+    (-) EnemyMissileCarrier_2
+        [=] Changing missile instantiation logic. Adding 2 locations for firing
 
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation

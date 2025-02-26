@@ -18,7 +18,6 @@ namespace FrontLineDefense.Enemy
             Vector3 playerDirection = GameManager.Instance.PlayerTransform.position - _Turret.position;
 
             //calculate the angle in radians and convert to  degrees
-            // float zRotateAngle = (Mathf.Atan2(playerDirection.y, playerDirection.x) * Mathf.Rad2Deg) - 180f;
             float zRotateAngle = Mathf.Atan2(playerDirection.y, playerDirection.x) * Mathf.Rad2Deg;
             if (zRotateAngle >= _minRotateAngle && zRotateAngle <= _maxZRotateAngle)
             {

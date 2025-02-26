@@ -14,9 +14,15 @@ namespace FrontLineDefense.Enemy
         private MissilePointIndex _currMissilePointIndex = 0;
         private const float _cMaxZRotateAngle = -12f, cMinRotateAngle = -178f;
         private const float _cAlignThreshold = 2f;
-        private const float _cMissileInstantiateOffseYZ = 0.4f;
+        private const float _cMissileInstantiateOffsetYZ = 0.4f;
 
         // private const float _searchWaitTime = 2f;
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            _currMissilePointIndex = 0;
+        }
 
         // public float zRotateAngle;         //Debugging
         // public Vector3 playerDirection;        //Debugging
@@ -59,26 +65,26 @@ namespace FrontLineDefense.Enemy
                 switch (_currMissilePointIndex)
                 {
                     case MissilePointIndex.TOP_LEFT:
-                        projectileInstantiatePos.y += _cMissileInstantiateOffseYZ;
-                        projectileInstantiatePos.z += _cMissileInstantiateOffseYZ;
+                        projectileInstantiatePos.y += _cMissileInstantiateOffsetYZ;
+                        projectileInstantiatePos.z += _cMissileInstantiateOffsetYZ;
                         _currMissilePointIndex += 1;
                         break;
 
                     case MissilePointIndex.TOP_RIGHT:
-                        projectileInstantiatePos.y += _cMissileInstantiateOffseYZ;
-                        projectileInstantiatePos.z -= _cMissileInstantiateOffseYZ;
+                        projectileInstantiatePos.y += _cMissileInstantiateOffsetYZ;
+                        projectileInstantiatePos.z -= _cMissileInstantiateOffsetYZ;
                         _currMissilePointIndex += 1;
                         break;
 
                     case MissilePointIndex.BOTTOM_LEFT:
-                        projectileInstantiatePos.y -= _cMissileInstantiateOffseYZ;
-                        projectileInstantiatePos.z += _cMissileInstantiateOffseYZ;
+                        projectileInstantiatePos.y -= _cMissileInstantiateOffsetYZ;
+                        projectileInstantiatePos.z += _cMissileInstantiateOffsetYZ;
                         _currMissilePointIndex += 1;
                         break;
 
                     case MissilePointIndex.BOTTOM_RIGHT:
-                        projectileInstantiatePos.y -= _cMissileInstantiateOffseYZ;
-                        projectileInstantiatePos.z -= _cMissileInstantiateOffseYZ;
+                        projectileInstantiatePos.y -= _cMissileInstantiateOffsetYZ;
+                        projectileInstantiatePos.z -= _cMissileInstantiateOffsetYZ;
                         _currMissilePointIndex = MissilePointIndex.TOP_LEFT;
                         break;
                 }

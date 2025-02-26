@@ -11,24 +11,23 @@ namespace FrontLineDefense.Enemy
     {
         [SerializeField] private float _rotateSpeed;
         [SerializeField] private PoolManager.PoolType _missilePool;
-        [SerializeField] private Transform[] _shootPoints;
-        private byte _currentShootPointIndex;
+        private MissilePointIndex _currMissilePointIndex = 0;
         private const float _alignThreshold = 2f;
         private const float _minYAngle = 90f, _maxYAngle = 270f;
+        private const float _cMissileInstantiateOffsetX = 0.574f;
         // private const float _searchWaitTime = 2f;
 
         protected override void OnDisable()
         {
             base.OnDisable();
-            _currentShootPointIndex = 0;
+            _currMissilePointIndex = 0;
         }
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
-            //Fill the shoot points with missiles
-
+            _currMissilePointIndex = 0;
         }
 
         // public float yRotateAngle;         //Debugging
@@ -72,7 +71,24 @@ namespace FrontLineDefense.Enemy
         protected override async void Shoot()
         {
             GameObject shotProjectile = PoolManager.Instance.ObjectPool[(int)_missilePool].Get();
-            shotProjectile.transform.position = _ShootPoint.position;
+
+            {
+                Vector3 projectileInstantiatePos = _ShootPoint.position;
+
+                switch (_currMissilePointIndex)
+                {
+                    case MissilePointIndex.TOP_LEFT:
+                        projectileInstantiatePos.z += _cMissileInstantiateOffsetX;
+                        _currMissilePointIndex += 1;
+                        break;
+
+                    case MissilePointIndex.TOP_RIGHT:
+                        projectileInstantiatePos.z -= _cMissileInstantiateOffsetX;
+                        _currMissilePointIndex = MissilePointIndex.TOP_LEFT;
+                        break;
+                }
+                shotProjectile.transform.position = projectileInstantiatePos;
+            }
             // Debug.Log($"Shoot Point | Local Euler Angle : {_ShootPoint.localEulerAngles} | Euler Angle : {_ShootPoint.eulerAngles}");
 
             bool leftAligned = false;

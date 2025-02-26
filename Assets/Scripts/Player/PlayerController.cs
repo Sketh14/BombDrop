@@ -85,9 +85,6 @@ namespace FrontLineDefense.Player
                 ShootBullets();
             else _shootTime = 0f;
 
-
-            // Vector2 input = joyStick.GetInputDirection();
-
             Vector2 direction = joyStick.GetInputDirection().normalized;
 
             // Move the airplance based on joystick input
