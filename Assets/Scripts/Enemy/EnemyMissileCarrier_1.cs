@@ -43,7 +43,8 @@ namespace FrontLineDefense.Enemy
             // zRotateAngle = Mathf.Clamp(zRotateAngle, 100f, 150f);
             if (zRotateAngle >= cMinRotateAngle && zRotateAngle <= _cMaxZRotateAngle)
             {
-                _Turret.localRotation = Quaternion.Lerp(_Turret.localRotation, Quaternion.Euler(0f, 0f, zRotateAngle), _rotateSpeed * Time.deltaTime);
+                // _Turret.localRotation = Quaternion.Lerp(_Turret.localRotation, Quaternion.Euler(0f, 0f, zRotateAngle), _rotateSpeed * Time.deltaTime);
+                _Turret.rotation = Quaternion.Lerp(_Turret.rotation, Quaternion.Euler(0f, 0f, zRotateAngle), _rotateSpeed * Time.deltaTime);
                 // Debug.Log($"Turret Local Euler : {_Turret.eulerAngles.z}");
                 // if (Mathf.Abs(_Turret.localEulerAngles.z - zRotateAngle) <= 4f)          //Does not work
                 if ((_ShotProjectileStatus & (1 << (int)ShootStatus.FOUND_PLAYER)) == 0

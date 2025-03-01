@@ -470,6 +470,30 @@
     (-) EnemyMissileCarrier_2
         [=] Changing missile instantiation logic. Adding 2 locations for firing
 
+---------------------------------------------------------------------------------------------------------------------------------------
+                                                        27 Feb
+---------------------------------------------------------------------------------------------------------------------------------------
+- Script
+    (-) PlayerController
+        [=] Changing to sqrmagnitude for JoyStick
+    (-) EnemySpawner
+        [=] Adding X/Y Offset for spawning positions
+        [=] Adding logic for initial rotation values
+
+---------------------------------------------------------------------------------------------------------------------------------------
+                                                        01 Mar
+---------------------------------------------------------------------------------------------------------------------------------------
+- Script
+    (-) Changing from localRotation to rotation for rotating turrets of enemy vehicles
+    (-) ProjectileBase
+        [=] Gradually incrementing and clamping TurnSpeed of missiles, so that it does not abruptly turn at the start
+    (-) PlayerController
+        [=] Using TakeDamage when hitting any environment
+- Project
+    (-) Changing Collider values for FollowingMissiles
+        [=] As they keep colliding with vehicle, only keeping the collider at the top-half
+
+
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation
 - [DO] [IMPORTANT] Change Rotation logic

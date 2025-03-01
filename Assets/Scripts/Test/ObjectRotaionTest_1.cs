@@ -30,6 +30,16 @@ namespace FrontLineDefense.Test
             // RotationTest2();
             // RotationTest3();
             RotationTest4();
+            // RotationTest5();
+        }
+
+        void RotationTest5()
+        {
+            Vector3 dirVec = (ObjectToFollow.position - transform.position).normalized;
+            float angle = Mathf.Atan2(dirVec.y, dirVec.x) * Mathf.Rad2Deg;
+
+            transform.rotation = Quaternion.Euler(0f, 0f, angle - 180);
+            // transform.rotation = Quaternion.LookRotation(dirVec, Vector3.forward);
         }
 
         void RotationTest4()

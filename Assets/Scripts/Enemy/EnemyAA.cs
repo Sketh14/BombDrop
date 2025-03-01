@@ -21,7 +21,8 @@ namespace FrontLineDefense.Enemy
             float zRotateAngle = Mathf.Atan2(playerDirection.y, playerDirection.x) * Mathf.Rad2Deg;
             if (zRotateAngle >= _minRotateAngle && zRotateAngle <= _maxZRotateAngle)
             {
-                _Turret.localRotation = Quaternion.Lerp(_Turret.localRotation, Quaternion.Euler(0f, 0f, zRotateAngle), _rotateSpeed * Time.deltaTime);
+                // _Turret.localRotation = Quaternion.Lerp(_Turret.localRotation, Quaternion.Euler(0f, 0f, zRotateAngle), _rotateSpeed * Time.deltaTime);
+                _Turret.rotation = Quaternion.Lerp(_Turret.rotation, Quaternion.Euler(0f, 0f, zRotateAngle), _rotateSpeed * Time.deltaTime);
                 //Can make a condition to check if the turret is facing the player and shoot then only
                 // But the player wont just appear on top of the vehicle, so no need for now
 

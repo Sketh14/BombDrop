@@ -54,14 +54,15 @@ namespace FrontLineDefense.Enemy
             {
                 TargetPlayer();
 
-#if !TEST_SHOOT_OFF
                 // if (!GameManager.Instance.PlayerDead && (_ShotProjectileStatus == (byte)ShootStatus.AVAILABLE_TO_SHOOT)
                 if (!GameManager.Instance.PlayerDead
                     // && (_ShotProjectileStatus & (1 << ((int)ShootStatus.AVAILABLE_TO_SHOOT | (int)ShootStatus.FOUND_PLAYER))) != 0)
                     && (_ShotProjectileStatus & (1 << (int)ShootStatus.AVAILABLE_TO_SHOOT)) != 0
                     && (_ShotProjectileStatus & (1 << (int)ShootStatus.FOUND_PLAYER)) != 0)
+                {
+                    Debug.Log($"Player Dead : {GameManager.Instance.PlayerDead}");
                     Shoot();
-#endif
+                }
             }
             else
             {

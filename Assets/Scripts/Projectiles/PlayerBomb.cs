@@ -22,7 +22,7 @@ namespace FrontLineDefense.Projectiles
         protected override void OnEnable()
         {
             _CurrentSpeedMult = _SpeedMult;
-            _TurnSpeed = _turnSpeed;
+            _CurrentTurnSpeed = _turnSpeed;
             _SpeedVec += Vector3.down;
         }
 

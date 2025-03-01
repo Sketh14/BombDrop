@@ -45,6 +45,7 @@ namespace FrontLineDefense.Global
                     break;
 
                 case (int)PlayerAction.PLAYER_DEAD:
+                    UpdateHealthBar(0f);
                     _gameOverPanel.gameObject.SetActive(true);
                     break;
 

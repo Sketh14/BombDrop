@@ -21,7 +21,8 @@ namespace FrontLineDefense.Projectiles
         protected bool _ReleasedToPool;
         [SerializeField] protected float _Damage = 1f;
         [SerializeField] protected PoolManager.PoolType _PoolToUse;
-        protected float _TurnSpeed = 0.75f;
+        protected float _CurrentTurnSpeed = 0.1f;
+        protected const float _cTurnSpeed = 0.75f;
         // [SerializeField] protected bool _GradualSpeedIncrease;
         protected float _CurrentSpeedMult = 1f;
         // private const float _positionLerpVal = 0.5f;
@@ -96,15 +97,17 @@ namespace FrontLineDefense.Projectiles
             if (_LeftAligned)
             {
                 float xRotationAngle = (Mathf.Atan2(_SpeedVec.y, _SpeedVec.x) * Mathf.Rad2Deg) - 180f;
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(xRotationAngle, -90f, 0f), _TurnSpeed * Time.deltaTime);      //Almost Perfect
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(xRotationAngle, -90f, 0f), _CurrentTurnSpeed * Time.deltaTime);      //Almost Perfect
                 // transform.rotation = Quaternion.Euler(xRotationAngle, -90f, 0f);      //This will cause abrupt turns if the player changes direction quickly
             }
             else
             {
                 float xRotationAngle = Mathf.Atan2(_SpeedVec.y, _SpeedVec.x) * Mathf.Rad2Deg;
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(xRotationAngle * -1f, 90f, 0f), _TurnSpeed * Time.deltaTime);      //Almost Perfect
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(xRotationAngle * -1f, 90f, 0f), _CurrentTurnSpeed * Time.deltaTime);      //Almost Perfect
                 // transform.rotation = Quaternion.Euler(xRotationAngle * -1f, 90f, 0f);      //This will cause abrupt turns if the player changes direction quickly
             }
+            _CurrentTurnSpeed += (Time.deltaTime * 0.25f);
+            _CurrentTurnSpeed = Mathf.Clamp(_CurrentTurnSpeed, 0.1f, _cTurnSpeed);
 
             // Apply Movement
             // transform.position = transform.position + (_SpeedVec * Time.deltaTime * _CurrentSpeedMult);      //This is independent of rotation

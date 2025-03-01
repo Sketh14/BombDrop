@@ -64,7 +64,8 @@ namespace FrontLineDefense.Enemy
 
             //calculate the angle in radians and convert to  degrees
             float yRotateAngle = (Mathf.Atan2(playerDirection.z, playerDirection.x) * Mathf.Rad2Deg) + 90f;
-            _Turret.localRotation = Quaternion.Lerp(_Turret.localRotation, Quaternion.Euler(-30f, yRotateAngle, 0f), _rotateSpeed * Time.fixedDeltaTime);
+            // _Turret.localRotation = Quaternion.Lerp(_Turret.localRotation, Quaternion.Euler(-30f, yRotateAngle, 0f), _rotateSpeed * Time.fixedDeltaTime);
+            _Turret.rotation = Quaternion.Lerp(_Turret.rotation, Quaternion.Euler(-30f, yRotateAngle, 0f), _rotateSpeed * Time.fixedDeltaTime);
             // _Turret.localRotation = Quaternion.Euler(0f, yRotateAngle, -30f);
         }
 

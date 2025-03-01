@@ -26,9 +26,12 @@ namespace FrontLineDefense.Global
         private Mesh mesh;
         // private Vector2 offset;
         private MeshCollider meshCollider;
-        private const int zPerlinPoint = 15, zSmoothingRange = 10;      // zPerlinPoint cannot be constant as it depends on _zDepth
+        /// <summary> The Z Co-Ordinate at which the terrain will be split in 2, main perlin points will lie on this line</summary>
+        private const int zPerlinPoint = 15;      // zPerlinPoint cannot be constant as it depends on _zDepth
+        /// <summary> The Z points to which the Terrain needs to be smoothed out. Also includes the start and end of the mesh </summary>
+        private const int zSmoothingRange = 10;      // zPerlinPoint cannot be constant as it depends on _zDepth
 
-        public Vector3[] randomEnemyPositions;             //Debugging
+        // public Vector3[] randomEnemyPositions;             //Debugging
         // public Vector3[] vertices;             //Debugging
         // [SerializeField] private int seed = 0;
 
@@ -154,6 +157,8 @@ namespace FrontLineDefense.Global
             GameManager.Instance.OnMapGenerated?.Invoke(randomEnemyPositions);
         }
 
+        private Vector3[] debug_EnemyPositions = new Vector3[10];
+        private int debug_EnemyPosFilled = 0;
         void CreateTerrain2()
         {
             Vector3[] vertices = new Vector3[(_xWidth + 1) * (_zDepth + 1)];
@@ -161,8 +166,7 @@ namespace FrontLineDefense.Global
             Vector2[] uvs = new Vector2[vertices.Length];
 
             int enemyPosFilled = 0, fillInterval = 0;
-            // Vector3[] 
-            randomEnemyPositions = new Vector3[5];
+            Vector3[] randomEnemyPositions = new Vector3[5];
 
             // int zPerlinPoint = 15;
             // int zRange = 10;
@@ -266,6 +270,7 @@ namespace FrontLineDefense.Global
                     {
                         yCoord = perlinYPoints[xCoord];
 
+
                         if (yCoord >= 5
                          && enemyPosFilled < 5 && fillInterval >= 2
                          && Random.Range(0f, 1f) <= 0.3f)                   //Can get rid of this part
@@ -273,6 +278,11 @@ namespace FrontLineDefense.Global
                             fillInterval = 0;
                             randomEnemyPositions[enemyPosFilled] = new Vector3(xCoord, yCoord, zCoord);
                             enemyPosFilled++;
+
+                            debug_EnemyPositions[debug_EnemyPosFilled] = new Vector3(xCoord - 1, perlinYPoints[xCoord - 1], zCoord);
+                            debug_EnemyPositions[debug_EnemyPosFilled + 1] = new Vector3(xCoord, yCoord, zCoord);
+                            // debug_EnemyPositions[debug_EnemyPosFilled + 2] = new Vector3(xCoord + 1, perlinYPoints[xCoord + 1], zCoord);
+                            debug_EnemyPosFilled += 2;
                         }
                     }
                     else yCoord = 0f;
@@ -320,7 +330,8 @@ namespace FrontLineDefense.Global
             meshCollider.sharedMesh = null;
             meshCollider.sharedMesh = mesh;
 
-            GameManager.Instance.OnMapGenerated?.Invoke(randomEnemyPositions);
+            // GameManager.Instance.OnMapGenerated?.Invoke(randomEnemyPositions);
+            GameManager.Instance.OnMapGenerated?.Invoke(debug_EnemyPositions);
         }
 
     }

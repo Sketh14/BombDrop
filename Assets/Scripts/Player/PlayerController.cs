@@ -88,7 +88,7 @@ namespace FrontLineDefense.Player
             Vector2 direction = joyStick.GetInputDirection().normalized;
 
             // Move the airplance based on joystick input
-            if (direction.magnitude > 0.1f)
+            if (direction.sqrMagnitude > 0.01f)
             {
                 //calculate the angle in radians and convert to  degrees 
                 float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -96,7 +96,6 @@ namespace FrontLineDefense.Player
                 // Apply rotation to the airplace to point in the direction of movement
                 // transform.rotation = Quaternion.Euler(0, 0, angle - 180);
                 transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, angle - 180), _rotateSpeed * Time.deltaTime);
-
             }
 
             //Apply rotation to the child mesh body when direction is changed
@@ -151,9 +150,10 @@ namespace FrontLineDefense.Player
         //TODO: Make a destruction logic/effect
         private void OnCollisionEnter(Collision other)
         {
-            Debug.Log("Hit");
-            gameObject.SetActive(false);
-            GameManager.Instance.OnPlayerAction?.Invoke(0f, (int)PlayerAction.PLAYER_DEAD);
+            // Debug.Log("Hit");
+            TakeDamage(-1000f);
+            // gameObject.SetActive(false);
+            // GameManager.Instance.OnPlayerAction?.Invoke(0f, (int)PlayerAction.PLAYER_DEAD);
         }
 
         private void DropBomb()
@@ -201,14 +201,16 @@ namespace FrontLineDefense.Player
         {
             // Debug.Log($"Taking Damage : {damageTaken}");
             _health -= damageTaken;
-            GameManager.Instance.OnPlayerAction?.Invoke(_health / _ogHealth, (int)PlayerAction.PLAYER_HIT);
 
             if (_health <= 0)
             {
+                // Debug.Log($"Player Dead : {GameManager.Instance.PlayerDead}");
                 GameManager.Instance.PlayerDead = true;
                 gameObject.SetActive(false);
                 GameManager.Instance.OnPlayerAction?.Invoke(0f, (int)PlayerAction.PLAYER_DEAD);
             }
+            else
+                GameManager.Instance.OnPlayerAction?.Invoke(_health / _ogHealth, (int)PlayerAction.PLAYER_HIT);
         }
     }
 }
