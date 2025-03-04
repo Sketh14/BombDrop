@@ -17,6 +17,8 @@ namespace FrontLineDefense.Global
         // Start is called before the first frame update
         void Start()
         {
+
+            Camera.main.depthTextureMode = DepthTextureMode.Depth;
             _cameraManager = new CameraManager(ref _cameraTransform, ref _playerTransform, ref _cameraFollowSpeedMult);
         }
 

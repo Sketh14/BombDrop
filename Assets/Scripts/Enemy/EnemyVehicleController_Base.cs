@@ -60,7 +60,7 @@ namespace FrontLineDefense.Enemy
                     && (_ShotProjectileStatus & (1 << (int)ShootStatus.AVAILABLE_TO_SHOOT)) != 0
                     && (_ShotProjectileStatus & (1 << (int)ShootStatus.FOUND_PLAYER)) != 0)
                 {
-                    Debug.Log($"Player Dead : {GameManager.Instance.PlayerDead}");
+                    // Debug.Log($"Player Dead : {GameManager.Instance.PlayerDead}");
                     Shoot();
                 }
             }

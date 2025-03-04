@@ -202,7 +202,7 @@ namespace FrontLineDefense.Player
             // Debug.Log($"Taking Damage : {damageTaken}");
             _health -= damageTaken;
 
-            if (_health <= 0)
+            if (_health <= 0 || damageTaken < -999f)
             {
                 // Debug.Log($"Player Dead : {GameManager.Instance.PlayerDead}");
                 GameManager.Instance.PlayerDead = true;

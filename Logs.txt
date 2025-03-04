@@ -493,6 +493,16 @@
     (-) Changing Collider values for FollowingMissiles
         [=] As they keep colliding with vehicle, only keeping the collider at the top-half
 
+---------------------------------------------------------------------------------------------------------------------------------------
+                                                        03 Mar
+---------------------------------------------------------------------------------------------------------------------------------------
+- Script
+    (-) PlayerManager
+        [=] For TakeDamage, less than -999 is death
+- Project
+    (-) Custom Shader for water material
+    (-) Added NoiseMaps for terrain | Added Noisemap for water shader
+
 
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation

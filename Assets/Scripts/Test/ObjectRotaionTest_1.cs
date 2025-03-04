@@ -16,6 +16,7 @@ namespace FrontLineDefense.Test
         private bool _leftAligned;
         private void Start()
         {
+            Camera.main.depthTextureMode = DepthTextureMode.Depth;
             _ogRotAngles = transform.eulerAngles;
             _targetAngles = _ogRotAngles;
 
