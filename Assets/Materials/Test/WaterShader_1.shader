@@ -27,11 +27,11 @@ Shader "Custom/WaterShader_1"
     {
         Tags { "RenderType"="Transparent" "Queue"="Transparent" }
         LOD 100
-        ZWrite Off
-
+        
         Pass
         {
             Blend SrcAlpha OneMinusSrcAlpha
+            ZWrite Off
 
             CGPROGRAM
             #pragma vertex vert
@@ -40,7 +40,8 @@ Shader "Custom/WaterShader_1"
             // #pragma multi_compile_fog
 
             #include "UnityCG.cginc"
-            
+
+            #define SMOOTHSTEP_AA 0.01
             
             struct appdata
             {
@@ -116,7 +117,8 @@ Shader "Custom/WaterShader_1"
                     (i.noiseUV.y + _Time.y * _SurfaceNoiseScroll.y) + distortSample.y);
                 float4 surfaceNoiseSample = tex2D(_SurfaceNoise, noiseUV).r;
                 float surfaceNoiseCutOff = foamDepthDifference01 * _SurfaceNoiseCutoff;
-                float surfaceNoise = surfaceNoiseSample > surfaceNoiseCutOff ? 1 : 0;
+                // float surfaceNoise = surfaceNoiseSample > surfaceNoiseCutOff ? 1 : 0;
+                float surfaceNoise = smoothstep(surfaceNoiseCutOff - SMOOTHSTEP_AA, surfaceNoiseCutOff + SMOOTHSTEP_AA, surfaceNoiseSample);
 
                 return waterColor + surfaceNoise;
             }

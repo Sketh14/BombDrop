@@ -45,8 +45,8 @@ Material:
     - _SurfaceNoiseCutoff: 0.8
     m_Colors:
     - _Color: {r: 0.045033798, g: 0.59113425, b: 0.8679245, a: 0.78431374}
-    - _DepthGradientDeep: {r: 0.08599996, g: 0.40699995, b: 1, a: 1}
-    - _DepthGradientShallow: {r: 0.32499996, g: 0.807, b: 0.971, a: 0.725}
+    - _DepthGradientDeep: {r: 0, g: 0.2543985, b: 0.7264151, a: 1}
+    - _DepthGradientShallow: {r: 0, g: 0.5415093, b: 0.7264151, a: 0.725}
     - _EdgeColor: {r: 0.745283, g: 0.745283, b: 0.745283, a: 1}
     - _SurfaceNoiseScroll: {r: 0.03, g: 0.02, b: 0, a: 0}
   m_BuildTextureStacks: []

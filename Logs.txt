@@ -503,8 +503,23 @@
     (-) Custom Shader for water material
     (-) Added NoiseMaps for terrain | Added Noisemap for water shader
 
+---------------------------------------------------------------------------------------------------------------------------------------
+                                                        04 Mar
+---------------------------------------------------------------------------------------------------------------------------------------
+- Project
+    (-) Changing Shallow | Deep Color for Water-Shader
+- Script
+    (-) WaterShader_1
+        [=] Adding SmoothStep for smoothing the edges of the foam
+    (-) CameraManager
+        [=] Not moving in the y-axis, instead rotating to face the player with offset
+        [=] Offsetting rotation to face a bit downwards and forwards
+    
 
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation
 - [DO] [IMPORTANT] Change Rotation logic
     (-) Remove atan2
+- [DO] Change Camera follow logic
+    (-) Should not move in y | Only move in x
+        [=] For Player's y-movement, use rotation to look at player instead
