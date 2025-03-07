@@ -7,6 +7,7 @@
 using UnityEngine;
 
 using FrontLineDefense.Global;
+using FrontLineDefense.Utils;
 
 namespace FrontLineDefense.Projectiles
 {
@@ -96,13 +97,13 @@ namespace FrontLineDefense.Projectiles
 
             if (_LeftAligned)
             {
-                float xRotationAngle = (Mathf.Atan2(_SpeedVec.y, _SpeedVec.x) * Mathf.Rad2Deg) - 180f;
+                float xRotationAngle = (MathfHelper.Atan2Approximation1(_SpeedVec.y, _SpeedVec.x) * Mathf.Rad2Deg) - 180f;
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(xRotationAngle, -90f, 0f), _CurrentTurnSpeed * Time.deltaTime);      //Almost Perfect
                 // transform.rotation = Quaternion.Euler(xRotationAngle, -90f, 0f);      //This will cause abrupt turns if the player changes direction quickly
             }
             else
             {
-                float xRotationAngle = Mathf.Atan2(_SpeedVec.y, _SpeedVec.x) * Mathf.Rad2Deg;
+                float xRotationAngle = MathfHelper.Atan2Approximation1(_SpeedVec.y, _SpeedVec.x) * Mathf.Rad2Deg;
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(xRotationAngle * -1f, 90f, 0f), _CurrentTurnSpeed * Time.deltaTime);      //Almost Perfect
                 // transform.rotation = Quaternion.Euler(xRotationAngle * -1f, 90f, 0f);      //This will cause abrupt turns if the player changes direction quickly
             }

@@ -1,5 +1,6 @@
 
 using FrontLineDefense.Global;
+using FrontLineDefense.Utils;
 using UnityEngine;
 
 namespace FrontLineDefense.Enemy
@@ -45,13 +46,15 @@ namespace FrontLineDefense.Enemy
                                 , _terrainTranform.position.y + (enemyPositions[i - 1].y * _terrainTranform.localScale.y) //+ cSpawnYOffset
                                 , _terrainTranform.position.z + (enemyPositions[i - 1].z * _terrainTranform.localScale.z));
                 spawnDir = (spawnDir - spawnPos).normalized;
-                spawnAngle = Mathf.Atan2(spawnDir.y, spawnDir.x) * Mathf.Rad2Deg;
+                spawnAngle = MathfHelper.Atan2Approximation1(spawnDir.y, spawnDir.x) * Mathf.Rad2Deg;
                 enemyToSpawn.transform.rotation = Quaternion.Euler(0f, 0f, spawnAngle - 180);//*/
 
-                // if (spawnAngle < 0)
-                spawnPos += (spawnDir * 3f);
-                // else
-                spawnPos.y += cSpawnYOffset;
+                //Finding normal to the direction vector
+                // Vector3 normalToDirectionVec = new Vector3(-(spawnDir.y - spawnPos.y),
+                //             (spawnDir.x - spawnPos.x), 0f).normalized;
+                spawnPos += (spawnDir * 3f) + (enemyToSpawn.transform.up * 1.35f);
+                // spawnPos += normalToDirectionVec * 1.5f;
+                // spawnPos.y += cSpawnYOffset;     //This will only raise in y-axis | This will result in shifting directly up and not perpendicular to the direction vector
                 // spawnPos.y = _terrainTranform.position.y + ((enemyPositions[i].y + enemyPositions[i - 1].y) / 2 * _terrainTranform.localScale.y) + cSpawnYOffset;
                 // Debug.Log($"Spawn Dir : {spawnDir} | i : {i} | spawnPos : {spawnPos} | spawnAngle : {spawnAngle}");
                 enemyToSpawn.transform.position = spawnPos;

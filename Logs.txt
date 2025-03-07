@@ -515,6 +515,29 @@
         [=] Not moving in the y-axis, instead rotating to face the player with offset
         [=] Offsetting rotation to face a bit downwards and forwards
     
+---------------------------------------------------------------------------------------------------------------------------------------
+                                                        05 Mar
+---------------------------------------------------------------------------------------------------------------------------------------
+- Script
+    (-) EnemySpawner
+        [=] Calculating normal to direciton vector and offsetting position so that the vehicle remains on top of terrain
+        [=] Using transform.up for now
+    (-) Adding Helper script for Atan2Approximation
+    (-) ProjectileBase
+        [=] Replacing Atan2 with approximation alternative
+- Project
+    (-) Changing the collider size for bullet
+- Scene
+    (-) Changing the UI
+        [=] Adding BG to Player-Health | Bomb-Cooldown
+
+---------------------------------------------------------------------------------------------------------------------------------------
+                                                        06 Mar
+---------------------------------------------------------------------------------------------------------------------------------------
+- Project
+    (-) Adding Diagonal Slash | Corner sprite
+- Script
+    (-) Skybox Material rotation logic
 
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation

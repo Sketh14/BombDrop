@@ -78,8 +78,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
+  - {x: -9, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
-  - {x: 9, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.6
@@ -167,7 +167,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.17
+  m_Radius: 0.27
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &-5549247166678177499
 Rigidbody:
@@ -211,4 +211,3 @@ MonoBehaviour:
   _SpeedMult: 4
   _poolToUse: 3
   _Damage: 5
-  _bulletLR: {fileID: 0}

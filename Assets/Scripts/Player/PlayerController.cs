@@ -1,6 +1,4 @@
-// #define TESTING
-
-using System;
+#define TESTING
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +7,10 @@ using UnityEngine.EventSystems;
 using FrontLineDefense.Global;
 using FrontLineDefense.Projectiles;
 using FrontLineDefense.Utils;
+
+#if TESTING
+using UnityEngine.InputSystem;
+#endif
 
 // using UnityEngine.InputSystem.
 namespace FrontLineDefense.Player
@@ -74,9 +76,11 @@ namespace FrontLineDefense.Player
         private void Update()
         {
 #if UNITY_EDITOR && TESTING
-            if (Input.GetKeyDown(KeyCode.Space))
+            // if (Input.GetKeyDown(KeyCode.Space))
+            if (Keyboard.current.spaceKey.wasPressedThisFrame)
                 DropBomb();
-            if (Input.GetKey(KeyCode.LeftControl))
+            // if (Input.GetKey(KeyCode.LeftControl))
+            if (Keyboard.current.leftCtrlKey.isPressed)
                 _shootStatus = 1;
             else
                 _shootStatus = 0;

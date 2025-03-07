@@ -1,6 +1,6 @@
 {
     "name": "FrontLineDefense.Utils",
-    "rootNamespace": "FrontLineDefense",
+    "rootNamespace": "FrontLineDefense.Utils",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
