@@ -75,10 +75,25 @@ namespace FrontLineDefense.Global
 
         private async void UpdateCoinCounter(int coinAmount)
         {
-            await Task.Delay(UniversalConstants.WaitTimeBeforeCoinCollection);
-            if (_cts.Token.IsCancellationRequested) return;
+            // await Task.Delay(UniversalConstants.WaitTimeBeforeCoinCollection);
+            const float cLerpMultiplier = 2f;           //, cScaleMultiplier = 3f;
+            float tempTimeElapsed = 0f;                 //, textScaleMult = 0f;
+            Vector3 ogTextScale = _coinCounterTxt.transform.localScale;
+            float ogAmount = GameManager.Instance.PlayerCoins - coinAmount;
+            while (true)
+            {
+                _coinCounterTxt.text = ((int)Mathf.Lerp(ogAmount, GameManager.Instance.PlayerCoins, tempTimeElapsed)).ToString();
+                _coinCounterTxt.transform.localScale = ogTextScale * (Mathf.Sin(tempTimeElapsed * 180.0f) + 1.0f);
+                // textScaleMult += Time.deltaTime * cScaleMultiplier;
+                tempTimeElapsed += Time.deltaTime * cLerpMultiplier;
+                if (tempTimeElapsed >= 1)
+                    break;
+                await Task.Yield();
+            }
+            _coinCounterTxt.transform.localScale = ogTextScale;
 
-            _coinCounterTxt.text = coinAmount.ToString();
+            if (_cts.Token.IsCancellationRequested) return;
+            _coinCounterTxt.text = GameManager.Instance.PlayerCoins.ToString();
         }
         #endregion UpdateUI
     }

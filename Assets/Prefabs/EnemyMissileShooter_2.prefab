@@ -1548,7 +1548,7 @@ MonoBehaviour:
   _SearchWaitTime: 4
   _ShootPoint: {fileID: 5623532681798974294}
   _healthBarRect: {fileID: 4188766731221249155}
-  _coinAmount: 5
+  _CoinAmount: 5
   _rotateSpeed: 2
   _missilePool: 1
 --- !u!65 &6366572763373961893

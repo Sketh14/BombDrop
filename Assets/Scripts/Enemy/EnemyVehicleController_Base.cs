@@ -18,7 +18,7 @@ namespace FrontLineDefense.Enemy
         [SerializeField] protected float _ShootCooldown, _DetectionRange, _Health, _SearchWaitTime;
         [SerializeField] protected Transform _ShootPoint;
         [SerializeField] protected RectTransform _healthBarRect;
-        [SerializeField] protected int _coinAmount;
+        [SerializeField] protected int _CoinAmount;
         /// <summary> 0: Available to Shoot | 1 : Shot | 2 : Recharging | 3 : Recharging Complete </summary>
         protected int _ShotProjectileStatus;
         protected bool _ReleasedToPool;
@@ -92,18 +92,19 @@ namespace FrontLineDefense.Enemy
             _healthBarRect.anchorMax = new Vector2(_Health / _OgHealth, 1f);
             if (_Health <= 0f)
             {
-                GameObject coinInstantiated;
+                /*GameObject coinInstantiated;
                 // Release coins to give to player
                 for (int i = 0; i < _coinAmount; i++)
                 {
                     coinInstantiated = PoolManager.Instance.ObjectPool[(int)PoolManager.PoolType.COIN].Get();
                     coinInstantiated.transform.position = _ShootPoint.position;
                     coinInstantiated.SetActive(true);
-                }
+                }*/
 
                 _ReleasedToPool = true;
+                GameManager.Instance.PlayerCoins += _CoinAmount;
                 PoolManager.Instance.ObjectPool[(int)_VehiclePoolType].Release(gameObject);
-                GameManager.Instance.OnPlayerAction?.Invoke(_coinAmount, (int)PlayerAction.COIN_COLLECTED);
+                GameManager.Instance.OnPlayerAction?.Invoke(_CoinAmount, (int)PlayerAction.COIN_COLLECTED);
             }
         }
     }

@@ -550,7 +550,7 @@ MonoBehaviour:
   _SearchWaitTime: 0
   _ShootPoint: {fileID: 4694353563588661888}
   _healthBarRect: {fileID: 8851789025969842811}
-  _coinAmount: 5
+  _CoinAmount: 5
   _rotateSpeed: 8
 --- !u!65 &8973371752506799605
 BoxCollider:
