@@ -38,7 +38,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _DepthFactor: 0.6
-    - _DepthMaxDistance: 17
+    - _DepthMaxDistance: 15
     - _Distance: 4.11
     - _FoamDistance: 1.2
     - _SurfaceDistortionAmount: 0.28

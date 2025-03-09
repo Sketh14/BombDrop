@@ -551,6 +551,12 @@
     (-) Adding materials for missiles
     (-) Adding PlayerBomb model
 
+---------------------------------------------------------------------------------------------------------------------------------------
+                                                        08 Mar
+---------------------------------------------------------------------------------------------------------------------------------------
+- Project
+    (-) Adding gun to lower half of plane
+    (-) Adding sprite for UI Buttons | Shoot | DropBomb
 
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation
