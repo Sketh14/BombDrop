@@ -558,10 +558,55 @@
     (-) Adding gun to lower half of plane
     (-) Adding sprite for UI Buttons | Shoot | DropBomb
 
+---------------------------------------------------------------------------------------------------------------------------------------
+                                                        09 Mar
+---------------------------------------------------------------------------------------------------------------------------------------
+- Project
+    (-) Explosion effects
+
+---------------------------------------------------------------------------------------------------------------------------------------
+                                                        10 Mar
+---------------------------------------------------------------------------------------------------------------------------------------
+- Project
+    (-) Explosion Effects Continued
+        [=] Ember Effect | Ring Effect
+
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation
+- JMO Assets - Explosion SFX
+    [=] Cartoon FX Remaster Free - Jean Moreno
 - [DO] [IMPORTANT] Change Rotation logic
     (-) Remove atan2
 - [DO] Change Camera follow logic
     (-) Should not move in y | Only move in x
         [=] For Player's y-movement, use rotation to look at player instead
+
+
+				if (light != null)
+				{
+					if (animateIntensity)
+					{
+						float delta = loop ? Mathf.Clamp01((time % intensityDuration)/intensityDuration) : Mathf.Clamp01(time/intensityDuration);
+						delta = perlinIntensity ? Mathf.PerlinNoise(Time.time * perlinIntensitySpeed, 0f) : intensityCurve.Evaluate(delta);
+						light.intensity = Mathf.LerpUnclamped(intensityEnd, intensityStart, delta);
+
+						if (fadeIn && time < fadeInDuration)
+						{
+							light.intensity *= Mathf.Clamp01(time / fadeInDuration);
+						}
+					}
+
+					if (animateRange)
+					{
+						float delta = loop ? Mathf.Clamp01((time % rangeDuration)/rangeDuration) : Mathf.Clamp01(time/rangeDuration);
+						delta = perlinRange ? Mathf.PerlinNoise(Time.time * perlinRangeSpeed, 10f) : rangeCurve.Evaluate(delta);
+						light.range = Mathf.LerpUnclamped(rangeEnd, rangeStart, delta);
+					}
+
+					if (animateColor)
+					{
+						float delta = loop ? Mathf.Clamp01((time % colorDuration)/colorDuration) : Mathf.Clamp01(time/colorDuration);
+						delta = perlinColor ? Mathf.PerlinNoise(Time.time * perlinColorSpeed, 0f) : colorCurve.Evaluate(delta);
+						light.color = colorGradient.Evaluate(delta);
+					}
+				}
