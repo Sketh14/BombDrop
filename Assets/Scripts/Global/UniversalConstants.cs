@@ -7,6 +7,7 @@ namespace FrontLineDefense.Global
     public enum ButtonClicked { RESTART }
     public enum SceneToLoad { MAIN_MENU, MAIN_GAMEPLAY }
     public enum MissilePointIndex { TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT }
+    // public enum ProjectileType { BULLET, FOLLOWING_MISSILE, STRAIGHT_MISSILE, PLAYER_BOMB }
 
     public class UniversalConstants
     {

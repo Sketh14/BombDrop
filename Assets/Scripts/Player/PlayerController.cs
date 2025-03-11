@@ -212,6 +212,8 @@ namespace FrontLineDefense.Player
                 GameManager.Instance.PlayerDead = true;
                 gameObject.SetActive(false);
                 GameManager.Instance.OnPlayerAction?.Invoke(0f, (int)PlayerAction.PLAYER_DEAD);
+
+                GameManager.Instance.OnProjectileHit?.Invoke(transform.position, PoolManager.PoolType.BOMB);
             }
             else
                 GameManager.Instance.OnPlayerAction?.Invoke(_health / _ogHealth, (int)PlayerAction.PLAYER_HIT);

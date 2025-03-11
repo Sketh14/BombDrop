@@ -9,7 +9,7 @@ namespace FrontLineDefense.Global
         public enum PoolType
         {
             BOMB, FOLLOWING_MISSILES, STRAIGHT_RANGED_MISSILES, AA_BULLET, SMISSILE_SHOOTER,
-            FMISSILE_SHOOTER, ENEMY_AA, PLAYER_BULLET, COIN
+            FMISSILE_SHOOTER, ENEMY_AA, PLAYER_BULLET, COIN, EXPLOSION_SMALL, EXPLOSION_BIG
         }
 
         [System.Serializable]

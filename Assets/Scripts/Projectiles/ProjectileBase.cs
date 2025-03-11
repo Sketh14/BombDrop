@@ -151,9 +151,12 @@ namespace FrontLineDefense.Projectiles
             if (_ReleasedToPool) return;
 
             _ReleasedToPool = true;
-            PoolManager.Instance.ObjectPool[(int)_PoolToUse].Release(gameObject);
             if (other.CompareTag(UniversalConstants.StatComponent))
+            {
                 other.GetComponent<IStatComponent>().TakeDamage(_Damage);
+            }
+            GameManager.Instance.OnProjectileHit?.Invoke(transform.position, _PoolToUse);
+            PoolManager.Instance.ObjectPool[(int)_PoolToUse].Release(gameObject);
         }
 
         // Projectiles are one-shot, so they dont need extra checks for DamageTaken

@@ -86,8 +86,7 @@ namespace FrontLineDefense.Global
                 _coinCounterTxt.transform.localScale = ogTextScale * (Mathf.Sin(tempTimeElapsed * 180.0f) + 1.0f);
                 // textScaleMult += Time.deltaTime * cScaleMultiplier;
                 tempTimeElapsed += Time.deltaTime * cLerpMultiplier;
-                if (tempTimeElapsed >= 1)
-                    break;
+                if (tempTimeElapsed >= 1) break;
                 await Task.Yield();
             }
             _coinCounterTxt.transform.localScale = ogTextScale;
