@@ -10,10 +10,14 @@ namespace FrontLineDefense.Global
     {
         [SerializeField] private Image _playerHealthBar, _bombCooldownBar;
         [SerializeField] private Image _gameOverPanel;
-        [SerializeField] private Button _restartBt;
-        [SerializeField] private TMPro.TMP_Text _coinCounterTxt;
+        [SerializeField] private Button _restartBt, _mainMenuBt, _pauseBt;
+        [SerializeField] private TMPro.TMP_Text _coinCounterTxt, _pauseTxt;
 
         private CancellationTokenSource _cts;
+
+        private byte _blinkEffectStatus;
+        // private Task _blinkWaitTask;
+        private const int _blinkWaitTime = 1500;
 
         private void OnDestroy()
         {
@@ -24,11 +28,63 @@ namespace FrontLineDefense.Global
         private void Start()
         {
             _cts = new CancellationTokenSource();
+            // _blinkWaitTask = Task.Delay(_blinkWaitTime);
+            _blinkEffectStatus = 0;
             GameManager.Instance.OnPlayerAction += UpdateUIHelper;
 
             //Button Callbacks
             // _restartBt.onClick.AddListener(() => GameManager.Instance.OnButtonClicked?.Invoke((int)ButtonClicked.RESTART));
             _restartBt.onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene((int)SceneToLoad.MAIN_GAMEPLAY));
+            _mainMenuBt.onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene((int)SceneToLoad.MAIN_MENU));
+            _pauseBt.onClick.AddListener(PauseGame);
+        }
+
+        private void PauseGame()
+        {
+            if (Time.timeScale > 0.9f)
+                Time.timeScale = 0f;
+            else
+                Time.timeScale = 1f;
+
+            PauseBlinkEffect();
+        }
+
+        private async void PauseBlinkEffect()
+        {
+            Color currentColor = _pauseTxt.color;
+            if (_blinkEffectStatus == 1)
+            {
+                _blinkEffectStatus = 0;
+                _pauseTxt.gameObject.SetActive(false);
+                currentColor.a = 1f;
+                _pauseTxt.color = currentColor;
+                return;
+            }
+            else
+                _blinkEffectStatus = 1;
+
+            _pauseTxt.gameObject.SetActive(true);
+            bool active = true;
+
+            // int debugTotal = 0;
+
+            while (_blinkEffectStatus != 0)
+            {
+                currentColor.a = active ? 1f : 0f;
+                _pauseTxt.color = currentColor;
+                active = !active;
+                // await _blinkWaitTask;
+                await Task.Delay(_blinkWaitTime);
+
+                if (_cts.IsCancellationRequested) return;
+
+                /*debugTotal++;
+                if (debugTotal > 1000)
+                {
+                    Debug.Log($"DEbug Total : {debugTotal}");
+                    return;
+                }*/
+            }
         }
 
         #region UpdateUI

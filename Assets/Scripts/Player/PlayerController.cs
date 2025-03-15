@@ -41,6 +41,8 @@ namespace FrontLineDefense.Player
         private const float _shootInterval = 0.25f;
         // private const float _positionLerpVal = 0.35f;
         private const float _bombCooldownTime = 2f;
+        private const float _propellerSpeedMult = 150f;
+
 
 
         private CustomTimer _customTimer;
@@ -139,7 +141,7 @@ namespace FrontLineDefense.Player
 
             transform.Translate(Vector2.left * _speedMult * Time.deltaTime);
 
-            _propeller.transform.Rotate(new Vector3(10f, 0f, 0f));
+            _propeller.Rotate(new Vector3(10f, 0f, 0f) * _propellerSpeedMult * Time.deltaTime);
         }
 
         /*private void FixedUpdate()

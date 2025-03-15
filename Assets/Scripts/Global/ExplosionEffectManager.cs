@@ -6,11 +6,12 @@ namespace FrontLineDefense.Global
     public class ExplosionEffectManager
     {
         // public Transform ExplosionTransform;
-        private Task _delayTask;
+        // private Task _delayTask;
+        private const int _delayTime = 1000;
 
         public ExplosionEffectManager()
         {
-            _delayTask = Task.Delay(1000);
+            // _delayTask = Task.Delay(1000);
         }
 
         ~ExplosionEffectManager() { }
@@ -34,7 +35,8 @@ namespace FrontLineDefense.Global
             }
 
             // Debug.Log($"{_debugStringBuilder}");
-            await _delayTask;
+            // await _delayTask;
+            await Task.Delay(_delayTime);
             // explosionTransform.gameObject.SetActive(false);
         }
     }
