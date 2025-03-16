@@ -649,6 +649,16 @@
     (-) MainMenu
         [=] Adding Panel UI to generate or input Level code
 
+- Scene
+    (-) MainMenu
+        [=] Removing 2 buttons from the code gen panel and only having 1
+- Script
+    (-) MainMenuManager
+        [=] Filling LevelCode InputField with random characters to be used for level generation
+        [=] Storing level-code in Scriptable-Object
+    (-) ProceduralTerrain
+        [=] Using Scriptable-Object to generate level
+
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation
 - JMO Assets - Explosion SFX

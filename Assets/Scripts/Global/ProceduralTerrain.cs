@@ -44,7 +44,8 @@ namespace BombDrop.Global
             //     seed = Random.Range(0, int.MaxValue); // Random seed if seed is 0
             // Random.InitState(seed);
 
-            Random.InitState(_generatedHash.GetHashCode());
+            // Random.InitState(_generatedHash.GetHashCode());
+            Random.InitState(_levelInfo.LevelHash.GetHashCode());
             // offset = new Vector2(Random.Range(0f, 1000f), Random.Range(0f, 1000f));
 
             mesh = new Mesh();

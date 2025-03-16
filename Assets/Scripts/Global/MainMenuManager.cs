@@ -12,7 +12,7 @@ namespace BombDrop.Global
 
         //Level Creation
         [SerializeField] private RectTransform _LevelInfoPanel;
-        [SerializeField] private Button _levelInfoCloseBt, _levelInfoUseCodeStartBt, _levelInfoGenerateRandomStartBt;
+        [SerializeField] private Button _levelInfoCloseBt, _levelInfoStartBt;           //, _levelInfoGenerateRandomStartBt;
         [SerializeField] private TMPro.TMP_InputField _levelInfoIF;
         [SerializeField] private LevelInfo _levelInfo;
 
@@ -23,8 +23,9 @@ namespace BombDrop.Global
             _startBt.onClick.AddListener(() =>
             {
                 _LevelInfoPanel.gameObject.SetActive(true);
+                _levelInfoIF.text = HelperFunctions.GenerateRandom6CharacterHash();
 
-                Debug.Log($"Size : {_levelInfoIF.text} | Empty : {_levelInfoIF.text == ""}  | Null : {_levelInfoIF.text == null}");
+                // Debug.Log($"Size : {_levelInfoIF.text} | Empty : {_levelInfoIF.text == ""}  | Null : {_levelInfoIF.text == null}");
                 // if (_levelInfoIF)
             });
             _quitBt.onClick.AddListener(() => _quitPanel.gameObject.SetActive(true));
@@ -39,16 +40,14 @@ namespace BombDrop.Global
             _quitNoBt.onClick.AddListener(() => _quitPanel.gameObject.SetActive(false));
 
             _levelInfoCloseBt.onClick.AddListener(() => _LevelInfoPanel.gameObject.SetActive(false));
-            _levelInfoUseCodeStartBt.onClick.AddListener(() =>
+            _levelInfoStartBt.onClick.AddListener(() =>
             {
-                _levelInfo.LevelHash = HelperFunctions.GenerateRandom6CharacterHash();
-                // UnityEngine.SceneManagement.SceneManager.LoadScene((int)SceneToLoad.MAIN_GAMEPLAY);
+                _levelInfo.LevelHash = _levelInfoIF.text;
+                UnityEngine.SceneManagement.SceneManager.LoadScene((int)SceneToLoad.MAIN_GAMEPLAY);
             });
-            _levelInfoGenerateRandomStartBt.onClick.AddListener(() =>
-            {
-                _levelInfo.LevelHash = "";
-                // UnityEngine.SceneManagement.SceneManager.LoadScene((int)SceneToLoad.MAIN_GAMEPLAY);
-            });
+
+            /*_levelInfoGenerateRandomStartBt.onClick.AddListener(() =>{ _levelInfo.LevelHash = "";
+                // UnityEngine.SceneManagement.SceneManager.LoadScene((int)SceneToLoad.MAIN_GAMEPLAY);});*/
         }
     }
 }
