@@ -164,7 +164,7 @@ namespace FrontLineDefense.Projectiles
 
         private void OnTriggerEnter(Collider other)
         {
-            // Debug.Log($"Hit | Collider : {other.name} | Tag : {other.tag}");
+            // Debug.Log($"Before Hit | Collider : {other.name} | Tag : {other.tag} | Released : {_ReleasedToPool}");
             // gameObject.SetActive(false);
             if (_ReleasedToPool) return;
 
@@ -173,7 +173,7 @@ namespace FrontLineDefense.Projectiles
             {
                 other.GetComponent<IStatComponent>().TakeDamage(_Damage);
             }
-            if (!other.CompareTag(UniversalConstants.WaterTag))
+            else if (!other.CompareTag(UniversalConstants.WaterTag))
                 GameManager.Instance.OnProjectileHit?.Invoke(transform.position, _PoolToUse);
             PoolManager.Instance.ObjectPool[(int)_PoolToUse].Release(gameObject);
         }

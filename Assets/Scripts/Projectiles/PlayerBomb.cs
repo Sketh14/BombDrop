@@ -24,6 +24,8 @@ namespace FrontLineDefense.Projectiles
             _CurrentSpeedMult = _SpeedMult;
             _CurrentTurnSpeed = _turnSpeed;
             _SpeedVec += Vector3.down;
+
+            base.OnEnable();
         }
 
         /*protected override void Update()

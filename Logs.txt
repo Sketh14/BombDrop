@@ -634,6 +634,11 @@
 - Project
     (-) Files restructure 
 
+- Porject
+    (-) Renaming assembly files
+- Script
+    (-) PlayerBomb
+        {=} Calling OnEnable of base
 
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation

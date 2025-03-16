@@ -327,7 +327,7 @@ namespace FrontLineDefense.Global
             mesh.uv = uvs;
             mesh.RecalculateNormals();
 
-            meshCollider.sharedMesh = null;
+            // meshCollider.sharedMesh = null;
             meshCollider.sharedMesh = mesh;
 
             // GameManager.Instance.OnMapGenerated?.Invoke(randomEnemyPositions);
