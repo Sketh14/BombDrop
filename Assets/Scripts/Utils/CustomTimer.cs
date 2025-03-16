@@ -14,11 +14,11 @@ namespace FrontLineDefense.Utils
         // <summary> Can only wait time in intervals of 0.1s </summary>
         public async Task WaitForSeconds(float timeInSec)
         {
-            float startTime = UnityEngine.Time.deltaTime;
-            float currentTime = startTime;
+            // float startTime = UnityEngine.Time.deltaTime;
+            float currentTime = 0f;
 
             // int tempCount = 0;
-            while (currentTime - startTime < timeInSec)
+            while (currentTime < timeInSec)
             {
                 if (_cts.Token.IsCancellationRequested) break;
 

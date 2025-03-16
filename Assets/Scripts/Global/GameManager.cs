@@ -25,7 +25,7 @@ namespace FrontLineDefense.Global
 
         /// <summary> 0 : Bomb Drop | 1 : Player Hit | 2 : Player Dead | 3 : Coin Collected </summary>
         public Action<float, int> OnPlayerAction;
-        public Action<int> OnButtonClicked;
+        public Action<int> OnButtonClicked, OnBoundariesEntered;
         public Action<Vector3, PoolManager.PoolType> OnProjectileHit;
         #endregion Actions
     }

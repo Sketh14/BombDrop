@@ -1,6 +1,8 @@
 using UnityEngine;
 
-namespace FrontLineDefense.Global
+using FrontLineDefense.Global;
+
+namespace FrontLineDefense.Gameplay
 {
     public class MainGameplayManager : MonoBehaviour
     {
@@ -18,15 +20,19 @@ namespace FrontLineDefense.Global
         private ExplosionEffectManager _explosionEffectManager;
         // private GameObject _explosionEffect;
 
+        // [SerializeField] private Vector3[] _playerShootDownPoints;
+
         private void OnDisable()
         {
             GameManager.Instance.OnProjectileHit -= MakeExplosionAt;
+            GameManager.Instance.OnBoundariesEntered -= ShootDownPlayer;
         }
 
         // Start is called before the first frame update
         void Start()
         {
             GameManager.Instance.OnProjectileHit += MakeExplosionAt;
+            GameManager.Instance.OnBoundariesEntered += ShootDownPlayer;
 
             _skyboxScrollSpeed = 0.95f;
             Camera.main.depthTextureMode = DepthTextureMode.Depth;
@@ -60,6 +66,39 @@ namespace FrontLineDefense.Global
             await _explosionEffectManager.FlashLights(explosionEffect.transform, explosionIntensity);
             PoolManager.Instance.ObjectPool[prefabIndex].Release(explosionEffect);
             // _explosionEffect.SetActive(false);
+        }
+
+        private void ShootDownPlayer(int playerStatus)
+        {
+            if (playerStatus != (int)PlayerAction.OUTSIDE_BOUNDARY_SAFEZONE) return;
+
+            GameObject followingMissileForPlayer = PoolManager.Instance.ObjectPool[(int)PoolManager.PoolType.FOLLOWING_MISSILES].Get();
+
+            if (_playerTransform.position.x > 0)
+            {
+                // followingMissileForPlayer.transform.position = _playerShootDownPoints[0];
+                followingMissileForPlayer.transform.position = new Vector3(600f, _playerTransform.position.y, 0f);
+
+                //Calculate Player Angle and set
+                // Vector3 playerDir = (_playerTransform.position - transform.position).normalized;
+                // float rotateAngle = Mathf.Atan2(playerDir.y, playerDir.x) * Mathf.Rad2Deg;
+                // followingMissileForPlayer.transform.rotation = Quaternion.Euler(new Vector3(rotateAngle * -1f, -90f, 0f));
+                followingMissileForPlayer.transform.rotation = Quaternion.Euler(new Vector3(0f, -90f, 0f));
+            }
+            else
+            {
+                followingMissileForPlayer.transform.position = new Vector3(-1010f, _playerTransform.position.y, 0f);
+
+                //Calculate Player Angle and set
+                // Vector3 playerDir = (_playerTransform.position - transform.position).normalized;
+                // float rotateAngle = Mathf.Atan2(playerDir.y, playerDir.x) * Mathf.Rad2Deg;
+                // followingMissileForPlayer.transform.rotation = Quaternion.Euler(new Vector3(rotateAngle * -1f, -90f, 0f));
+                followingMissileForPlayer.transform.rotation = Quaternion.Euler(new Vector3(0f, 90f, 0f));
+            }
+
+            followingMissileForPlayer.transform.localScale = new Vector3(2f, 2f, 2f);
+            followingMissileForPlayer.GetComponent<Projectiles.ProjectileBase>().SetStats(Vector3.right * -1.0f, true, -1000f, 80f);
+            followingMissileForPlayer.SetActive(true);
         }
 
         private void Update()

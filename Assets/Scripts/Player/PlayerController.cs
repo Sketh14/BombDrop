@@ -7,6 +7,8 @@ using UnityEngine.EventSystems;
 using FrontLineDefense.Global;
 using FrontLineDefense.Projectiles;
 using FrontLineDefense.Utils;
+using System.Threading;
+
 
 #if TESTING
 using UnityEngine.InputSystem;
@@ -42,13 +44,19 @@ namespace FrontLineDefense.Player
         // private const float _positionLerpVal = 0.35f;
         private const float _bombCooldownTime = 2f;
         private const float _propellerSpeedMult = 150f;
+        private const float _checkBoundaryWaitTime = 1f;
 
-
-
+        private CancellationTokenSource _cts;
         private CustomTimer _customTimer;
+
+        private void OnDestroy()
+        {
+            _cts.Cancel();
+        }
 
         private void Start()
         {
+            _cts = new CancellationTokenSource();
             _dropBomb.onClick.AddListener(DropBomb);
             // _shootBullet.OnSelect((data) => (ShootBullets));
             EventTrigger.Entry downEvent = new EventTrigger.Entry() { eventID = EventTriggerType.PointerDown };
@@ -70,6 +78,8 @@ namespace FrontLineDefense.Player
             _planeMesh = transform.GetChild(0);
             _planeMeshRotateMult = (int)PlaneRotateStatus.RIGHT;
             _customTimer = new CustomTimer();
+
+            CheckBoundary();
         }
 
         /*
@@ -199,6 +209,7 @@ namespace FrontLineDefense.Player
         {
             GameManager.Instance.OnPlayerAction?.Invoke(_bombCooldownTime, (int)PlayerAction.BOMB_DROP);
             await _customTimer.WaitForSeconds(_bombCooldownTime);
+            if (_cts.IsCancellationRequested) return;
             _bombStatus = (int)BombStatus.AVAILABLE;
         }
 
@@ -219,6 +230,32 @@ namespace FrontLineDefense.Player
             }
             else
                 GameManager.Instance.OnPlayerAction?.Invoke(_health / _ogHealth, (int)PlayerAction.PLAYER_HIT);
+        }
+
+        private async void CheckBoundary()
+        {
+            // bool outsideBoundary = false;
+            int playerBoundaryStatus = (int)PlayerAction.INSIDE_BOUNDARY;
+            while (true)
+            {
+                if (playerBoundaryStatus == (int)PlayerAction.INSIDE_BOUNDARY
+                     && (transform.position.x < -700f || transform.position.x > 350f))
+                {
+                    // outsideBoundary = true;
+                    playerBoundaryStatus = (int)PlayerAction.OUTSIDE_BOUNDARY;
+                    GameManager.Instance.OnBoundariesEntered?.Invoke(playerBoundaryStatus);
+                }
+                else if (playerBoundaryStatus == (int)PlayerAction.OUTSIDE_BOUNDARY &&
+                    transform.position.x > -700f && transform.position.x < 350f)
+                {
+                    // outsideBoundary = false;
+                    playerBoundaryStatus = (int)PlayerAction.INSIDE_BOUNDARY;
+                    GameManager.Instance.OnBoundariesEntered?.Invoke(playerBoundaryStatus);
+                }
+                await _customTimer.WaitForSeconds(_checkBoundaryWaitTime);
+
+                if (_cts.IsCancellationRequested) return;
+            }
         }
     }
 }

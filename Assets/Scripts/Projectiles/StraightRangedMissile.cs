@@ -20,7 +20,7 @@ namespace FrontLineDefense.Projectiles
             _CurrentSpeedMult = _SpeedMult;
         }
 
-        public override void SetStats(in Vector3 initialSpeedVec, in bool leftAligned)
+        public override void SetStats(in Vector3 initialSpeedVec, in bool leftAligned, in float damageDealt = 0f, in float spedMult = 1f)
         {
             _CurrentSpeedMult = _SpeedMult;
             _CurrentTurnSpeed = 1f;

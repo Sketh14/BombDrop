@@ -13,6 +13,12 @@ namespace FrontLineDefense.Global
         [SerializeField] private Button _restartBt, _mainMenuBt, _pauseBt;
         [SerializeField] private TMPro.TMP_Text _coinCounterTxt, _pauseTxt;
 
+        //Caution Panel
+        [SerializeField] private RectTransform _cautionPanel;
+        [SerializeField] private TMPro.TMP_Text _cautionTimeTxt;
+        private const float _maxTimeOutsideOfBoundary = 7f;
+        private byte _cautionPopUpStatus = 0;
+
         private CancellationTokenSource _cts;
 
         private byte _blinkEffectStatus;
@@ -23,6 +29,7 @@ namespace FrontLineDefense.Global
         {
             _cts.Cancel();
             GameManager.Instance.OnPlayerAction -= UpdateUIHelper;
+            GameManager.Instance.OnBoundariesEntered -= ShowBoundaryCaution;
         }
 
         private void Start()
@@ -31,6 +38,7 @@ namespace FrontLineDefense.Global
             // _blinkWaitTask = Task.Delay(_blinkWaitTime);
             _blinkEffectStatus = 0;
             GameManager.Instance.OnPlayerAction += UpdateUIHelper;
+            GameManager.Instance.OnBoundariesEntered += ShowBoundaryCaution;
 
             //Button Callbacks
             // _restartBt.onClick.AddListener(() => GameManager.Instance.OnButtonClicked?.Invoke((int)ButtonClicked.RESTART));
@@ -84,6 +92,47 @@ namespace FrontLineDefense.Global
                     Debug.Log($"DEbug Total : {debugTotal}");
                     return;
                 }*/
+            }
+        }
+
+        private async void ShowBoundaryCaution(int playerStatus)
+        {
+            switch (playerStatus)
+            {
+                case (int)PlayerAction.INSIDE_BOUNDARY:
+                    if (_cautionPopUpStatus == 2) return;
+
+                    _cautionPanel.gameObject.SetActive(false);
+                    _cautionPopUpStatus = 0;
+                    break;
+
+                case (int)PlayerAction.OUTSIDE_BOUNDARY:
+                    _cautionPopUpStatus = 1;
+                    float timeElapsed = _maxTimeOutsideOfBoundary;
+                    _cautionPanel.gameObject.SetActive(true);
+
+                    while (timeElapsed > 0f)
+                    {
+                        timeElapsed -= Time.deltaTime;
+                        _cautionTimeTxt.text = $"{timeElapsed:F2} s";
+                        await Task.Yield();
+
+                        if (_cts.IsCancellationRequested || _cautionPopUpStatus == 0) return;
+                    }
+                    _cautionPopUpStatus = 2;            //Too Late
+                    _cautionTimeTxt.text = "0.00 s";
+                    _cautionPanel.GetChild(0).GetComponent<TMPro.TMP_Text>().text = "Missile Launched!";
+                    GameManager.Instance.OnBoundariesEntered?.Invoke((int)PlayerAction.OUTSIDE_BOUNDARY_SAFEZONE);
+
+                    break;
+
+                //Do Nothing
+                case (int)PlayerAction.OUTSIDE_BOUNDARY_SAFEZONE:
+                    break;
+
+                default:
+                    Debug.LogError($"ShowBoundaryCaution Error | Wrong status chosen : {playerStatus}");
+                    break;
             }
         }
 

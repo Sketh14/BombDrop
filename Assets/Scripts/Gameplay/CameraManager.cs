@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace FrontLineDefense.Global
+namespace FrontLineDefense.Gameplay
 {
     public class CameraManager
     {

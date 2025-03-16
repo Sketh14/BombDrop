@@ -612,6 +612,28 @@
     (-) PlayerController
         [=] Fixing propeller rotation logic with Time.deltaTime
 
+- Script
+    (-) GameManager
+        [=] Adding action to invoke Boundary-Entered
+
+---------------------------------------------------------------------------------------------------------------------------------------
+                                                        16 Mar
+---------------------------------------------------------------------------------------------------------------------------------------
+- Scene
+    (-) Showing CautionPanel when entering boundaries on either side
+- Script
+    (-) GameUIManager
+        [=] Caution countdown logic | UI logic
+    (-) MainGameplayManager
+        [=] Shooting Down player logic
+    (-) ProjectileBase
+        [=] Adding parameter to set Damage | also turn speed and speed mult
+        [=] Adding callback to hear if the player dies
+    (-) UniversalConstant
+        [=] Adding enums for player boundary check
+- Project
+    (-) Files restructure 
+
 
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation

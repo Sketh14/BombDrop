@@ -23,20 +23,26 @@ namespace FrontLineDefense.Projectiles
         [SerializeField] protected float _Damage = 1f;
         [SerializeField] protected PoolManager.PoolType _PoolToUse;
         protected float _CurrentTurnSpeed = 0.1f;
-        protected const float _cTurnSpeed = 0.75f;
+        protected float _TurnSpeed = 0.75f;
         // [SerializeField] protected bool _GradualSpeedIncrease;
         protected float _CurrentSpeedMult = 1f;
         // private const float _positionLerpVal = 0.5f;
         // private float _inititalRot;
         protected bool _LeftAligned;
 
-        protected virtual void OnDisable() { _ReleasedToPool = false; }
+        protected virtual void OnDestroy()
+        {
+            GameManager.Instance.OnPlayerAction -= SelfDestruct;
+        }
 
-        protected virtual void OnEnable() { }
+        protected virtual void OnDisable() { }
+
+        protected virtual void OnEnable() { _ReleasedToPool = false; }
 
         // Start is called before the first frame update
         protected virtual void Start()
         {
+            GameManager.Instance.OnPlayerAction += SelfDestruct;
             // if (!_GradualSpeedIncrease)
             // _CurrentSpeedMult = _SpeedMult;
 
@@ -108,7 +114,7 @@ namespace FrontLineDefense.Projectiles
                 // transform.rotation = Quaternion.Euler(xRotationAngle * -1f, 90f, 0f);      //This will cause abrupt turns if the player changes direction quickly
             }
             _CurrentTurnSpeed += (Time.deltaTime * 0.25f);
-            _CurrentTurnSpeed = Mathf.Clamp(_CurrentTurnSpeed, 0.1f, _cTurnSpeed);
+            _CurrentTurnSpeed = Mathf.Clamp(_CurrentTurnSpeed, 0.1f, _TurnSpeed);
 
             // Apply Movement
             // transform.position = transform.position + (_SpeedVec * Time.deltaTime * _CurrentSpeedMult);      //This is independent of rotation
@@ -136,11 +142,23 @@ namespace FrontLineDefense.Projectiles
             // transform.position = Vector3.Lerp(transform.position, transform.position + _SpeedVec, _positionLerpVal);
         }
 
-        public virtual void SetStats(in Vector3 initialSpeed, in bool leftAligned)
+        public virtual void SetStats(in Vector3 initialSpeed, in bool leftAligned, in float damageDealt = 0f, in float speedMult = 0f)
         {
             // _inititalRot = transform.eulerAngles.z;
             _LeftAligned = leftAligned;
             _SpeedVec = new Vector3(0f, 0f, initialSpeed.z);
+
+            if (damageDealt < -0.05f || damageDealt > 0.05f)
+                _Damage = damageDealt;
+
+            if (speedMult < -0.05f || speedMult > 0.05f)
+            {
+                _CurrentSpeedMult = speedMult;
+                _SpeedMult = speedMult;
+
+                _CurrentTurnSpeed = 5;
+                _TurnSpeed = 5;
+            }
             // Debug.Log($"initialSpeed : {initialSpeed} | _SpeedVec : {_SpeedVec}");
         }
 
@@ -155,7 +173,15 @@ namespace FrontLineDefense.Projectiles
             {
                 other.GetComponent<IStatComponent>().TakeDamage(_Damage);
             }
-            GameManager.Instance.OnProjectileHit?.Invoke(transform.position, _PoolToUse);
+            if (!other.CompareTag(UniversalConstants.WaterTag))
+                GameManager.Instance.OnProjectileHit?.Invoke(transform.position, _PoolToUse);
+            PoolManager.Instance.ObjectPool[(int)_PoolToUse].Release(gameObject);
+        }
+
+        private void SelfDestruct(float dummyData, int playerStatus)
+        {
+            if (_ReleasedToPool || playerStatus != (int)PlayerAction.PLAYER_DEAD) return;
+            _ReleasedToPool = true;
             PoolManager.Instance.ObjectPool[(int)_PoolToUse].Release(gameObject);
         }
 

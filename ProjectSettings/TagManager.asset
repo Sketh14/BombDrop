@@ -6,6 +6,7 @@ TagManager:
   tags:
   - StatComponent
   - Projectiles
+  - Water
   layers:
   - Default
   - TransparentFX
