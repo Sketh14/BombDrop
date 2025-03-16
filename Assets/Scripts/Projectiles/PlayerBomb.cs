@@ -4,7 +4,7 @@
 
 using UnityEngine;
 
-namespace FrontLineDefense.Projectiles
+namespace BombDrop.Projectiles
 {
     public class PlayerBomb : ProjectileBase
     {

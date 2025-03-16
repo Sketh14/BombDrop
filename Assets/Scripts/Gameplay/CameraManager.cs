@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace FrontLineDefense.Gameplay
+namespace BombDrop.Gameplay
 {
     public class CameraManager
     {

@@ -1,8 +1,8 @@
 using UnityEngine;
 
-using FrontLineDefense.Global;
+using BombDrop.Global;
 
-namespace FrontLineDefense.Gameplay
+namespace BombDrop.Gameplay
 {
     public class MainGameplayManager : MonoBehaviour
     {

@@ -1,9 +1,9 @@
 using UnityEngine;
 
-using FrontLineDefense.Player;
+using BombDrop.Player;
 using System.Threading.Tasks;
 
-namespace FrontLineDefense.Test
+namespace BombDrop.Test
 {
     public class PerformanceCheck : MonoBehaviour
     {

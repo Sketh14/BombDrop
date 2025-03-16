@@ -1,7 +1,7 @@
 //https://gist.github.com/turtles/6a5a457a4289f0f457a87f1362eacbfc
 using Mathf = UnityEngine.Mathf;
 
-namespace FrontLineDefense.Utils
+namespace BombDrop.Utils
 {
     public class MathfHelper
     {

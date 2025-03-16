@@ -6,10 +6,10 @@
 
 using UnityEngine;
 
-using FrontLineDefense.Global;
-using FrontLineDefense.Utils;
+using BombDrop.Global;
+using BombDrop.Utils;
 
-namespace FrontLineDefense.Projectiles
+namespace BombDrop.Projectiles
 {
     [RequireComponent(typeof(Rigidbody))]
     public abstract class ProjectileBase : MonoBehaviour

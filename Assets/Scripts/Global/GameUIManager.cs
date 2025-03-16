@@ -4,7 +4,7 @@ using Task = System.Threading.Tasks.Task;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace FrontLineDefense.Global
+namespace BombDrop.Global
 {
     public class GameUIManager : MonoBehaviour
     {

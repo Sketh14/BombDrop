@@ -1,9 +1,9 @@
 using UnityEngine;
 
-using FrontLineDefense.Global;
-using FrontLineDefense.Projectiles;
+using BombDrop.Global;
+using BombDrop.Projectiles;
 
-namespace FrontLineDefense.Enemy
+namespace BombDrop.Enemy
 {
     public class EnemyAA : EnemyVehicleController_Base
     {

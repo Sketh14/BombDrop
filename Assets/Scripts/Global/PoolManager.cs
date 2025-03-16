@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-namespace FrontLineDefense.Global
+namespace BombDrop.Global
 {
     public class PoolManager : MonoBehaviour
     {

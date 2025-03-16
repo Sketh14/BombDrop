@@ -1,4 +1,4 @@
-namespace FrontLineDefense.Global
+namespace BombDrop.Global
 {
     public interface IStatComponent
     {

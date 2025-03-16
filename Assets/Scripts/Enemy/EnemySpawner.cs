@@ -1,9 +1,9 @@
 
-using FrontLineDefense.Global;
-using FrontLineDefense.Utils;
+using BombDrop.Global;
+using BombDrop.Utils;
 using UnityEngine;
 
-namespace FrontLineDefense.Enemy
+namespace BombDrop.Enemy
 {
     public class EnemySpawner : MonoBehaviour
     {

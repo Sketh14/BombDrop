@@ -4,7 +4,7 @@
 
 using UnityEngine;
 
-namespace FrontLineDefense.Global
+namespace BombDrop.Global
 {
     [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider))]
     public class ProceduralTerrain : MonoBehaviour
@@ -16,6 +16,7 @@ namespace FrontLineDefense.Global
 
         [SerializeField] private float _heightMultiplier = 10f; // Multiplier to control mountain height
         [SerializeField] private string _generatedHash;
+        [SerializeField] private LevelInfo _levelInfo;
         [SerializeField] private AnimationCurve _lerpCurve;
 
 #if MESH_GENERATION_TESTING
@@ -68,28 +69,6 @@ namespace FrontLineDefense.Global
             }
         }
 #endif
-
-        private void GenerateHash()
-        {
-            // _randomBytes = new byte[6];
-
-            byte[] _randomBytes = new byte[6];
-            // using (var rng = new RNGCryptoServiceProvider())            
-            //     rng.GetBytes(bytes);
-
-            System.Random randomByteGenerator = new System.Random(System.DateTime.Now.Day + System.DateTime.Now.Hour
-                                                 + System.DateTime.Now.Minute + System.DateTime.Now.Second
-                                                 + System.DateTime.Now.Millisecond);
-
-            randomByteGenerator.NextBytes(_randomBytes);
-
-            // and if you need it as a string...
-            // _generatedHash = System.BitConverter.ToString(_randomBytes);
-            _generatedHash = System.BitConverter.ToString(_randomBytes).Replace("-", "");
-
-            // or maybe...
-            // string hash2 = System.BitConverter.ToString(_randomBytes).Replace("-", "").ToLower();
-        }
 
 
         void CreateTerrain()

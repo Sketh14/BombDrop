@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 ///  
 /// </summary>
 
-namespace FrontLineDefense.Player
+namespace BombDrop.Player
 {
     public class JoyStickController : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
     {

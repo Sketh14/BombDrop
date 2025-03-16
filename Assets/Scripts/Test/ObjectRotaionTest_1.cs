@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
-namespace FrontLineDefense.Test
+namespace BombDrop.Test
 {
     public class ObjectRotaionTest_1 : MonoBehaviour
     {

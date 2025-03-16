@@ -5,9 +5,9 @@ using Task = System.Threading.Tasks.Task;
 
 using UnityEngine;
 using System.Threading;
-using FrontLineDefense.Global;
+using BombDrop.Global;
 
-namespace FrontLineDefense.Projectiles
+namespace BombDrop.Projectiles
 {
 
     public class Coin : MonoBehaviour

@@ -5,10 +5,10 @@
 * FollowingMissiles : These will be slower than the player and follow the player
 */
 
-using FrontLineDefense.Global;
+using BombDrop.Global;
 using UnityEngine;
 
-namespace FrontLineDefense.Projectiles
+namespace BombDrop.Projectiles
 {
     public class FollowingMissile : ProjectileBase
     {

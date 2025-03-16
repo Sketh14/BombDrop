@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using FrontLineDefense.Global;
+using BombDrop.Global;
 using UnityEngine;
 
-namespace FrontLineDefense
+namespace BombDrop.Enemy
 {
     public class LookRotationTest : MonoBehaviour
     {

@@ -1,4 +1,4 @@
-namespace FrontLineDefense.Global
+namespace BombDrop.Global
 {
     public enum ShootStatus { AVAILABLE_TO_SHOOT, SHOT_PROJECTILE, RECHARGING, SEARCHING_PLAYER, FOUND_PLAYER }
     public enum PlaneRotateStatus { LEFT, RIGHT, IN_PROCESS_OF_TURNING }

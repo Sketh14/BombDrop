@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace FrontLineDefense.Gameplay
+namespace BombDrop.Gameplay
 {
     public class ExplosionEffectManager
     {

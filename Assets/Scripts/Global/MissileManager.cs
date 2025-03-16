@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace FrontLineDefense.Global
+namespace BombDrop.Global
 {
     public class MissileManager
     {

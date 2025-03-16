@@ -3,10 +3,10 @@
 using System.Threading;
 using UnityEngine;
 
-using FrontLineDefense.Utils;
-using FrontLineDefense.Global;
+using BombDrop.Utils;
+using BombDrop.Global;
 
-namespace FrontLineDefense.Enemy
+namespace BombDrop.Enemy
 {
     public abstract class EnemyVehicleController_Base : MonoBehaviour, IStatComponent
     {

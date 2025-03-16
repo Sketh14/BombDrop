@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.5
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.057927355, g: 0.21181966, b: 0.3649764, a: 0.5}
+  m_IndirectSpecularColor: {r: 0.057966936, g: 0.21182135, b: 0.36496142, a: 0.5}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -494,6 +494,7 @@ MonoBehaviour:
   _scale: 20
   _heightMultiplier: 10
   _generatedHash: KUNDAN
+  _levelInfo: {fileID: 0}
   _lerpCurve:
     serializedVersion: 2
     m_Curve: []
@@ -4185,6 +4186,7 @@ MonoBehaviour:
   _scale: 1.5
   _heightMultiplier: 16
   _generatedHash: TOPNO
+  _levelInfo: {fileID: 11400000, guid: a4a77f0a153cc3b45822a4c9281ab24a, type: 2}
   _lerpCurve:
     serializedVersion: 2
     m_Curve:

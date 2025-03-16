@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace FrontLineDefense.Test
+namespace BombDrop.Test
 {
     public class CollisionTest_1 : MonoBehaviour
     {

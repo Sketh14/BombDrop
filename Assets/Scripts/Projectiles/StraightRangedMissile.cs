@@ -3,10 +3,10 @@
 * StraightRangedMissiles : These could be slower than the player and shoot upto a distance
 */
 
-using FrontLineDefense.Global;
+using BombDrop.Global;
 using UnityEngine;
 
-namespace FrontLineDefense.Projectiles
+namespace BombDrop.Projectiles
 {
     public class StraightRangedMissile : ProjectileBase
     {

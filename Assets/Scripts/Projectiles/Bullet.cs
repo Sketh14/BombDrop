@@ -2,10 +2,10 @@
 
 */
 
-using FrontLineDefense.Global;
+using BombDrop.Global;
 using UnityEngine;
 
-namespace FrontLineDefense.Projectiles
+namespace BombDrop.Projectiles
 {
     public class Bullet : MonoBehaviour
     {

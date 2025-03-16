@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-using FrontLineDefense.Global;
-using FrontLineDefense.Projectiles;
-using FrontLineDefense.Utils;
+using BombDrop.Global;
+using BombDrop.Projectiles;
+using BombDrop.Utils;
 using System.Threading;
 
 
@@ -15,7 +15,7 @@ using UnityEngine.InputSystem;
 #endif
 
 // using UnityEngine.InputSystem.
-namespace FrontLineDefense.Player
+namespace BombDrop.Player
 {
     public class PlayerController : MonoBehaviour, IStatComponent
     {
