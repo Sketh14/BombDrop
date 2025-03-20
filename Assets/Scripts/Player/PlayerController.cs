@@ -1,4 +1,4 @@
-#define TESTING
+// #define TESTING
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -226,6 +226,8 @@ namespace BombDrop.Player
                 GameManager.Instance.PlayerDead = true;
                 gameObject.SetActive(false);
                 GameManager.Instance.OnPlayerAction?.Invoke(0f, (int)PlayerAction.PLAYER_DEAD);
+                AudioManager.Instance.EngineAudioSource.gameObject.SetActive(false);
+                AudioManager.Instance.PlaySFXClip(AudioTypes.BOMB_EXPLOSION, 1f);
 
                 GameManager.Instance.OnProjectileHit?.Invoke(transform.position, PoolManager.PoolType.BOMB);
             }

@@ -137,8 +137,8 @@ namespace BombDrop.Global
             GameManager.Instance.OnMapGenerated?.Invoke(randomEnemyPositions);
         }
 
-        private Vector3[] debug_EnemyPositions = new Vector3[10];
-        private int debug_EnemyPosFilled = 0;
+        // private Vector3[] randomEnemyPositions = new Vector3[10];
+        // private int enemyPosFilled = 0;
         void CreateTerrain2()
         {
             Vector3[] vertices = new Vector3[(_xWidth + 1) * (_zDepth + 1)];
@@ -146,7 +146,7 @@ namespace BombDrop.Global
             Vector2[] uvs = new Vector2[vertices.Length];
 
             int enemyPosFilled = 0, fillInterval = 0;
-            Vector3[] randomEnemyPositions = new Vector3[5];
+            Vector3[] randomEnemyPositions = new Vector3[10];
 
             // int zPerlinPoint = 15;
             // int zRange = 10;
@@ -252,17 +252,17 @@ namespace BombDrop.Global
 
 
                         if (yCoord >= 5
-                         && enemyPosFilled < 5 && fillInterval >= 2
+                         && enemyPosFilled < 5                              // && fillInterval >= 2
                          && Random.Range(0f, 1f) <= 0.3f)                   //Can get rid of this part
                         {
-                            fillInterval = 0;
-                            randomEnemyPositions[enemyPosFilled] = new Vector3(xCoord, yCoord, zCoord);
+                            // fillInterval = 0;
+                            // randomEnemyPositions[enemyPosFilled] = new Vector3(xCoord, yCoord, zCoord);
                             enemyPosFilled++;
 
-                            debug_EnemyPositions[debug_EnemyPosFilled] = new Vector3(xCoord - 1, perlinYPoints[xCoord - 1], zCoord);
-                            debug_EnemyPositions[debug_EnemyPosFilled + 1] = new Vector3(xCoord, yCoord, zCoord);
-                            // debug_EnemyPositions[debug_EnemyPosFilled + 2] = new Vector3(xCoord + 1, perlinYPoints[xCoord + 1], zCoord);
-                            debug_EnemyPosFilled += 2;
+                            randomEnemyPositions[fillInterval] = new Vector3(xCoord - 1, perlinYPoints[xCoord - 1], zCoord);
+                            randomEnemyPositions[fillInterval + 1] = new Vector3(xCoord, yCoord, zCoord);
+                            // debug_EnemyPositions[fillInterval + 2] = new Vector3(xCoord + 1, perlinYPoints[xCoord + 1], zCoord);
+                            fillInterval += 2;
                         }
                     }
                     else yCoord = 0f;
@@ -279,7 +279,7 @@ namespace BombDrop.Global
                         enemyPosFilled++;
                     }*/
 
-                    fillInterval++;
+                    // fillInterval++;
                 }
             }
 
@@ -311,7 +311,7 @@ namespace BombDrop.Global
             meshCollider.sharedMesh = mesh;
 
             // GameManager.Instance.OnMapGenerated?.Invoke(randomEnemyPositions);
-            GameManager.Instance.OnMapGenerated?.Invoke(debug_EnemyPositions);
+            GameManager.Instance.OnMapGenerated?.Invoke(randomEnemyPositions);
         }
 
     }

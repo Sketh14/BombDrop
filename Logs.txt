@@ -705,6 +705,22 @@
     (-) MainMenuManager
         [=] Adding Settings logic | Volume Control
 
+- Script
+    (-) Disabling Desktop controls
+    (-) Fixing Audio issue
+        [=] Turning off EngineAudioSource after player death
+    (-) ProceduralTerrain
+        [=] Only using random to fill enemy position spots
+    (-) GameUIManager
+        [=] Adding CLICK sound to button clicks
+- Scene
+    (-) MainGameplay
+        [=] Fixing Shoot Trigger
+            {+} Removing duplicate trigger from child object
+        [=] Incresing size of sliders in Pause panel
+    (-) MainMenu
+        [=] Incresing size of sliders in Settings panel
+
 =======================================================================================================================================
                                                             CREDITS
 

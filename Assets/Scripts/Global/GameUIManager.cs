@@ -45,9 +45,21 @@ namespace BombDrop.Global
 
             //Button Callbacks
             // _restartBt.onClick.AddListener(() => GameManager.Instance.OnButtonClicked?.Invoke((int)ButtonClicked.RESTART));
-            _restartBt.onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene((int)SceneToLoad.MAIN_GAMEPLAY));
-            _mainMenuBt.onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene((int)SceneToLoad.MAIN_MENU));
-            _pauseBt.onClick.AddListener(PauseGame);
+            _restartBt.onClick.AddListener(() =>
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene((int)SceneToLoad.MAIN_GAMEPLAY);
+                AudioManager.Instance.PlaySFXClip(AudioTypes.CLICK_BUTTON);
+            });
+            _mainMenuBt.onClick.AddListener(() =>
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene((int)SceneToLoad.MAIN_MENU);
+                AudioManager.Instance.PlaySFXClip(AudioTypes.CLICK_BUTTON);
+            });
+            _pauseBt.onClick.AddListener(() =>
+            {
+                PauseGame();
+                AudioManager.Instance.PlaySFXClip(AudioTypes.CLICK_BUTTON);
+            });
 
             //Slider CAllbacks
             _sfxSlider.onValueChanged.AddListener((value) => { AudioManager.Instance.SetAudioSourcesLevels(AudioMixers.SFX, value); });
