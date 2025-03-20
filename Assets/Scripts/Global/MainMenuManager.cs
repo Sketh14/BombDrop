@@ -12,9 +12,14 @@ namespace BombDrop.Global
 
         //Level Creation
         [SerializeField] private RectTransform _LevelInfoPanel;
-        [SerializeField] private Button _levelInfoCloseBt, _levelInfoStartBt;           //, _levelInfoGenerateRandomStartBt;
+        [SerializeField] private Button _levelInfoCloseBt, _levelInfoStartBt, _openSettingsBt;           //, _levelInfoGenerateRandomStartBt;
         [SerializeField] private TMPro.TMP_InputField _levelInfoIF;
         [SerializeField] private LevelInfo _levelInfo;
+
+        //Volume Control
+        [SerializeField] private Button _settingsCloseBt;
+        [SerializeField] private RectTransform _settingsPanel;
+        [SerializeField] private Slider _bgmSlider, _sfxSlider, _engineSlider;
 
         //Audio
         // [SerializeField] private AudioManager AudioManager.Instance;
@@ -62,12 +67,20 @@ namespace BombDrop.Global
                 AudioManager.Instance.PlaySFXClip(AudioTypes.CLICK_BUTTON);
                 _levelInfo.LevelHash = _levelInfoIF.text;
                 UnityEngine.SceneManagement.SceneManager.LoadScene((int)SceneToLoad.MAIN_GAMEPLAY);
+                AudioManager.Instance.EngineAudioSource.gameObject.SetActive(true);
             });
 
             /*_levelInfoGenerateRandomStartBt.onClick.AddListener(() =>{ _levelInfo.LevelHash = "";
                 // UnityEngine.SceneManagement.SceneManager.LoadScene((int)SceneToLoad.MAIN_GAMEPLAY);});*/
 
+            //Slider CAllbacks
             // _levelInfo.LevelLoaded = false;
+            _openSettingsBt.onClick.AddListener(() => { _settingsPanel.gameObject.SetActive(true); });
+            _settingsCloseBt.onClick.AddListener(() => { _settingsPanel.gameObject.SetActive(false); });
+
+            _sfxSlider.onValueChanged.AddListener((value) => { AudioManager.Instance.SetAudioSourcesLevels(AudioMixers.SFX, value); });
+            _bgmSlider.onValueChanged.AddListener((value) => { AudioManager.Instance.SetAudioSourcesLevels(AudioMixers.BGM, value); });
+            _engineSlider.onValueChanged.AddListener((value) => { AudioManager.Instance.SetAudioSourcesLevels(AudioMixers.ENGINE, value); });
         }
     }
 }

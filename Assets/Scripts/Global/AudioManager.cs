@@ -10,6 +10,7 @@ namespace BombDrop.Global
     {
         [SerializeField] private AudioClip[] _audioClips;
         [SerializeField] private AudioSource _sfxAudioSource, _bgmAudioSource, _engineAudioSource;
+        public AudioSource EngineAudioSource { get => _engineAudioSource; }
         [SerializeField] private AudioMixerGroup _sfxAudioMixer, _bgmAudioMixer;
 
         #region Singleton

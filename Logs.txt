@@ -698,6 +698,12 @@
     (-) PlayerController
         [=] Shoot sound
 
+- Scene
+    (-) MainMenu
+        [=] Adding Settings Panel
+- Script
+    (-) MainMenuManager
+        [=] Adding Settings logic | Volume Control
 
 =======================================================================================================================================
                                                             CREDITS
