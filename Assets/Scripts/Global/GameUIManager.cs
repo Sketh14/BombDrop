@@ -14,10 +14,13 @@ namespace BombDrop.Global
         [SerializeField] private TMPro.TMP_Text _coinCounterTxt, _pauseTxt;
 
         //Caution Panel
-        [SerializeField] private RectTransform _cautionPanel;
+        [SerializeField] private RectTransform _cautionPanel, _pausePanel;
         [SerializeField] private TMPro.TMP_Text _cautionTimeTxt;
         private const float _maxTimeOutsideOfBoundary = 7f;
         private byte _cautionPopUpStatus = 0;
+
+        //Volume Control
+        [SerializeField] private Slider _bgmSlider, _sfxSlider, _engineSlider;
 
         private CancellationTokenSource _cts;
 
@@ -45,14 +48,27 @@ namespace BombDrop.Global
             _restartBt.onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene((int)SceneToLoad.MAIN_GAMEPLAY));
             _mainMenuBt.onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene((int)SceneToLoad.MAIN_MENU));
             _pauseBt.onClick.AddListener(PauseGame);
+
+            //Slider CAllbacks
+            _sfxSlider.onValueChanged.AddListener((value) => { AudioManager.Instance.SetAudioSourcesLevels(AudioMixers.SFX, value); });
+            _bgmSlider.onValueChanged.AddListener((value) => { AudioManager.Instance.SetAudioSourcesLevels(AudioMixers.BGM, value); });
+            _engineSlider.onValueChanged.AddListener((value) => { AudioManager.Instance.SetAudioSourcesLevels(AudioMixers.ENGINE, value); });
         }
 
         private void PauseGame()
         {
             if (Time.timeScale > 0.9f)
+            {
                 Time.timeScale = 0f;
+                AudioManager.Instance.PauseAll(true);
+                _pausePanel.gameObject.SetActive(true);
+            }
             else
+            {
                 Time.timeScale = 1f;
+                AudioManager.Instance.PauseAll(false);
+                _pausePanel.gameObject.SetActive(false);
+            }
 
             PauseBlinkEffect();
         }

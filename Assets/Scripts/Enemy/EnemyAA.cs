@@ -46,6 +46,8 @@ namespace BombDrop.Enemy
             shotProjectile.transform.rotation = _ShootPoint.rotation;
             // Debug.Log($"SHooting Before ACtive| Instantiated Pos : {shotProjectile.transform.position}");
             shotProjectile.SetActive(true);
+
+            AudioManager.Instance.PlaySFXClip(AudioTypes.AA_VEHICLE_SHOOT, 0.5f);
             // Debug.Log($"SHooting After Active| Instantiated Pos : {shotProjectile.transform.position}");
             // shotProjectile.GetComponent<ProjectileBase>().SetStats(_Turret.right * -1.0f);
         }

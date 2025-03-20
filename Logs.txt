@@ -659,6 +659,52 @@
     (-) ProceduralTerrain
         [=] Using Scriptable-Object to generate level
 
+---------------------------------------------------------------------------------------------------------------------------------------
+                                                        17 Mar
+---------------------------------------------------------------------------------------------------------------------------------------
+- Script
+    (-) AudioManager
+        [=] Script to manage Audio Sources
+        [=] Adding AudioTypes enum
+    (-) MainMenuManager
+        [=] Connecting to AudioManager
+- Scene
+    (-) MainMenu
+        [=] Changing Color of Quit Panel
+- Project
+    (-) Adding sfx clips
+
+---------------------------------------------------------------------------------------------------------------------------------------
+                                                        20 Mar
+---------------------------------------------------------------------------------------------------------------------------------------
+- Scene
+    (-) Adding SFX clips to AudioManager
+        [=] AAGUN | Missiles | Player Bomb | Bomb Drop | Engine Noise
+    (-) Adding Pause Panel
+        [=] Volume Sliders
+- Script
+    (-) GameUIManager
+        [=] Pause Panel controls
+        [=] Volume Control
+    (-) AudioManager
+        [=] Pause mechanic
+        [=] Volume Control
+        [=] Making this singleton to load on both levels
+        [=] Adding AudioMixer enum
+    (-) GameManager
+        [=] Moving LevelInfo here to be accesible from everywhere
+    (-) LevelInfo
+        [=] Adding fields to store volume levels for different AudioSources
+    (-) PlayerController
+        [=] Shoot sound
+
+
+=======================================================================================================================================
+                                                            CREDITS
+
+- Sound Effect by freesound_community from Pixabay
+
+
 =======================================================================================================================================
 - This multiplayer we can do it may be dec. I think I have completed aeroplane control. And terrain generation
 - JMO Assets - Explosion SFX
@@ -671,6 +717,9 @@
 
 - Can make a speed boost logic
     [=] Fire coming from exchaust effect from the front beside propeller
+
+
+
 
 {
 				if (light != null)

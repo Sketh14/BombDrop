@@ -339,3 +339,4 @@ MonoBehaviour:
   _SpeedMult: 21
   _Damage: 30
   _PoolToUse: 1
+  _AudioClipToUse: 3

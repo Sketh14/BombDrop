@@ -22,6 +22,7 @@ namespace BombDrop.Projectiles
         protected bool _ReleasedToPool;
         [SerializeField] protected float _Damage = 1f;
         [SerializeField] protected PoolManager.PoolType _PoolToUse;
+        [SerializeField] protected AudioTypes _AudioClipToUse;
         protected float _CurrentTurnSpeed = 0.1f;
         protected float _TurnSpeed = 0.75f;
         // [SerializeField] protected bool _GradualSpeedIncrease;
@@ -172,9 +173,14 @@ namespace BombDrop.Projectiles
             if (other.CompareTag(UniversalConstants.StatComponent))
             {
                 other.GetComponent<IStatComponent>().TakeDamage(_Damage);
+                AudioManager.Instance.PlaySFXClip(_AudioClipToUse, 1f);
+                GameManager.Instance.OnProjectileHit?.Invoke(transform.position, _PoolToUse);
             }
             else if (!other.CompareTag(UniversalConstants.WaterTag))
+            {
+                AudioManager.Instance.PlaySFXClip(_AudioClipToUse, 1f);
                 GameManager.Instance.OnProjectileHit?.Invoke(transform.position, _PoolToUse);
+            }
             PoolManager.Instance.ObjectPool[(int)_PoolToUse].Release(gameObject);
         }
 

@@ -19,6 +19,9 @@ namespace BombDrop.Global
         public Transform PlayerTransform;
         public bool PlayerDead;
         public int PlayerCoins;
+        // public AudioManager AudioManagerRef;
+        public LevelInfo LevelInfo;
+
 
         #region Actions
         public Action<Vector3[]> OnMapGenerated;

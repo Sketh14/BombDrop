@@ -255,6 +255,7 @@ MonoBehaviour:
   _SpeedMult: 35
   _Damage: 30
   _PoolToUse: 0
+  _AudioClipToUse: 2
   _turnSpeed: 1
 --- !u!1 &6384834625931352241
 GameObject:

@@ -16,7 +16,7 @@ namespace BombDrop.Global
 
         [SerializeField] private float _heightMultiplier = 10f; // Multiplier to control mountain height
         [SerializeField] private string _generatedHash;
-        [SerializeField] private LevelInfo _levelInfo;
+        // [SerializeField] private LevelInfo _levelInfo;
         [SerializeField] private AnimationCurve _lerpCurve;
 
 #if MESH_GENERATION_TESTING
@@ -45,7 +45,7 @@ namespace BombDrop.Global
             // Random.InitState(seed);
 
             // Random.InitState(_generatedHash.GetHashCode());
-            Random.InitState(_levelInfo.LevelHash.GetHashCode());
+            Random.InitState(GameManager.Instance.LevelInfo.LevelHash.GetHashCode());
             // offset = new Vector2(Random.Range(0f, 1000f), Random.Range(0f, 1000f));
 
             mesh = new Mesh();

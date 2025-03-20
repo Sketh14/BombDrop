@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace BombDrop.Global
@@ -8,5 +6,8 @@ namespace BombDrop.Global
     public class LevelInfo : ScriptableObject
     {
         public string LevelHash;
+
+        // public float SFXLevel, BGMLevel, EngineLevel;
+        // public bool LevelLoaded;
     }
 }

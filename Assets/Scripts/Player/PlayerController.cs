@@ -201,6 +201,7 @@ namespace BombDrop.Player
                 _instancedBullet.transform.position = _shootPoint.position;
                 _instancedBullet.transform.rotation = _shootPoint.rotation;
                 _instancedBullet.SetActive(true);
+                AudioManager.Instance.PlaySFXClip(AudioTypes.PLAYER_SHOOT, 0.5f);
             }
             _shootTime += Time.deltaTime;
         }
