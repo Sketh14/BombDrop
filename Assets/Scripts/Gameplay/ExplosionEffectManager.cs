@@ -1,3 +1,4 @@
+using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -9,12 +10,15 @@ namespace BombDrop.Gameplay
         // private Task _delayTask;
         private const int _delayTime = 1000;
 
+        private CancellationTokenSource _cts;
+
         public ExplosionEffectManager()
         {
             // _delayTask = Task.Delay(1000);
+            _cts = new CancellationTokenSource();
         }
 
-        ~ExplosionEffectManager() { }
+        ~ExplosionEffectManager() { _cts.Cancel(); }
 
         // System.Text.StringBuilder _debugStringBuilder = new System.Text.StringBuilder();
         public async Task FlashLights(Transform explosionTransform, float lightIntensity)
@@ -30,7 +34,7 @@ namespace BombDrop.Gameplay
                 lightIntensityMult += Time.deltaTime * cLerpMultiplier;
                 // _debugStringBuilder.Append(Mathf.Sin(lightIntensityMult * 180f));
                 // _debugStringBuilder.Append(',');
-                if (lightIntensityMult > 1f) break;
+                if (lightIntensityMult > 1f || _cts.IsCancellationRequested) break;
                 await Task.Yield();
             }
 

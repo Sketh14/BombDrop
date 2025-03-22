@@ -32,6 +32,7 @@ namespace BombDrop.Enemy
         {
             // _Health = _OgHealth;                //To reset stats if needed
             _Cts.Cancel();
+            GameManager.Instance.OnProjectileHit -= CheckForHit;
         }
 
         protected virtual void OnEnable()
@@ -40,6 +41,9 @@ namespace BombDrop.Enemy
             _ShotProjectileStatus |= 1 << (int)ShootStatus.AVAILABLE_TO_SHOOT;
             // Debug.Log($"Enabling ShootStatus : {_ShotProjectileStatus}");
             _Cts = new CancellationTokenSource();
+
+
+            GameManager.Instance.OnProjectileHit += CheckForHit;
         }
 
         protected virtual void Start()
@@ -83,6 +87,34 @@ namespace BombDrop.Enemy
 
         protected abstract void TargetPlayer();
         protected abstract void Shoot();
+
+        private void CheckForHit(Vector3 explosionPosition, PoolManager.PoolType explosionPoolType, BombStatus bombStatus)
+        {
+            if (bombStatus != BombStatus.HIT_OTHER) return;
+
+            float damageDealt = 1f;
+            switch (explosionPoolType)
+            {
+                case PoolManager.PoolType.FOLLOWING_MISSILES:
+                    damageDealt = UniversalConstants.FollowingMissileDamage;
+                    break;
+
+                case PoolManager.PoolType.STRAIGHT_RANGED_MISSILES:
+                    damageDealt = UniversalConstants.StraightMissileDamage;
+                    break;
+
+                case PoolManager.PoolType.BOMB:
+                    damageDealt = UniversalConstants.PlayerBombDamage;
+                    break;
+            }
+
+            float distanceSquared = Vector3.SqrMagnitude(explosionPosition - transform.position);
+            if (distanceSquared < (UniversalConstants.MissileDamageRange * UniversalConstants.MissileDamageRange))
+                TakeDamage(damageDealt * (1f / distanceSquared * 8f));                      //Min Distance Squared Possibly : 14.44118
+            // Debug.Log($"Name : {gameObject.name} | distanceSquared : {distanceSquared}"
+            // + $" | Damage Dealt * 1.5 : {damageDealt * (1f / distanceSquared * 8f)} |"
+            // + $"Damage Dealt: {damageDealt * (1f / distanceSquared)} ");
+        }
 
         public virtual void TakeDamage(float damageTaken)
         {

@@ -252,17 +252,17 @@ namespace BombDrop.Global
 
 
                         if (yCoord >= 5
-                         && enemyPosFilled < 5                              // && fillInterval >= 2
+                         && enemyPosFilled < 10 && fillInterval >= 3
                          && Random.Range(0f, 1f) <= 0.3f)                   //Can get rid of this part
                         {
-                            // fillInterval = 0;
+                            fillInterval = 0;
                             // randomEnemyPositions[enemyPosFilled] = new Vector3(xCoord, yCoord, zCoord);
-                            enemyPosFilled++;
+                            // enemyPosFilled++;
 
-                            randomEnemyPositions[fillInterval] = new Vector3(xCoord - 1, perlinYPoints[xCoord - 1], zCoord);
-                            randomEnemyPositions[fillInterval + 1] = new Vector3(xCoord, yCoord, zCoord);
-                            // debug_EnemyPositions[fillInterval + 2] = new Vector3(xCoord + 1, perlinYPoints[xCoord + 1], zCoord);
-                            fillInterval += 2;
+                            randomEnemyPositions[enemyPosFilled] = new Vector3(xCoord - 1, perlinYPoints[xCoord - 1], zCoord);
+                            randomEnemyPositions[enemyPosFilled + 1] = new Vector3(xCoord, yCoord, zCoord);
+                            // debug_EnemyPositions[enemyPosFilled + 2] = new Vector3(xCoord + 1, perlinYPoints[xCoord + 1], zCoord);
+                            enemyPosFilled += 2;
                         }
                     }
                     else yCoord = 0f;
@@ -279,7 +279,7 @@ namespace BombDrop.Global
                         enemyPosFilled++;
                     }*/
 
-                    // fillInterval++;
+                    fillInterval++;
                 }
             }
 

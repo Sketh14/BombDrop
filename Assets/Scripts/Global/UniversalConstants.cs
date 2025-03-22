@@ -2,7 +2,7 @@ namespace BombDrop.Global
 {
     public enum ShootStatus { AVAILABLE_TO_SHOOT, SHOT_PROJECTILE, RECHARGING, SEARCHING_PLAYER, FOUND_PLAYER }
     public enum PlaneRotateStatus { LEFT, RIGHT, IN_PROCESS_OF_TURNING }
-    public enum BombStatus { AVAILABLE, SHOT }
+    public enum BombStatus { AVAILABLE, SHOT, HIT_STAT, HIT_OTHER }
     public enum PlayerAction { BOMB_DROP, PLAYER_HIT, PLAYER_DEAD, COIN_COLLECTED, INSIDE_BOUNDARY, OUTSIDE_BOUNDARY, OUTSIDE_BOUNDARY_SAFEZONE }
     public enum ButtonClicked { RESTART }
     public enum SceneToLoad { MAIN_MENU, MAIN_GAMEPLAY }
@@ -17,5 +17,12 @@ namespace BombDrop.Global
         public const string WaterTag = "Water";
         public const float Gravity = -9.8f;
         public const int WaitTimeBeforeCoinCollection = 3000;
+
+        public const float AABulletDamage = 5f;
+        public const float PlayerBulletDamage = 3f;
+        public const float StraightMissileDamage = 10f;
+        public const float PlayerBombDamage = 30f;
+        public const float FollowingMissileDamage = 15f;
+        public const float MissileDamageRange = 10f;
     }
 }

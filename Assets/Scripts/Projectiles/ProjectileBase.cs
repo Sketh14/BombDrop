@@ -174,12 +174,12 @@ namespace BombDrop.Projectiles
             {
                 other.GetComponent<IStatComponent>().TakeDamage(_Damage);
                 AudioManager.Instance.PlaySFXClip(_AudioClipToUse, 1f);
-                GameManager.Instance.OnProjectileHit?.Invoke(transform.position, _PoolToUse);
+                GameManager.Instance.OnProjectileHit?.Invoke(transform.position, _PoolToUse, BombStatus.HIT_STAT);
             }
             else if (!other.CompareTag(UniversalConstants.WaterTag))
             {
                 AudioManager.Instance.PlaySFXClip(_AudioClipToUse, 1f);
-                GameManager.Instance.OnProjectileHit?.Invoke(transform.position, _PoolToUse);
+                GameManager.Instance.OnProjectileHit?.Invoke(transform.position, _PoolToUse, BombStatus.HIT_OTHER);
             }
             PoolManager.Instance.ObjectPool[(int)_PoolToUse].Release(gameObject);
         }

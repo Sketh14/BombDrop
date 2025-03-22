@@ -1,6 +1,7 @@
 using UnityEngine;
 
 using BombDrop.Global;
+using System.Threading;
 
 namespace BombDrop.Gameplay
 {
@@ -18,6 +19,8 @@ namespace BombDrop.Gameplay
         private float _skyboxScrollSpeed;
         private CameraManager _cameraManager;
         private ExplosionEffectManager _explosionEffectManager;
+
+        private CancellationTokenSource _cts;
         // private GameObject _explosionEffect;
 
         // [SerializeField] private Vector3[] _playerShootDownPoints;
@@ -26,6 +29,7 @@ namespace BombDrop.Gameplay
         {
             GameManager.Instance.OnProjectileHit -= MakeExplosionAt;
             GameManager.Instance.OnBoundariesEntered -= ShootDownPlayer;
+            _cts.Cancel();
         }
 
         // Start is called before the first frame update
@@ -34,13 +38,14 @@ namespace BombDrop.Gameplay
             GameManager.Instance.OnProjectileHit += MakeExplosionAt;
             GameManager.Instance.OnBoundariesEntered += ShootDownPlayer;
 
+            _cts = new CancellationTokenSource();
             _skyboxScrollSpeed = 0.95f;
             Camera.main.depthTextureMode = DepthTextureMode.Depth;
             _cameraManager = new CameraManager(ref _cameraTransform, ref _playerTransform, ref _cameraFollowSpeedMult);
             _explosionEffectManager = new ExplosionEffectManager();
         }
 
-        private async void MakeExplosionAt(Vector3 explosionPosition, PoolManager.PoolType explosionPoolType)
+        private async void MakeExplosionAt(Vector3 explosionPosition, PoolManager.PoolType explosionPoolType, BombStatus bombStatus)
         {
             // Debug.Log($"Make Explosion Called | explosionPoolType : {explosionPoolType}");
             float explosionIntensity = 10f;
@@ -64,6 +69,7 @@ namespace BombDrop.Gameplay
             explosionEffect.SetActive(true);
 
             await _explosionEffectManager.FlashLights(explosionEffect.transform, explosionIntensity);
+            if (_cts.IsCancellationRequested) return;
             PoolManager.Instance.ObjectPool[prefabIndex].Release(explosionEffect);
             // _explosionEffect.SetActive(false);
         }

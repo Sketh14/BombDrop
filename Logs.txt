@@ -721,6 +721,30 @@
     (-) MainMenu
         [=] Incresing size of sliders in Settings panel
 
+---------------------------------------------------------------------------------------------------------------------------------------
+                                                        21 Mar
+---------------------------------------------------------------------------------------------------------------------------------------
+- Script
+    (-) ProceduralTerrain
+        [=] Using FillInterval
+    (-) ExplosionEffectManager
+        [=] Adding cts
+- Scene
+    (-) MainGameplay
+        [=] Adjusting Joystick
+
+---------------------------------------------------------------------------------------------------------------------------------------
+                                                        22 Mar
+---------------------------------------------------------------------------------------------------------------------------------------
+- Script
+    (-) UniversalConstant
+        [=] Adding damage values of projectiles here
+        [=] Adding enum values to BombStatus
+    (-) EnemyVehilceController_Base
+        [=] Checking for explosion damage for projectiles exxplosion nearby
+    (-) MainGameplayManager
+        [=] Fixing bug of explosion
+
 =======================================================================================================================================
                                                             CREDITS
 
@@ -739,7 +763,7 @@
 
 - Can make a speed boost logic
     [=] Fire coming from exchaust effect from the front beside propeller
-
+- [Do] Make universal bomb info on  level info so that everyone can acccess it
 
 
 
