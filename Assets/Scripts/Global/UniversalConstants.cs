@@ -22,7 +22,7 @@ namespace BombDrop.Global
         public const float AABulletDamage = 5f;
         public const float PlayerBulletDamage = 3f;
         public const float StraightMissileDamage = 10f;
-        public const float PlayerBombDamage = 50f;
+        public const float PlayerBombDamage = 30f;
         public const float FollowingMissileDamage = 15f;
         public const float MissileDamageRange = 10f;
     }
