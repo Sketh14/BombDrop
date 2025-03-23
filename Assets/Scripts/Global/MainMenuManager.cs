@@ -32,7 +32,7 @@ namespace BombDrop.Global
             {
                 AudioManager.Instance.PlaySFXClip(AudioTypes.CLICK_BUTTON);
                 _LevelInfoPanel.gameObject.SetActive(true);
-                _levelInfoIF.text = HelperFunctions.GenerateRandom6CharacterHash();
+                _levelInfoIF.text = HelperFunctions.GenerateRandomHash6Bytes();
 
                 // Debug.Log($"Size : {_levelInfoIF.text} | Empty : {_levelInfoIF.text == ""}  | Null : {_levelInfoIF.text == null}");
                 // if (_levelInfoIF)

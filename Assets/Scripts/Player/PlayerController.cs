@@ -38,13 +38,11 @@ namespace BombDrop.Player
         private byte _bombStatus;
         /// <summary> 0 : Available | 1 : Shooting </summary>
         private byte _shootStatus;
-        private float _ogHealth;
-        private float _shootTime;
-        private const float _shootInterval = 0.25f;
+        private float _ogHealth, _shootTime;
+        private const float _shootInterval = 0.25f, _bombCooldownTime = 2f;
+        private const float _propellerSpeedMult = 150f, _checkBoundaryWaitTime = 1f;
+        private bool _levelCleared;
         // private const float _positionLerpVal = 0.35f;
-        private const float _bombCooldownTime = 2f;
-        private const float _propellerSpeedMult = 150f;
-        private const float _checkBoundaryWaitTime = 1f;
 
         private CancellationTokenSource _cts;
         private CustomTimer _customTimer;
@@ -52,11 +50,15 @@ namespace BombDrop.Player
         private void OnDestroy()
         {
             _cts.Cancel();
+            GameManager.Instance.OnPlayerAction -= StopPlayerMovement;
         }
 
         private void Start()
         {
             _cts = new CancellationTokenSource();
+            GameManager.Instance.OnPlayerAction += StopPlayerMovement;
+            _levelCleared = false;
+
             _dropBomb.onClick.AddListener(DropBomb);
             // _shootBullet.OnSelect((data) => (ShootBullets));
             EventTrigger.Entry downEvent = new EventTrigger.Entry() { eventID = EventTriggerType.PointerDown };
@@ -87,6 +89,8 @@ namespace BombDrop.Player
         */
         private void Update()
         {
+            if (_levelCleared) return;
+
 #if UNITY_EDITOR && TESTING
             // if (Input.GetKeyDown(KeyCode.Space))
             if (Keyboard.current.spaceKey.wasPressedThisFrame)
@@ -258,6 +262,19 @@ namespace BombDrop.Player
                 await _customTimer.WaitForSeconds(_checkBoundaryWaitTime);
 
                 if (_cts.IsCancellationRequested) return;
+            }
+        }
+
+        private void StopPlayerMovement(float value, int playerStatus)
+        {
+            switch (playerStatus)
+            {
+                case (int)PlayerAction.LEVEL_CLEARED:
+                    _levelCleared = true;
+                    break;
+
+                default:
+                    break;
             }
         }
     }

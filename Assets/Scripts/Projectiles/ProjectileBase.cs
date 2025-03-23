@@ -20,7 +20,7 @@ namespace BombDrop.Projectiles
         [SerializeField] protected float _SpeedMult = 1f;
         protected Vector3 _SpeedVec;
         protected bool _ReleasedToPool;
-        [SerializeField] protected float _Damage = 1f;
+        // [SerializeField] protected float _Damage = 1f;
         [SerializeField] protected PoolManager.PoolType _PoolToUse;
         [SerializeField] protected AudioTypes _AudioClipToUse;
         protected float _CurrentTurnSpeed = 0.1f;
@@ -29,7 +29,7 @@ namespace BombDrop.Projectiles
         protected float _CurrentSpeedMult = 1f;
         // private const float _positionLerpVal = 0.5f;
         // private float _inititalRot;
-        protected bool _LeftAligned;
+        protected bool _LeftAligned, _BoundaryProjectile;
 
         protected virtual void OnDestroy()
         {
@@ -143,14 +143,13 @@ namespace BombDrop.Projectiles
             // transform.position = Vector3.Lerp(transform.position, transform.position + _SpeedVec, _positionLerpVal);
         }
 
-        public virtual void SetStats(in Vector3 initialSpeed, in bool leftAligned, in float damageDealt = 0f, in float speedMult = 0f)
+        public virtual void SetStats(in Vector3 initialSpeed, in bool leftAligned, in bool boundaryProjectile = false, in float speedMult = 0f)
         {
             // _inititalRot = transform.eulerAngles.z;
             _LeftAligned = leftAligned;
             _SpeedVec = new Vector3(0f, 0f, initialSpeed.z);
 
-            if (damageDealt < -0.05f || damageDealt > 0.05f)
-                _Damage = damageDealt;
+            _BoundaryProjectile = boundaryProjectile;
 
             if (speedMult < -0.05f || speedMult > 0.05f)
             {
@@ -170,9 +169,33 @@ namespace BombDrop.Projectiles
             if (_ReleasedToPool) return;
 
             _ReleasedToPool = true;
+            float damageDealt = 1f;
+
+            //Need to take boundary missile into consideration
+            if (_BoundaryProjectile)
+                damageDealt = -1000f;
+            else
+            {
+                switch (_PoolToUse)
+                {
+                    case PoolManager.PoolType.BOMB:
+                        damageDealt = UniversalConstants.PlayerBombDamage;
+                        break;
+
+                    case PoolManager.PoolType.FOLLOWING_MISSILES:
+                        damageDealt = UniversalConstants.FollowingMissileDamage;
+                        break;
+
+                    case PoolManager.PoolType.STRAIGHT_RANGED_MISSILES:
+                        damageDealt = UniversalConstants.StraightMissileDamage;
+                        break;
+                }
+            }
+
+
             if (other.CompareTag(UniversalConstants.StatComponent))
             {
-                other.GetComponent<IStatComponent>().TakeDamage(_Damage);
+                other.GetComponent<IStatComponent>().TakeDamage(damageDealt);
                 AudioManager.Instance.PlaySFXClip(_AudioClipToUse, 1f);
                 GameManager.Instance.OnProjectileHit?.Invoke(transform.position, _PoolToUse, BombStatus.HIT_STAT);
             }
@@ -186,7 +209,8 @@ namespace BombDrop.Projectiles
 
         private void SelfDestruct(float dummyData, int playerStatus)
         {
-            if (_ReleasedToPool || playerStatus != (int)PlayerAction.PLAYER_DEAD) return;
+            if (_ReleasedToPool || (playerStatus != (int)PlayerAction.PLAYER_DEAD
+            && playerStatus != (int)PlayerAction.LEVEL_CLEARED)) return;
             _ReleasedToPool = true;
             PoolManager.Instance.ObjectPool[(int)_PoolToUse].Release(gameObject);
         }

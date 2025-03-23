@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6954666669760565163}
   - component: {fileID: 5389218646669712058}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 5652597478162180171}
   - component: {fileID: 4289827850281607912}
   - component: {fileID: 6182137485846402507}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Missile_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 1552898056154673420}
   - component: {fileID: 7522145509514367804}
   - component: {fileID: 6814973961158744698}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: StraightRangedMissile_1
   m_TagString: Projectiles
   m_Icon: {fileID: 0}

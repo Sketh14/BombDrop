@@ -103,7 +103,7 @@ namespace BombDrop.Gameplay
             }
 
             followingMissileForPlayer.transform.localScale = new Vector3(2f, 2f, 2f);
-            followingMissileForPlayer.GetComponent<Projectiles.ProjectileBase>().SetStats(Vector3.right * -1.0f, true, -1000f, 80f);
+            followingMissileForPlayer.GetComponent<Projectiles.ProjectileBase>().SetStats(Vector3.right * -1.0f, true, true, 80f);
             followingMissileForPlayer.SetActive(true);
         }
 

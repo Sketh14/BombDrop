@@ -2,7 +2,7 @@ namespace BombDrop.Utils
 {
     public class HelperFunctions
     {
-        public static string GenerateRandom6CharacterHash()
+        public static string GenerateRandomHash6Bytes()
         {
             byte[] _randomBytes = new byte[6];
             // using (var rng = new RNGCryptoServiceProvider())            

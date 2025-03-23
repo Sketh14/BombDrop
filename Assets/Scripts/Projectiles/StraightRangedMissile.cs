@@ -20,7 +20,7 @@ namespace BombDrop.Projectiles
             _CurrentSpeedMult = _SpeedMult;
         }
 
-        public override void SetStats(in Vector3 initialSpeedVec, in bool leftAligned, in float damageDealt = 0f, in float spedMult = 1f)
+        public override void SetStats(in Vector3 initialSpeedVec, in bool leftAligned, in bool boundaryProjectile = false, in float spedMult = 1f)
         {
             _CurrentSpeedMult = _SpeedMult;
             _CurrentTurnSpeed = 1f;
@@ -38,7 +38,10 @@ namespace BombDrop.Projectiles
 
             if (Vector2.SqrMagnitude(new Vector2(transform.position.x, transform.position.y) - new Vector2(_playerTargetedPos.x, _playerTargetedPos.y))
                 <= _maxTargetDiff * _maxTargetDiff)
+            {
+                _ReleasedToPool = true;
                 PoolManager.Instance.ObjectPool[(int)_PoolToUse].Release(gameObject);
+            }
         }
     }
 }

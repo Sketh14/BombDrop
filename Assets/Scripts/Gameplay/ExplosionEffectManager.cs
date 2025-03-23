@@ -34,8 +34,8 @@ namespace BombDrop.Gameplay
                 lightIntensityMult += Time.deltaTime * cLerpMultiplier;
                 // _debugStringBuilder.Append(Mathf.Sin(lightIntensityMult * 180f));
                 // _debugStringBuilder.Append(',');
-                if (lightIntensityMult > 1f || _cts.IsCancellationRequested) break;
                 await Task.Yield();
+                if (lightIntensityMult > 1f || _cts.IsCancellationRequested) break;
             }
 
             // Debug.Log($"{_debugStringBuilder}");

@@ -734,7 +734,7 @@
         [=] Adjusting Joystick
 
 ---------------------------------------------------------------------------------------------------------------------------------------
-                                                        22 Mar
+                                                        22 Mar | 23 Mar
 ---------------------------------------------------------------------------------------------------------------------------------------
 - Script
     (-) UniversalConstant
@@ -744,6 +744,41 @@
         [=] Checking for explosion damage for projectiles exxplosion nearby
     (-) MainGameplayManager
         [=] Fixing bug of explosion
+
+- Script
+    (-) GameManager
+        [=] Counter for enemies
+        [=] Using PlayerAction to signal Level Status
+    (-) EnemyVehilceController_Base
+        [=] Callback for clearing level
+        [=] Increasing Damage from bomb falling nearby
+    (-) GameUIManager
+        [=] Next Level panel logic
+    (-) HelperFunctions 
+        [=] Rename function
+    (-) StraightRangedMissiles | Fixing Bug
+        [=] Setting ReleasedToPool to true when checking distance
+    (-) PlayerController
+        [=] Level Clear Callback
+            {+} Stop player's movement
+    (-) ProjectileBase
+        [=] Removing Damage[FLOAT] and replacing with BoundaryProjectile[BOOL]
+        [=] Using damage values from UniversalConstant
+    (-) ExplosionEffectManager | Fixing async bug
+    (-) UniversalConstant
+        [=] Adding values to PlayerAction
+    (-) ProjectileBase
+        [=] Using OnPlayerAction callback to self-destruct
+- Scene
+    (-) MainGameplay
+        [=] UI for Netx Level panel
+            {+} Giving options for random level or user-choice
+        [=] Fixing Player
+            {+} Removing Colliders from gun
+- Project
+    (-) Adding layer for Enemy projectiles
+        [=] "Bomb" layer will not collide with "Player" | "Bomb" layer
+    (-) Changing prefab layers
 
 =======================================================================================================================================
                                                             CREDITS
@@ -764,7 +799,7 @@
 - Can make a speed boost logic
     [=] Fire coming from exchaust effect from the front beside propeller
 - [Do] Make universal bomb info on  level info so that everyone can acccess it
-
+- [Do] Make Win Screen
 
 
 {

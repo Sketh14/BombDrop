@@ -3,6 +3,8 @@ using Task = System.Threading.Tasks.Task;
 
 using UnityEngine;
 using UnityEngine.UI;
+using SceneManager = UnityEngine.SceneManagement.SceneManager;
+using BombDrop.Utils;
 
 namespace BombDrop.Global
 {
@@ -10,7 +12,7 @@ namespace BombDrop.Global
     {
         [SerializeField] private Image _playerHealthBar, _bombCooldownBar;
         [SerializeField] private Image _gameOverPanel;
-        [SerializeField] private Button _restartBt, _mainMenuBt, _pauseBt;
+        [SerializeField] private Button _pauseBt;
         [SerializeField] private TMPro.TMP_Text _coinCounterTxt, _pauseTxt;
 
         //Caution Panel
@@ -21,6 +23,14 @@ namespace BombDrop.Global
 
         //Volume Control
         [SerializeField] private Slider _bgmSlider, _sfxSlider, _engineSlider;
+
+        //Next Level Panel
+        [SerializeField] private Button _nextLevelNLBt, _mainMenuNLBt, _closePanelNLBt, _startLevelNLBt;
+        [SerializeField] private RectTransform _nextLevelPanel, _levelCodeNLPanel;
+        [SerializeField] private TMPro.TMP_InputField _levelCodeNLIF;
+
+        //Game Over Panel
+        [SerializeField] private Button _restartGOBt, _mainMenuGOBt;
 
         private CancellationTokenSource _cts;
 
@@ -45,14 +55,14 @@ namespace BombDrop.Global
 
             //Button Callbacks
             // _restartBt.onClick.AddListener(() => GameManager.Instance.OnButtonClicked?.Invoke((int)ButtonClicked.RESTART));
-            _restartBt.onClick.AddListener(() =>
+            _restartGOBt.onClick.AddListener(() =>
             {
-                UnityEngine.SceneManagement.SceneManager.LoadScene((int)SceneToLoad.MAIN_GAMEPLAY);
+                SceneManager.LoadScene((int)SceneToLoad.MAIN_GAMEPLAY);
                 AudioManager.Instance.PlaySFXClip(AudioTypes.CLICK_BUTTON);
             });
-            _mainMenuBt.onClick.AddListener(() =>
+            _mainMenuGOBt.onClick.AddListener(() =>
             {
-                UnityEngine.SceneManagement.SceneManager.LoadScene((int)SceneToLoad.MAIN_MENU);
+                SceneManager.LoadScene((int)SceneToLoad.MAIN_MENU);
                 AudioManager.Instance.PlaySFXClip(AudioTypes.CLICK_BUTTON);
             });
             _pauseBt.onClick.AddListener(() =>
@@ -60,11 +70,36 @@ namespace BombDrop.Global
                 PauseGame();
                 AudioManager.Instance.PlaySFXClip(AudioTypes.CLICK_BUTTON);
             });
+            //Next Level Panel
+            _nextLevelNLBt.onClick.AddListener(() =>
+            {
+                _levelCodeNLIF.text = HelperFunctions.GenerateRandomHash6Bytes();
+                _levelCodeNLPanel.gameObject.SetActive(true);
+                AudioManager.Instance.PlaySFXClip(AudioTypes.CLICK_BUTTON);
+            });
+            _startLevelNLBt.onClick.AddListener(() =>
+            {
+                GameManager.Instance.LevelInfo.LevelHash = _levelCodeNLIF.text;
+                SceneManager.LoadScene((int)SceneToLoad.MAIN_GAMEPLAY);
+                AudioManager.Instance.PlaySFXClip(AudioTypes.CLICK_BUTTON);
+            });
+            _closePanelNLBt.onClick.AddListener(() =>
+            {
+                _levelCodeNLPanel.gameObject.SetActive(false);
+                AudioManager.Instance.PlaySFXClip(AudioTypes.CLICK_BUTTON);
+            });
+            _mainMenuNLBt.onClick.AddListener(() =>
+            {
+                SceneManager.LoadScene((int)SceneToLoad.MAIN_MENU);
+                AudioManager.Instance.PlaySFXClip(AudioTypes.CLICK_BUTTON);
+            });
 
             //Slider CAllbacks
             _sfxSlider.onValueChanged.AddListener((value) => { AudioManager.Instance.SetAudioSourcesLevels(AudioMixers.SFX, value); });
             _bgmSlider.onValueChanged.AddListener((value) => { AudioManager.Instance.SetAudioSourcesLevels(AudioMixers.BGM, value); });
             _engineSlider.onValueChanged.AddListener((value) => { AudioManager.Instance.SetAudioSourcesLevels(AudioMixers.ENGINE, value); });
+
+            UpdateCoinCounter(GameManager.Instance.PlayerCoins);
         }
 
         private void PauseGame()
@@ -184,6 +219,10 @@ namespace BombDrop.Global
 
                 case (int)PlayerAction.COIN_COLLECTED:
                     UpdateCoinCounter((int)updateVal);
+                    break;
+
+                case (int)PlayerAction.LEVEL_CLEARED:
+                    _nextLevelPanel.gameObject.SetActive(true);
                     break;
             }
         }

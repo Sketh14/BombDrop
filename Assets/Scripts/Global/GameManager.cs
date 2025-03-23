@@ -18,7 +18,7 @@ namespace BombDrop.Global
 
         public Transform PlayerTransform;
         public bool PlayerDead;
-        public int PlayerCoins;
+        public int PlayerCoins, EnemiesLeft;
         // public AudioManager AudioManagerRef;
         public LevelInfo LevelInfo;
 
@@ -26,9 +26,10 @@ namespace BombDrop.Global
         #region Actions
         public Action<Vector3[]> OnMapGenerated;
 
-        /// <summary> 0 : Bomb Drop | 1 : Player Hit | 2 : Player Dead | 3 : Coin Collected </summary>
+        /// <summary> 0 : Bomb Drop | 1 : Player Hit | 2 : Player Dead | 3 : Coin Collected | 4 : Inside Boundary | 5 : Outside Boundary 
+        /// | 6 : Level Started | 7 : Level Cleared | 8 : Level Restarted </summary>
         public Action<float, int> OnPlayerAction;
-        public Action<int> OnButtonClicked, OnBoundariesEntered;
+        public Action<int> OnButtonClicked, OnBoundariesEntered;                //, OnLevelStatusChange;
         public Action<Vector3, PoolManager.PoolType, BombStatus> OnProjectileHit;
         #endregion Actions
     }

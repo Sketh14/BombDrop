@@ -110,9 +110,9 @@ namespace BombDrop.Enemy
 
             float distanceSquared = Vector3.SqrMagnitude(explosionPosition - transform.position);
             if (distanceSquared < (UniversalConstants.MissileDamageRange * UniversalConstants.MissileDamageRange))
-                TakeDamage(damageDealt * (1f / distanceSquared * 8f));                      //Min Distance Squared Possibly : 14.44118
+                TakeDamage(damageDealt * (1f / distanceSquared * 14f));                      //Min Distance Squared Possibly : 14.44118
             // Debug.Log($"Name : {gameObject.name} | distanceSquared : {distanceSquared}"
-            // + $" | Damage Dealt * 1.5 : {damageDealt * (1f / distanceSquared * 8f)} |"
+            // + $" | Damage Dealt * 11 : {damageDealt * (1f / distanceSquared * 14f)} |"
             // + $"Damage Dealt: {damageDealt * (1f / distanceSquared)} ");
         }
 
@@ -132,6 +132,10 @@ namespace BombDrop.Enemy
                     coinInstantiated.transform.position = _ShootPoint.position;
                     coinInstantiated.SetActive(true);
                 }*/
+
+                // GameManager.Instance.EnemiesLeft--;
+                if (--GameManager.Instance.EnemiesLeft <= 0)
+                    GameManager.Instance.OnPlayerAction?.Invoke(1f, (int)PlayerAction.LEVEL_CLEARED);
 
                 _ReleasedToPool = true;
                 GameManager.Instance.PlayerCoins += _CoinAmount;

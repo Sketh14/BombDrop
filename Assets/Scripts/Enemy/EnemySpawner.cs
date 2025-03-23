@@ -25,6 +25,7 @@ namespace BombDrop.Enemy
 
         private void SpawnEnemies(Vector3[] enemyPositions)
         {
+            GameManager.Instance.EnemiesLeft = enemyPositions.Length / 2;
 
             GameObject enemyToSpawn;
             Vector3 spawnDir = Vector3.zero, spawnPos = Vector3.zero;
